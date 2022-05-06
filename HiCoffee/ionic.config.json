@@ -1,0 +1,7 @@
+{
+  "name": "HiCoffee",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
