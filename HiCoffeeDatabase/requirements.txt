@@ -1,6 +1,5 @@
 asgiref==3.5.0
 asttokens==2.0.5
-autopep8 @ file:///opt/conda/conda-bld/autopep8_1639166893812/work
 backcall==0.2.0
 black==22.3.0
 certifi==2021.10.8
@@ -8,6 +7,7 @@ cffi==1.15.0
 chardet==4.0.0
 charset-normalizer==2.0.12
 click==8.1.2
+cloudinary==1.29.0
 colorama==0.4.4
 coreapi==2.3.3
 coreschema==0.0.4
@@ -17,6 +17,7 @@ defusedxml==0.7.1
 dj-database-url==0.5.0
 Django==4.0.3
 django-cleanup==6.0.0
+django-cloudinary-storage==0.3.0
 django-cors-headers==3.11.0
 django-debug-toolbar==3.2.4
 django-filter==21.1
@@ -57,7 +58,6 @@ platformdirs==2.5.1
 prompt-toolkit==3.0.28
 psycopg2==2.9.3
 pure-eval==0.2.2
-pycodestyle @ file:///tmp/build/80754af9/pycodestyle_1636635402688/work
 pycparser==2.21
 pycryptodome==3.14.1
 Pygments==2.11.2
@@ -80,7 +80,6 @@ social-auth-app-django==4.0.0
 social-auth-core==4.2.0
 sqlparse==0.2.4
 stack-data==0.2.0
-toml @ file:///tmp/build/80754af9/toml_1616166611790/work
 tomli==2.0.1
 traitlets==5.1.1
 typing_extensions==4.1.1
@@ -89,5 +88,3 @@ uritemplate==4.1.1
 urllib3==1.26.8
 wcwidth==0.2.5
 whitenoise==6.0.0
-wincertstore==0.2
-winkerberos==0.9.0

@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import django_heroku
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,10 +28,12 @@ SECRET_KEY = 'django-insecure-$3p+3nxsy8cd$2j5-9hi2ko40xxve^7h)y0rx=63_3gl3*rl6&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = ["https://hicoffeeapi.herokuapp.com"]
 ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'location',
     'core',
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -81,9 +87,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            "host":"mongodb+srv://dbRon:Long12345@cluster0.w09ru.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-            "name":"HiCoffeeDB",
-            "authMechanism":"SCRAM-SHA-1" #For atlas cloud db
+            "host": "mongodb+srv://dbRon:Long12345@cluster0.w09ru.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "name": "HiCoffeeDB",
+            "authMechanism": "SCRAM-SHA-1"  # For atlas cloud db
         }
     }
 }
@@ -153,3 +159,15 @@ DJOSER = {
         "current_user": "core.serializers.UserSerializer",
     }
 }
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dlu',
+    'API_KEY': '471522412694188',
+    'API_SECRET': 'aQAwuL0JbMk0zjnCdcEAco1a6M0'
+}
+
+# Heroku
+django_heroku.settings(locals())
