@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import CofferShop
+from .models import CoffeeShop
 
 
 class CoffeeShopSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CofferShop
+        model = CoffeeShop
         fields = ('id', 'name', 'rate', 'image')

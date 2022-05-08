@@ -17,4 +17,5 @@ export class CoffeeShopService {
     };
     return Http.get(options);
   }
+
 }
