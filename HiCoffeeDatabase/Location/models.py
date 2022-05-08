@@ -9,7 +9,7 @@ class CoffeeShop(models.Model):
     image_represent = models.ImageField(upload_to='images/', blank=True)
     open_time = models.TimeField()
     closed_time = models.TimeField()
-    create_at = models.DateTimeField(auto_created=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     phone_number = models.CharField(max_length=20)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                               on_delete=models.SET_NULL, null=True)
@@ -30,6 +30,7 @@ class ImageCoffeeShop(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
     coffee_shop = models.ForeignKey(
         CoffeeShop, on_delete=models.CASCADE, related_name='img_cfs')
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Information(models.Model):
@@ -46,3 +47,4 @@ class FeedBack(models.Model):
         CoffeeShop, on_delete=models.CASCADE, related_name='fb_cfs')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
