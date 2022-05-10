@@ -1,0 +1,3 @@
+[submodule "HiCoffeeServer"]
+	path = HiCoffeeServer
+	url = https://github.com/HoangLongHotarou/HiCoffee.git
