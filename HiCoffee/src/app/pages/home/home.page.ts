@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
+import { Pagination } from 'src/app/interfaces/pagination';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 
 @Component({
@@ -12,16 +14,21 @@ export class HomePage implements OnInit {
   coffeeShop: string;
   category: string;
   img: string;
+  pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
   category$: Category[] = [];
+  imageUrl: SafeResourceUrl;
   constructor(private fetchAPI: FetchAPIService) { }
 
   ngOnInit() {
     this.fetchAPI.findAll('location/coffeeshop/').then((res) => {
-      this.coffeeShop$ = res.data;
+      this.pagination = res.data;
+      console.log(this.pagination);
+      this.coffeeShop$ = this.pagination.results;
       console.log(this.coffeeShop$);
-      // this.coffeeShop = this.coffeeShop$[0].name;
+      this.coffeeShop = this.coffeeShop$[0].name;
       this.img = this.coffeeShop$[0].image_represent;
+      this.imageUrl = this.img;
       console.log(this.img);
     });
 

@@ -19,7 +19,9 @@ export class FetchAPIService {
 
   find(urls: string, id: number): Promise<HttpResponse> {
     const options = {
-      url: `${this.resourceUrl + urls}${id}`
+      url: `${this.resourceUrl + urls}${id}`,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      headers: { 'Content-Type': 'application/json' }
     };
     return Http.get(options);
   }
