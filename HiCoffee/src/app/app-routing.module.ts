@@ -8,7 +8,7 @@ const routes: Routes = [
   // },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'introduce',
     pathMatch: 'full'
   },
   {
@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
   },
+  {
+    path: 'introduce',
+    loadChildren: () => import('./pages/introduce/introduce.module').then( m => m.IntroducePageModule)
+  },
+
 ];
 
 @NgModule({
