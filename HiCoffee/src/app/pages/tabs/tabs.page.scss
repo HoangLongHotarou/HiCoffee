@@ -1,0 +1,28 @@
+ion-tab-bar {
+    box-shadow: 0 -2px 5px rgba($color: #000000, $alpha: 0.2);
+    padding: 5px 0;
+
+    ion-tab-button {
+        --color-selected: var(--ion-color-coffee-primary);              
+        ion-icon {
+            font-size: 1.5rem;
+            transition: linear 0.2s;  
+        }
+        ion-label {
+            display: none;
+            transition: linear 0.2s; 
+        }
+
+        &:hover {
+            ion-label {
+                display: block;
+            }
+        }
+
+        &[selected="true"] {
+            ion-label {
+                display: block;
+            }
+        }
+    }
+}
