@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trang Chủ</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,4 +20,5 @@
   <p>Category: {{category}}</p>
   <p>img {{img}}</p>
   <img [src]="imageUrl">
+  <app-card></app-card>
 </ion-content>

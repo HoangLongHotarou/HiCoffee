@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ForgetpasswordPageRoutingModule } from './forgetpassword-routing.module';
 
-import { HomePage } from './home.page';
+import { ForgetpasswordPage } from './forgetpassword.page';
+
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +15,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    ComponentsModule,
+    ForgetpasswordPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [HomePage]
+  declarations: [ForgetpasswordPage]
 })
-export class HomePageModule {}
+export class ForgetpasswordPageModule {}
