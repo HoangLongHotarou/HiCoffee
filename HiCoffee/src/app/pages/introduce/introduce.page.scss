@@ -13,7 +13,7 @@ ion-content {
         background-size: cover;             
         @include flexLayout(start, center);
         flex-direction: column;
-    
+
         .logo {
             width: 100px;
             height: 100px;
@@ -42,4 +42,3 @@ ion-content {
         }
     }
 }
-

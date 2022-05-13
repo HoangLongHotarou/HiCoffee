@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   constructor(private fetchAPI: FetchAPIService) { }
 
   ngOnInit() {
-    this.fetchAPI.findAll('location/coffeeshop/').then((res) => {
+    this.fetchAPI.findAll('location/coffeeshop/?page=2').then((res) => {
       this.pagination = res.data;
       console.log(this.pagination);
       this.coffeeShop$ = this.pagination.results;
