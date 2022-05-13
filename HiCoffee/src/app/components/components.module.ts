@@ -15,7 +15,8 @@ const COMPONENTS = [
   declarations: COMPONENTS,
   exports: COMPONENTS,  
   imports: [
-    CommonModule,IonicModule
+    CommonModule,
+    IonicModule
   ] 
 })
 export class ComponentsModule {}
