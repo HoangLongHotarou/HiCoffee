@@ -1,12 +1,29 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start" [routerLink]="['/introduce']">
+      <ion-button color="coffee-primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>Đăng nhập</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- <app-tabs></app-tabs> -->
+  <div id="header">
+    <div class="logo">
+      <ion-img src="../../../assets/images/LogoHiCoffeeBG.jpg"></ion-img>
+    </div>
+  </div>
+  <form id="form">
+    <app-input placeholder="Email"></app-input>
+    <app-input type="password" placeholder="Mật khẩu"></app-input>
+    <div>
+      <ion-router-link [routerLink]="['/forgetpassword']" routerLinkActive="router-link-active" >Quên mật khẩu?</ion-router-link>
+    </div>
+    <ion-button expand="block" shape="round">Đăng nhập</ion-button>
+    <ion-button class="btn-nobackground" expand="block" shape="round" [routerLink]="['/signup']"
+      routerLinkActive="router-link-active">Đăng kí</ion-button>
 
+  </form>
 </ion-content>

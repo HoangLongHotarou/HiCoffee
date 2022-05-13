@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollbar="custome-scroll-bar">
+<ion-content>
   Test FetchAPI
   <p>CoffeeShops: {{coffeeShop$}}</p>
   <li *ngFor="let i of coffeeShop$">
@@ -18,4 +18,5 @@
   <p>Category: {{category}}</p>
   <p>img {{img}}</p>
   <img [src]="imageUrl">
+  <app-card></app-card>
 </ion-content>

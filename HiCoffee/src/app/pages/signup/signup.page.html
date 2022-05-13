@@ -1,9 +1,28 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-buttons slot="start" [routerLink]="['/login']">
+      <ion-button color="coffee-primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <!-- <app-tabs></app-tabs> -->
+  <!-- <div id="header">
+    <div class="logo">
+      <ion-img src="../../../assets/images/LogoHiCoffeeBG.jpg" ></ion-img>
+    </div>
+  </div> -->
+  <form id="form">
+    <app-input placeholder="Email"></app-input>
+    <app-input placeholder="Họ"></app-input>
+    <app-input placeholder="Tên"></app-input>
+    <app-input type="password" placeholder="Mật khẩu"></app-input>
+    <p>Mật khẩu cần chứa ít nhất 8 ký tự, gồm ký tự đặc biệt, chữ in hoa, chữ thường, và số</p>
+    <app-input type="password" placeholder="Nhập lại mật khẩu"></app-input>
+    <ion-button expand="block" shape="round" [routerLink]="['/signup']" routerLinkActive="router-link-active" >Đăng kí</ion-button>
+
+  </form>
 </ion-content>

@@ -4,4 +4,11 @@
 
 ion-button {
     --background: var(--ion-color-coffee-primary);
+    text-transform: initial;
+}
+
+.btn-nobackground{
+    --background: #f5f5f3;
+    --color: var(--ion-color-coffee-primary);
+    border: 2px solid var(--ion-color-coffee-primary);
 }
