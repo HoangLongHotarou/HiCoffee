@@ -9,6 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   constructor() {
-    CapacitorGoogleMaps.initialize({ key: environment.mapsKey });
+    // CapacitorGoogleMaps.initialize({ key: environment.mapsKey });
   }
 }
