@@ -2,6 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializers import *
 from .pagination import DefaultPagination
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 # Create your views here.
 
 
@@ -15,6 +17,10 @@ class CoffeeShopViewSet(ModelViewSet):
         if self.request.method == 'GET':
             return GetCoffeeShopSerializer
         return CoffeeShopSerializer
+
+    
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 class CategoryViewSet(ModelViewSet):

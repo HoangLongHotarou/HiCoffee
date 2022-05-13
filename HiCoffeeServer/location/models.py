@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class CoffeeShop(models.Model):
-    name = models.CharField(max_length=1024)
+    name = models.CharField(max_length=1024,unique=True)
     description = models.TextField(null=True)
     total_rate = models.FloatField(null=True)
     max_price = models.BigIntegerField(null=True)
