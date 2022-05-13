@@ -5,14 +5,5 @@
 </ion-header>
 
 <ion-content>
-  Test FetchAPI
-  <p>CoffeeShops: {{coffeeShop$}}</p>
-  <li *ngFor="let i of coffeeShop$">
-    {{ i.name }}:{{i.phone_number}}
-  </li>
-  <p>Categories: {{category$}}</p>
-  <p>CoffeeShop: {{coffeeShop}}</p>
-  <p>Category: {{category}}</p>
-  <p>img {{img}}</p>
-  <img [src]="imageUrl">
+  <app-card></app-card>
 </ion-content>

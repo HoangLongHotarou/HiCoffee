@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TabsComponent } from './tabs/tabs.component';
 import { InputComponent } from './input/input.component';
 import { IonicModule } from '@ionic/angular';
+import { CardComponent } from './card/card.component';
 
 const COMPONENTS = [
     TabsComponent,
-    InputComponent
+    InputComponent,
+    CardComponent
 ]
 
 @NgModule({
