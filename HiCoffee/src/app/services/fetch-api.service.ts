@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = environment.apiHiCoffee.apiUrl;
+  private resourceUrl = environment.apiHiCoffee.apiLocalhost;
   constructor() { }
 
   findAll(urls: string): Promise<HttpResponse> {

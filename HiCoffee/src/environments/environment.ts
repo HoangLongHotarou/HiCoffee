@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiHiCoffee: {
-    apiUrl: 'https://hicoffeeapi.herokuapp.com/'
+    apiHeroku: 'https://hicoffeeapi.herokuapp.com/',
+    apiLocalhost: 'http://127.0.0.1:8080/'
   }
 };
 

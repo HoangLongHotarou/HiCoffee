@@ -1,9 +1,9 @@
-import { MapComponent } from './map/map.component';
+import { MapComponent } from '../../components/map/map.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputComponent } from './input/input.component';
+import { InputComponent } from '../../components/input/input.component';
 import { IonicModule } from '@ionic/angular';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from '../../components/card/card.component';
 
 const COMPONENTS = [
   InputComponent,

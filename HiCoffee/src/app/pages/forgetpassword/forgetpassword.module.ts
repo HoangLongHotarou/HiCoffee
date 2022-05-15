@@ -8,7 +8,7 @@ import { ForgetpasswordPageRoutingModule } from './forgetpassword-routing.module
 
 import { ForgetpasswordPage } from './forgetpassword.page';
 
-import { ComponentsModule } from 'src/app/components/components.module';
+import { ComponentsModule } from 'src/app/modules/component/component.module';
 
 @NgModule({
   imports: [
