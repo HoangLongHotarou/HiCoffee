@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, HttpResponse } from '@capacitor-community/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = 'https://hicoffeeapi.herokuapp.com/';
+  private resourceUrl = environment.apiHiCoffee.apiUrl;
   constructor() { }
 
   findAll(urls: string): Promise<HttpResponse> {

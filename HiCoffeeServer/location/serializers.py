@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from django.db import transaction
+from django.shortcuts import get_object_or_404
 
 
 class CoffeeShopNameSerializer(serializers.ModelSerializer):
@@ -65,20 +67,16 @@ class InformationSerializer(serializers.ModelSerializer):
 
 
 class GetFeedBackSerializer(serializers.ModelSerializer):
-    coffee_shop = CoffeeShopNameSerializer()
-
     class Meta:
         model = FeedBack
-        fields = ('id', 'vote_rate', 'feedback',
-                  'coffee_shop', 'user', 'customer_fake')
+        fields = ('id', 'vote_rate', 'feedback', 'user', 'customer_fake')
 
 
 class FeedBackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FeedBack
-        fields = ('id', 'vote_rate', 'feedback',
-                  'coffee_shop', 'user', 'customer_fake')
+        fields = ('id', 'vote_rate', 'feedback', 'user', 'customer_fake')
 
 
 class CoffeeShopSerializer(serializers.ModelSerializer):
@@ -98,3 +96,32 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description', 'total_rate', 'max_price', 'minimun_price',
                   'image_represent', 'open_time', 'closed_time', 'updated_at',
                   'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs')
+
+
+class PostFeedBackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedBack
+        fields = ('vote_rate', 'feedback', 'user', 'customer_fake')
+
+    def save(self, **kwargs):
+        with transaction.atomic():
+            self.instance = FeedBack.objects.create(
+                vote_rate=self.validated_data['vote_rate'],
+                feedback=self.validated_data['feedback'],
+                customer_fake=self.validated_data['customer_fake'],
+                user=self.validated_data['user'],
+                coffee_shop_id=kwargs['coffee_shop_id']
+            )
+            return self.instance
+
+    def modify(self, **kwargs):
+        with transaction.atomic():
+            self.instance = get_object_or_404(FeedBack, pk=kwargs['id'])
+            self.instance = FeedBack(
+                vote_rate=self.validated_data['vote_rate'],
+                feedback=self.validated_data['feedback'],
+                customer_fake=self.validated_data['customer_fake'],
+                user=self.validated_data['user'],
+                coffee_shop_id=kwargs['coffee_shop_id']
+            )
+            return self.instance

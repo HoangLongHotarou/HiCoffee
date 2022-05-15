@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  mapsKey: 'AIzaSyBApzraouEpsmwWIcqnOSt5FPurNJb4C6s'
+  apiHiCoffee: {
+    apiUrl: 'https://hicoffeeapi.herokuapp.com/'
+  }
 };
 
 /*

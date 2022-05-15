@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
-declare let google;
+import { CapacitorGoogleMaps } from '@capacitor-community/capacitor-googlemaps-native';
 
 @Component({
   selector: 'app-test-feature',
@@ -8,38 +7,59 @@ declare let google;
   styleUrls: ['./test-feature.page.scss'],
 })
 export class TestFeaturePage implements OnInit {
-  @ViewChild('map', { static: true }) mapElement: ElementRef;
+  // @ViewChild('map', { static: true }) mapElement: ElementRef;
+  @ViewChild('map') mapView: ElementRef;
   map: any;
+  win: any = window;
 
   constructor() {
     // this.Test();
   }
 
   ngOnInit() {
-    this.getCurrentLocation().then(pos => {
-      this.showMap(pos.coords.latitude, pos.coords.longitude);
+    // this.ionViewDidEnter();
+  }
+
+  // @ViewChild('map') mapView: ElementRef;
+
+  async ionViewDidEnter() {
+    // console.log('test');
+    await CapacitorGoogleMaps.initialize({
+      key: 'AIzaSyBApzraouEpsmwWIcqnOSt5FPurNJb4C6s',
     });
-  }
 
-  showMap(latitude: any, longitude: any) {
-    const latLng = new google.maps.LatLng(latitude, longitude);
-    const mapOptions = {
-      center: latLng,
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-  }
+    const boundingRect = this.mapView.nativeElement.getBoundingClientRect() as DOMRect;
 
-  getCurrentLocation(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const locOptions = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };
-      Geolocation.getCurrentPosition(locOptions).then((position: any) => {
-        resolve(position);
-      }).catch(e => {
-        reject(e.message);
+    CapacitorGoogleMaps.create({
+      width: Math.round(boundingRect.width),
+      height: Math.round(boundingRect.height),
+      x: Math.round(boundingRect.x),
+      y: Math.round(boundingRect.y),
+      latitude: -33.86,
+      longitude: 151.20,
+      zoom: 12
+    });
+
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    CapacitorGoogleMaps.addListener('onMapReady', async function() {
+    /*
+      We can do all the magic here when map is ready
+    */
+
+      CapacitorGoogleMaps.addMarker({
+        latitude: -33.86,
+        longitude: 151.20,
+        title: 'Custom Title',
+        snippet: 'Custom Snippet',
+      });
+
+      CapacitorGoogleMaps.setMapType({
+        type: 'normal'
       });
     });
   }
 
+  ionViewDidLeave() {
+    CapacitorGoogleMaps.close();
+  }
 }

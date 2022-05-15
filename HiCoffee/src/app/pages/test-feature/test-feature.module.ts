@@ -13,7 +13,7 @@ import { TestFeaturePage } from './test-feature.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TestFeaturePageRoutingModule
+    TestFeaturePageRoutingModule,
   ],
   declarations: [TestFeaturePage]
 })
