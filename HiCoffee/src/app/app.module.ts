@@ -5,7 +5,7 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './modules/app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './modules/component/component.module';
 
 @NgModule({
