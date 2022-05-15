@@ -1,6 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CapacitorGoogleMaps } from '@capacitor-community/capacitor-googlemaps-native';
-import { environment } from 'src/environments/environment';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 declare let google;
 
@@ -11,49 +9,20 @@ declare let google;
 })
 export class MapComponent implements OnInit {
 
-  // @ViewChild('map') mapView: ElementRef;
-  // map: any;
-  // mapElement: any;
-
-  // constructor() {
-  //   // CapacitorGoogleMaps.initialize({ key: environment.mapsKey });
-  //   // this.getCurrentLocation().then(pos => {
-  //   //   this.showMap(pos.coords.latitude, pos.coords.longitude);
-  //   // });
-  // }
-
-  // ngOnInit() {
-  //   // this.createMap();
-  //   // CapacitorGoogleMaps.initialize({ key: environment.mapsKey });
-  //   this.getCurrentLocation().then(pos => {
-  //     this.showMap(pos.coords.latitude, pos.coords.longitude);
-  //   });
-  // }
-
-  // ionViewDidEnter() {
-  //   this.createMap();
-  // }
-
-  // createMap() {
-  //   const boundingRect = this.mapView.nativeElement.getBoundingClientRect() as DOMRect;
-  //   CapacitorGoogleMaps.create({
-  //     width: Math.round(boundingRect.width),
-  //     height: Math.round(boundingRect.height),
-  //     x: Math.round(boundingRect.x),
-  //     y: Math.round(boundingRect.y),
-  //     // latitude?: Number;
-  //     zoom: 5,
-  //   });
-  // }
-
   @ViewChild('map', { static: true }) mapElement: ElementRef;
+  @Input() latitude: any;
+  @Input() longitude: any;
+  @Input() nameCoffeeShop: any;
+
   map: any;
 
   constructor() {
-    // this.Test();
   }
 
   ngOnInit() {
+    console.log(this.latitude);
+    console.log(this.longitude);
+    console.log(this.nameCoffeeShop);
     this.getCurrentLocation().then(pos => {
       this.showMap(pos.coords.latitude, pos.coords.longitude);
     });
@@ -63,10 +32,23 @@ export class MapComponent implements OnInit {
     const latLng = new google.maps.LatLng(latitude, longitude);
     const mapOptions = {
       center: latLng,
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      zoom: 100,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      icon: 'Test',
+      snippet: 'test'
     };
+    const marker = new google.maps.Marker(
+      {
+        position: latLng,
+        animation: google.maps.Animation.BOUNCE,
+        // icon:'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'
+      });
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    const infowindow = new google.maps.InfoWindow({
+      content: 'Hello World!'
+    });
+    marker.setMap(this.map);
+    infowindow.open(this.map, marker);
   }
 
   getCurrentLocation(): Promise<any> {
