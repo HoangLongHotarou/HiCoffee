@@ -4,9 +4,9 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from '../../components/app/app.component';
-import { AppRoutingModule } from '../app-routing/app-routing.module';
-import { ComponentsModule } from '../component/component.module';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './modules/app-routing/app-routing.module';
+import { ComponentsModule } from './modules/component/component.module';
 
 @NgModule({
   declarations: [AppComponent],
