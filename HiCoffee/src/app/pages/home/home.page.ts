@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   constructor(private fetchAPI: FetchAPIService) { }
 
   ngOnInit() {
-    this.fetchAPI.findAll('location/coffeeshop/?page=2').then((res) => {
+    this.fetchAPI.findAll('locations/coffeeshops/?page=2').then((res) => {
       this.pagination = res.data;
       console.log(this.pagination);
       this.coffeeShop$ = this.pagination.results;
@@ -32,21 +32,21 @@ export class HomePage implements OnInit {
       console.log(this.img);
     });
 
-    this.fetchAPI.findAll('location/category/').then((res) => {
-      this.category$ = res.data;
-      console.log(this.category$);
-      // this.category = this.category$[0].type;
-    });
+    // this.fetchAPI.findAll('location/category/').then((res) => {
+    //   this.category$ = res.data;
+    //   console.log(this.category$);
+    //   // this.category = this.category$[0].type;
+    // });
 
-    this.fetchAPI.find('location/coffeeshop/', 1).then((res) => {
-      this.coffeeShop = res.data;
-      console.log(this.coffeeShop);
-    });
+    // this.fetchAPI.find('location/coffeeshop/', 1).then((res) => {
+    //   this.coffeeShop = res.data;
+    //   console.log(this.coffeeShop);
+    // });
 
-    this.fetchAPI.find('location/category/', 2).then((res) => {
-      this.category = res.data;
-      console.log(this.category);
-    });
+    // this.fetchAPI.find('location/category/', 2).then((res) => {
+    //   this.category = res.data;
+    //   console.log(this.category);
+    // });
   }
 
 }

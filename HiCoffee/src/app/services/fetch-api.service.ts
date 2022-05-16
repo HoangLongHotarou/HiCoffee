@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import { UserCreate } from './../interfaces/auth/usercreate';
 import { Injectable } from '@angular/core';
 import { Http, HttpResponse } from '@capacitor-community/http';
 import { environment } from 'src/environments/environment';
@@ -12,7 +14,6 @@ export class FetchAPIService {
   findAll(urls: string): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}`,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' }
     };
     return Http.get(options);
@@ -21,9 +22,26 @@ export class FetchAPIService {
   find(urls: string, id: number): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}${id}`,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' }
     };
     return Http.get(options);
+  }
+
+  post(urls: string, o: object): Promise<HttpResponse> {
+    const options = {
+      url: `${this.resourceUrl + urls}`,
+      data: o,
+      headers: { 'Content-Type': 'application/json' }
+    };
+    return Http.post(options);
+  }
+
+  put(urls: string, o: object, id: number): Promise<HttpResponse> {
+    const options = {
+      url: `${this.resourceUrl + urls}${id}`,
+      data: o,
+      headers: { 'Content-Type': 'application/json' }
+    };
+    return Http.put(options);
   }
 }
