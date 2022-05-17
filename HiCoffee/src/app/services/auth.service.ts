@@ -19,12 +19,20 @@ export class AuthService {
     return this.localStore.checkToken();
   }
 
-  async signUp(user: UserCreate) {
+  async signUp(user: UserCreate): Promise<boolean> {
+    let check = true;
     await this.fetchAPI.post('auth/users/', user).then((res) => {
-      console.log(res.data);
-      user = res.data;
+      // console.log(res.data);
+      // user = res.data;
+      if (res.status === 200) {
+        user = res.data;
+        console.log(user);
+      } else {
+        check = false;
+      }
     });
-    console.log(user);
+    // console.log(user);
+    return check;
   }
 
   async login(user: UserLogin): Promise<boolean> {
