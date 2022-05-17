@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from './input/input.component';
 import { IonicModule } from '@ionic/angular';
 import { CardComponent } from './card/card.component';
+import { MainitemComponent } from './mainitem/mainitem.component';
 
 const COMPONENTS = [
   InputComponent,
   CardComponent,
   MapComponent,
+  MainitemComponent
 ];
 
 @NgModule({

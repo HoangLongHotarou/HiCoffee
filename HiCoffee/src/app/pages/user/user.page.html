@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div *ngIf="!isLogin" id="noneLogin" class="container">
+    <div class="info">
+      <p>Đăng nhập để tận hưởng các đặc quyền chưa từng có từ trước tới nay tại ứng dụng <span>Hi Coffee</span></p>      
+      <ion-button routerLink="/login">
+        Đăng nhập
+      </ion-button>
+    </div>
+  </div>
+  <div *ngIf="isLogin" id="info-user" class="container">
+    <h4>Thông tin cá nhân</h4>
+    <div class="avatar">
+      <ion-label>Ảnh đại diện</ion-label>
+      <ion-img src="{{imgSrc}}"></ion-img>          
+    </div>   
+    <div class="info-detail ion-padding">
+      <ion-label>Email:</ion-label>  
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+      <ion-label>Họ (không dấu):</ion-label>
+      <ion-input type="text" [(ngModel)]="lastName"></ion-input>
+      <ion-label>Tên đệm & Tên (không dấu):</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName"></ion-input>     
+    </div>   
+    <div class="ion-text-center">
+      <ion-button>Cập nhật thông tin</ion-button>
+    </div>     
+  </div>
 </ion-content>

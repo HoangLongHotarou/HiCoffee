@@ -1,5 +1,5 @@
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 ion-button {
@@ -11,4 +11,14 @@ ion-button {
     --background: #f5f5f3;
     --color: var(--ion-color-coffee-primary);
     border: 2px solid var(--ion-color-coffee-primary);
+}
+
+.loading-style {
+    color: var(--ion-color-coffee-primary);
+    font-weight: 700;
+    --spinner-color: var(--ion-color-coffee-primary);
+}
+
+ion-refresher {
+    color: var(--ion-color-coffee-primary);
 }

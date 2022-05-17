@@ -21,4 +21,38 @@
   <p>img {{img}}</p>
   <img [src]="imageUrl">
   <app-card></app-card>
+  <app-mainitem 
+    imgSrc="../../../assets/images/background.jpg"
+    title="Cafe cheo veo"
+    address="116 Đ. Hùng Vương, Phường 11, Thành phố Đà Lạt, Lâm Đồng."
+    description="Tiệm cà phê nhỏ của nhà Reply1994 Da Lat. Cheo veo nằm giữa một khu rừng, nhìn được toàn bộ thành phố Đà lạt và một phần Đức Trọng."
+  ></app-mainitem>
+  <ion-button routerLink="/listitem">List Item</ion-button>
+
+  <ion-slides [option]="cafeSlideOpts">
+    <ion-slide>
+      <ion-img src="../../../assets/images/background.jpg"></ion-img>
+    </ion-slide>
+    <ion-slide>
+      <ion-img src="../../../assets/images/background.jpg"></ion-img>
+    </ion-slide>
+    <ion-slide>
+      <ion-img src="../../../assets/images/background.jpg"></ion-img>
+    </ion-slide>
+    <ion-slide>
+      <ion-img src="../../../assets/images/background.jpg"></ion-img>
+    </ion-slide>
+    <ion-slide>
+      <ion-img src="../../../assets/images/background.jpg"></ion-img>
+    </ion-slide>
+      <!-- <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card>
+      <app-card image="../../../assets/images/toiden1.jpg" coffeename="Cafe Tỏi đen"></app-card> -->
+  </ion-slides>
 </ion-content>

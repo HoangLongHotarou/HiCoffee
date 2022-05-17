@@ -1,0 +1,38 @@
+ion-card {
+    padding: 5px;
+    ion-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .title {
+        color: var(--ion-color-coffee-primary);
+        font-weight: 900;
+        font-size: 1.2em;
+    }
+    .address {
+        margin-top: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        span {
+            color: var(--ion-color-coffee-black);
+            font-weight: 700;
+        }
+    }
+    .description {   
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;     
+        span {
+            color: var(--ion-color-coffee-black);
+            font-weight: 700;
+        }
+    }
+}

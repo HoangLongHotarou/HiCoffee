@@ -79,7 +79,10 @@
   /** coffee colors  **/ 
   --ion-color-coffee-primary: #9c061f;
   --ion-color-coffee-secondary: #f1f1f1;
-  --ion-color-coffee-cream: #efead8;
+  --ion-color-coffee-light: #ececec;
+  --ion-color-coffee-gray: #acacac;
+  --ion-color-coffee-black: #1b1b1b;
+  --ion-color-coffee-glassmorphism: rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {

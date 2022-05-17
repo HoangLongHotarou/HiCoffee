@@ -8,4 +8,5 @@ export interface CoffeeShop {
     open_time: string;
     closed_time: string;
     phone_number: string;
+    location: string;
 }

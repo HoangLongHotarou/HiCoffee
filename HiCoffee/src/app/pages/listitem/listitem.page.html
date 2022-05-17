@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let shop of coffeeShop$" class="container">
+    <app-mainitem
+      imgSrc="{{shop.image_represent}}"
+      title="{{shop.name}}"
+      address="{{shop.location}}"
+      description="{{shop.description}}"
+    ></app-mainitem>
+  </div>
+
+  <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Đang tải...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
