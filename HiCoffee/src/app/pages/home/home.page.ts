@@ -4,6 +4,7 @@ import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { FetchAPIService } from 'src/app/services/fetch-api.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  loading: any;
   coffeeShop: string;
   category: string;
   img: string;
@@ -18,7 +20,14 @@ export class HomePage implements OnInit {
   coffeeShop$: CoffeeShop[] = [];
   category$: Category[] = [];
   imageUrl: SafeResourceUrl;
-  constructor(private fetchAPI: FetchAPIService) { }
+
+  constructor(private fetchAPI: FetchAPIService, public loadingController: LoadingController ) { }
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  cafeSlideOpts = {
+    slidesPerView: 1.5,
+    centeredSlides: true,
+  };
 
   ngOnInit() {
     this.fetchAPI.findAll('location/coffeeshops/?page=2').then((res) => {
@@ -46,7 +55,15 @@ export class HomePage implements OnInit {
     this.fetchAPI.find('location/categories/', 2).then((res) => {
       this.category = res.data;
       console.log(this.category);
+      // this.loading.dismiss();
     });
   }
 
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'loading-style',
+      message: 'Vui lòng chờ',
+    });
+    return this.loading.present();
+  }
 }

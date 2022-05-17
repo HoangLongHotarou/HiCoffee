@@ -13,33 +13,37 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    // canLoad: [AutoLoginGuard]
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule),
+    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule)
   },
   {
     path: 'introduce',
-    loadChildren: () => import('./pages/introduce/introduce.module').then( m => m.IntroducePageModule),
-    // canLoad: [AuthGuard]
+    loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
   },
   {
     path: 'forgetpassword',
-    loadChildren: () => import('./pages/forgetpassword/forgetpassword.module').then( m => m.ForgetpasswordPageModule)
+    loadChildren: () => import('./pages/forgetpassword/forgetpassword.module').then(m => m.ForgetpasswordPageModule)
+  },
+  {
+    path: 'listitem',
+    loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
     path: 'test-feature',
-    loadChildren: () => import('./pages/test-feature/test-feature.module').then( m => m.TestFeaturePageModule)
+    loadChildren: () => import('./pages/test-feature/test-feature.module').then(m => m.TestFeaturePageModule)
   },
   {
     path: 'test-feature-ii',
-    loadChildren: () => import('./pages/test-feature-ii/test-feature-ii.module').then( m => m.TestFeatureIiPageModule),
+    loadChildren: () => import('./pages/test-feature-ii/test-feature-ii.module').then(m => m.TestFeatureIiPageModule),
   }
 ];
 

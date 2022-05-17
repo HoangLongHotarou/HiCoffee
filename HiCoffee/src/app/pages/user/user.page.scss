@@ -1,0 +1,83 @@
+@mixin flexLayout($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+ion-content {
+    #noneLogin {
+        padding: 0;
+        height: 100%;
+        background: url("../../../assets/images/background1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include flexLayout(center, center);
+
+        .info {
+            text-align: center;
+
+            p {
+                margin: 0;
+                padding: 0 40px;
+                color: var(--ion-color-coffee-secondary);
+                margin-bottom: 10px;
+                line-height: 1.5em;
+
+                span {
+                    color: var(--ion-color-coffee-primary);
+                    font-weight: 900;
+                    font-size: 1.1rem;
+                    background-color: var(--ion-color-coffee-secondary);
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+
+    #info-user {
+        h4 {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--ion-color-coffee-primary);
+        }
+
+        .avatar {
+            margin-top: 20px;
+            @include flexLayout(center, center);
+            flex-direction: column;
+
+            ion-img {
+                width: 100px;
+                height: 100px;
+                overflow: hidden;
+                border-radius: 50%;   
+                border: 2px solid var(--ion-color-coffee-primary);       
+            }            
+
+            ion-label {
+                margin-bottom: 10px;
+                ion-icon {
+                    font-size: 1.2em;
+                }
+            }
+        }
+
+        .info-detail {
+            ion-label {
+                display: block;
+                color: var(--ion-color-coffee-primary);
+                font-weight: 500;
+            }
+            ion-input {
+                margin: 5px 0;
+                --background: var(--ion-color-coffee-light);
+                border-radius: 5px;
+                border: 1px solid transparent;
+                transition: linear 0.2s;
+                &.has-focus {
+                    border: 1px solid var(--ion-color-coffee-primary);
+                }
+            }
+        }
+    }
+}

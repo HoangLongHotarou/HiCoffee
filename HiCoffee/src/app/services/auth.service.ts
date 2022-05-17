@@ -11,7 +11,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);;
   user: User;
 
   constructor(private fetchAPI: FetchAPIService, private localStore: LocalStoreService) { }
@@ -46,7 +45,5 @@ export class AuthService {
 
   async logout() {
     await this.localStore.deleteToken();
-    this.isAuthenticated.next(false);
-    console.log(this.isAuthenticated.value);
   }
 }
