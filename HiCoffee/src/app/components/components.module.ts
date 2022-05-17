@@ -4,11 +4,15 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from './input/input.component';
 import { IonicModule } from '@ionic/angular';
 import { CardComponent } from './card/card.component';
+import { InputpasswordComponent } from './inputpassword/inputpassword.component';
+import { SlidecategoryComponent } from './slidecategory/slidecategory.component';
 
 const COMPONENTS = [
   InputComponent,
   CardComponent,
   MapComponent,
+  InputpasswordComponent,
+  SlidecategoryComponent
 ];
 
 @NgModule({
