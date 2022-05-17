@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="header">
+    <ion-label class="foryou">{{title}}</ion-label>
+    <ion-router-link class="more">{{moretext}}</ion-router-link>
+  </div>
+  <ion-slides [options]="cafeSlideOpts">
+    <ion-slide *ngFor="let cafe of coffee">
+      <app-card image = "{{cafe.image_represent}}" coffeename="{{cafe.name}}"></app-card>
+    </ion-slide>  
+  </ion-slides>
+</div>

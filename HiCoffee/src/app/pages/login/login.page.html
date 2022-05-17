@@ -17,9 +17,10 @@
   </div>
   <form id="form">
     <app-input placeholder="Email"></app-input>
-    <app-input type="password" placeholder="Mật khẩu"></app-input>
+    <app-inputpassword type="password" placeholder="Mật khẩu"></app-inputpassword>
     <div>
-      <ion-router-link [routerLink]="['/forgetpassword']" routerLinkActive="router-link-active" >Quên mật khẩu?</ion-router-link>
+      <ion-router-link [routerLink]="['/forgetpassword']" routerLinkActive="router-link-active">Quên mật khẩu?
+      </ion-router-link>
     </div>
     <ion-button expand="block" shape="round">Đăng nhập</ion-button>
     <ion-button class="btn-nobackground" expand="block" shape="round" [routerLink]="['/signup']"
