@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
+import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 declare let google;
 
 @Component({
@@ -13,6 +14,7 @@ export class MapComponent implements OnInit {
   @Input() latitude: any;
   @Input() longitude: any;
   @Input() nameCoffeeShop: any;
+  @Input() coffeeArray: Array<CoffeeShop>;
 
   map: any;
 

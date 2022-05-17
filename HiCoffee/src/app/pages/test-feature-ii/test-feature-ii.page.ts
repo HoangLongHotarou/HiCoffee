@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { UserCreate } from './../../interfaces/auth/usercreate';
+import { UserCreate } from '../../interfaces/auth.interface/usercreate';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 

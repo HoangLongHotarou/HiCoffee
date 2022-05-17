@@ -32,21 +32,21 @@ export class HomePage implements OnInit {
       console.log(this.img);
     });
 
-    // this.fetchAPI.findAll('location/category/').then((res) => {
-    //   this.category$ = res.data;
-    //   console.log(this.category$);
-    //   // this.category = this.category$[0].type;
-    // });
+    this.fetchAPI.findAll('location/categories/').then((res) => {
+      this.category$ = res.data;
+      console.log(this.category$);
+      // this.category = this.category$[0].type;
+    });
 
-    // this.fetchAPI.find('location/coffeeshop/', 1).then((res) => {
-    //   this.coffeeShop = res.data;
-    //   console.log(this.coffeeShop);
-    // });
+    this.fetchAPI.find('location/coffeeshops/', 1).then((res) => {
+      this.coffeeShop = res.data;
+      console.log(this.coffeeShop);
+    });
 
-    // this.fetchAPI.find('location/category/', 2).then((res) => {
-    //   this.category = res.data;
-    //   console.log(this.category);
-    // });
+    this.fetchAPI.find('location/categories/', 2).then((res) => {
+      this.category = res.data;
+      console.log(this.category);
+    });
   }
 
 }

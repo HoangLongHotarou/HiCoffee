@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanLoad {
   constructor(private auth: AuthService, private router: Router) { }
   async canLoad(): Promise<boolean> {
-    if (await this.auth.localStore.checkToken() === true) {
+    if (await this.auth.checkLogin() === true) {
       return true;
     } else {
       this.router.navigateByUrl('/test-feature-ii');
