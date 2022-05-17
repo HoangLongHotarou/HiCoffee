@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("JWT",),
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
 }
 
 AUTH_USER_MODEL = "core.User"
@@ -178,8 +178,8 @@ REDIS_URL = os.environ.get('REDIS_URL')
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        # "LOCATION": REDIS_URL,
+        # "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": REDIS_URL,
         "TIME_OUT": 2*60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",

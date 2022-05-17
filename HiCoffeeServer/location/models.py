@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class CoffeeShop(models.Model):
-    name = models.CharField(max_length=1024,unique=True)
+    name = models.CharField(max_length=1024)
     description = models.TextField(null=True)
     total_rate = models.FloatField(null=True)
     max_price = models.BigIntegerField(null=True)
@@ -15,7 +15,7 @@ class CoffeeShop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     phone_number = models.CharField(max_length=20)
-    location = models.CharField(max_length=1024, null=True)
+    location = models.CharField(max_length=1024, null=True,unique=True)
     latitude = models.CharField(max_length=50, null=True, verbose_name="Vĩ độ")
     longitude = models.CharField(
         max_length=50, null=True, verbose_name="Kinh độ")

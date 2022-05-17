@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializers import *
 from .pagination import DefaultPagination
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
