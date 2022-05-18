@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 
@@ -15,7 +16,7 @@ export class SlidecategoryComponent implements OnInit {
 
   //coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService) { }
+  constructor(private fetchAPI: FetchAPIService,private router:Router) { }
 
   cafeSlideOpts = {
     freeMode : true,
@@ -31,5 +32,10 @@ export class SlidecategoryComponent implements OnInit {
     // });
 
     // console.log('Text '+this.coffee)
+  }
+
+  gotoDetailPage(cafe) {
+    let cafeString = JSON.stringify(cafe);
+    this.router.navigate(['/test-feature',cafeString]);
   }
 }

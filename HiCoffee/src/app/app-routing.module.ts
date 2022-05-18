@@ -7,7 +7,7 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'introduce',
+    redirectTo: 'signupcoffee',
     // redirectTo: 'login',
     pathMatch: 'full'
   },
@@ -38,13 +38,23 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
-    path: 'test-feature',
+    path: 'test-feature/:cafeObj',
     loadChildren: () => import('./pages/test-feature/test-feature.module').then(m => m.TestFeaturePageModule)
   },
   {
     path: 'test-feature-ii',
     loadChildren: () => import('./pages/test-feature-ii/test-feature-ii.module').then(m => m.TestFeatureIiPageModule),
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+    path: 'signupcoffee',
+    loadChildren: () => import('./pages/signupcoffee/signupcoffee.module').then( m => m.SignupcoffeePageModule)
   }
+
+
 ];
 
 @NgModule({

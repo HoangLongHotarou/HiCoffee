@@ -1,4 +1,4 @@
-<div id="map" #map></div>
+<!-- <div id="map" #map></div> -->
 
 <!-- Test FetchAPI -->
   <!-- <app-tabs></app-tabs> -->
@@ -13,3 +13,14 @@
   <p>img {{img}}</p>
   <img [src]="imageUrl">
   <app-card></app-card> -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Test</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <h1>{{cafe.name}}</h1>
+    <h3>{{cafe.description}}</h3>
+    <h1>{{cafe.total_rate}}</h1>
+    <ion-img src="{{cafe.image_represent}}"></ion-img>
+  </ion-content>

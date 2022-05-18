@@ -12,8 +12,7 @@ export class InputpasswordComponent {
   @Input() type: string;
   @Input() placeholder: string;
 
-  // @ContentChild(IonInput) input: IonInput;
-  @ViewChild('myname') input;
+  @ContentChild(IonInput) input: IonInput;
   
   constructor() { }
   

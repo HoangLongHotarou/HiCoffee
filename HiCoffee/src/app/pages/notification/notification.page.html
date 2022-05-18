@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/tabs']">
+      <ion-button color="coffee-primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Notification</ion-title>
+    <ion-buttons slot="end" (click) = "AlertDelete()">
+      <ion-button color="coffee-primary">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="inform">
+      <ion-img src="../../../assets/images/LogoHiCoffeeBG.jpg"></ion-img>
+    </div>
+    <ion-label>Hiện chưa có thông báo nào</ion-label>
+  </div>
+</ion-content>

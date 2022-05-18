@@ -5,7 +5,10 @@
   </div>
   <ion-slides [options]="cafeSlideOpts">
     <ion-slide *ngFor="let cafe of coffee">
-      <app-card image = "{{cafe.image_represent}}" coffeename="{{cafe.name}}"></app-card>
+      <app-card 
+        image = "{{cafe.image_represent}}" 
+        coffeename="{{cafe.name}}" 
+        (click)="gotoDetailPage(cafe)"></app-card>
     </ion-slide>  
   </ion-slides>
 </div>

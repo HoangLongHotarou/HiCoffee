@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signupcoffee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="form">
+    <ion-item>
+      <ion-input type="text" placeholder="Tên quán" [(ngModel)]="coffeename"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Giá thấp nhất" [(ngModel)]="min-price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Giá cao nhất" [(ngModel)]="max-price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime displayFormat="hh-mm-A"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Giá cao nhất" [(ngModel)]="max-price"></ion-input>
+    </ion-item>
+    <ion-button (click)="clickSignup($event)" expand="block" shape="round">Đăng kí</ion-button>
+  </div>
+</ion-content>
