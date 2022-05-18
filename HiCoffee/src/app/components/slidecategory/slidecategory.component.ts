@@ -9,6 +9,7 @@ import { FetchAPIService } from 'src/app/services/fetch-api.service';
 })
 export class SlidecategoryComponent implements OnInit {
 
+  @Input() routerlink: string;
   @Input() title: string;
   @Input() moretext: string;
   @Input() coffee: Array<CoffeeShop>;

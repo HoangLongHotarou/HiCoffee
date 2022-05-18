@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chi tiết</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="background">
+      <ion-img *ngFor="let img of coffeeShop.imgs_cfs" src="{{img.image}}"></ion-img>      
+    </div>
+    <div #contenttouch class="content-container">
+      <div #bartouch class="bar"></div>
+      <div class="content ion-margin ion-padding">
+        <ion-grid class="header ion-no-padding">
+          <ion-row class="ion-justify-content-between ion-align-items-center">
+            <div class="header-title">{{coffeeShop.name}}</div>
+            <div class="header-favorite"><span></span><ion-icon name="heart-outline"></ion-icon></div>
+          </ion-row>
+          <ion-row class="ion-justify-content-between">
+            <div class="header-time"><span>Mở cửa: </span>{{coffeeShop.open_time.substring(0, 5)}}</div>
+            <div class="header-time"><span>Đóng cửa: </span>{{coffeeShop.closed_time.substring(0, 5)}}</div>
+          </ion-row>
+          <ion-row class="ion-justify-content-between">
+            <div class="header-rate-title">Đánh giá:</div>
+            <div class="header-rate-star"><span>{{coffeeShop.total_rate}} </span><ion-icon name="star"></ion-icon></div>
+          </ion-row>
+          <ion-row class="ion-justify-content-between">
+            <div class="header-price"><span>Mức giá: </span>{{coffeeShop.minimun_price}}-{{coffeeShop.max_price}}<sup>VND</sup></div>
+          </ion-row>
+        </ion-grid>           
+        <div class="header-des">Mô tả:</div>
+        <div class="description ion-padding">          
+          {{coffeeShop.description}}      
+        </div>    
+        <div class="header-map-title">Vị trí quán cà phê</div>    
+        <app-map latitude="{{coffeeShop.latitude}}" longitude="{{coffeeShop.longitude}}" height="30vh"></app-map>  
+      </div>
+    </div>
+  </div>
+</ion-content>

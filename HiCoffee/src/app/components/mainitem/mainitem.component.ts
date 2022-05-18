@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-mainitem',
@@ -11,9 +12,9 @@ export class MainitemComponent implements OnInit {
   @Input() title: string;
   @Input() address: string;
   @Input() description: string;
+  @Output() clicked = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {}
-
 }

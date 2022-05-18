@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-    canLoad: [AutoLoginGuard]
+    // canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'introduce',
     loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
-    canLoad: [AuthGuard]
+    // canLoad: [AuthGuard]
   },
   {
     path: 'tabs',
@@ -44,7 +44,12 @@ const routes: Routes = [
   {
     path: 'test-feature-ii',
     loadChildren: () => import('./pages/test-feature-ii/test-feature-ii.module').then(m => m.TestFeatureIiPageModule),
+  },
+  {
+    path: 'detailitem/:itemObj',
+    loadChildren: () => import('./pages/detailitem/detailitem.module').then( m => m.DetailitemPageModule)
   }
+
 ];
 
 @NgModule({

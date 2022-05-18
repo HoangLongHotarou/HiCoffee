@@ -15,7 +15,7 @@ import { ComponentsModule } from 'src/app/modules/component/component.module';
     FormsModule,
     IonicModule,
     ListitemPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [ListitemPage]
 })

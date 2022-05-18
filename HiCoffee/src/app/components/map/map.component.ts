@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 declare let google;
@@ -15,16 +15,20 @@ export class MapComponent implements OnInit {
   @Input() longitude: any;
   @Input() nameCoffeeShop: any;
   @Input() coffeeArray: Array<CoffeeShop>;
+  @Input() height: string;
 
   map: any;
 
-  constructor() {
+  constructor(
+    private renderer: Renderer2,
+  ) {
   }
 
   ngOnInit() {
     console.log(this.latitude);
     console.log(this.longitude);
     console.log(this.nameCoffeeShop);
+    this.renderer.setStyle(this.mapElement.nativeElement, 'height', this.height);
     this.getCurrentLocation().then(pos => {
       this.showMap(pos.coords.latitude, pos.coords.longitude);
     });

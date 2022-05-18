@@ -1,0 +1,118 @@
+ion-content {
+    .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            background: url("../../../assets/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .content-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 75%;
+            background-color: var(--ion-color-coffee-secondary);
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;  
+            background: var(--ion-color-coffee-light);    
+            overflow: hidden;             
+
+            .bar { 
+                width: 40%;
+                height: 6px;
+                background-color: var(--ion-color-coffee-gray);
+                margin: 0 auto;
+                margin-top: 20px; 
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .content {
+                max-height: 100%;
+                overflow-y: scroll;
+                padding-bottom: 80px;
+
+                ion-row {
+                    margin-bottom: 10px;
+                }
+
+                .map {
+                    height: 10vh;
+                }
+
+                .description {
+                    text-align: justify;
+                    font-size: 1.2em;
+                    line-height: 1.5em;
+                }
+
+                .header {
+                    &-des {
+                        font-size: 1.2em;
+                        font-weight: 900;
+                    }
+
+                    &-title {
+                        color: var(--ion-color-coffee-primary);
+                        font-weight: 700;
+                        font-size: 1.6em;
+                    }
+                    &-favorite {
+                        border-radius: 20px;
+                        border: 1px solid var(--ion-color-coffee-gray);
+                        padding: 2px 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;   
+                        font-size: 1.5em;
+                        cursor: pointer;                       
+                    }
+
+                    &-time {
+                        font-size: 1.2em;
+                        span {
+                            font-weight: 900;
+                        }
+                    }
+
+                    &-rate-title {
+                        font-size: 1.2em;
+                        font-weight: 900;                        
+                    }
+
+                    &-price {
+                        font-size: 1.2em;
+                        span {
+                            font-weight: 900;
+                        }                                               
+                    }
+
+                    &-rate-star {
+                        font-size: 1.2em;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        ion-icon {
+                            color: var(--ion-color-coffee-star);
+                        }
+                    }
+
+                    &-map-title {
+                        font-size: 1.2em;
+                        font-weight: 900;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
