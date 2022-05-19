@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <ion-label class="foryou">{{title}}</ion-label>
-    <ion-router-link class="more">{{moretext}}</ion-router-link>
+    <ion-router-link href="{{routerlink}}" class="more">{{moretext}}</ion-router-link>
   </div>
   <ion-slides [options]="cafeSlideOpts">
     <ion-slide *ngFor="let cafe of coffee">

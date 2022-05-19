@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TestFeatureIiPageRoutingModule } from './test-feature-ii-routing.module';
+import { DetailitemPageRoutingModule } from './detailitem-routing.module';
 
-import { TestFeatureIiPage } from './test-feature-ii.page';
+import { DetailitemPage } from './detailitem.page';
 import { ComponentsModule } from 'src/app/modules/component/component.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/modules/component/component.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    TestFeatureIiPageRoutingModule,
+    DetailitemPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [TestFeatureIiPage]
+  declarations: [DetailitemPage]
 })
-export class TestFeatureIiPageModule {}
+export class DetailitemPageModule {}

@@ -3,6 +3,7 @@ import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { LoadingController } from '@ionic/angular';
+import { NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,11 @@ export class ListitemPage implements OnInit {
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService, public loadingController: LoadingController) {
+  constructor(
+    private fetchAPI: FetchAPIService, 
+    public loadingController: LoadingController, 
+    private router: Router
+    ) {
     this.title = 'Title Default';
   }
 
@@ -58,5 +63,10 @@ export class ListitemPage implements OnInit {
     if (this.page === this.maximumpage) {
       event.target.disabled = true;
     }
+  }
+
+  goToDetailPage(coffeeShop) {
+    let coffeeString = JSON.stringify(coffeeShop)    
+    this.router.navigate(['detailitem', coffeeString]);
   }
 }

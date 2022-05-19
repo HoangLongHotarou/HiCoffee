@@ -1,5 +1,5 @@
 import { CheckIn } from 'src/app/interfaces/check-in';
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 declare let google;
@@ -9,21 +9,27 @@ declare let google;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnChanges {
+export class MapComponent implements OnChanges, OnInit {
 
   @ViewChild('map', { static: true }) mapElement: ElementRef;
   @Input() coffeeShop: CoffeeShop;
   @Input() coffeeShop$: Array<CoffeeShop>;
   @Input() checkIn$: CheckIn[];
+  @Input() height: string;
 
   map: any;
 
-  constructor() {
+  constructor(
+    private renderer: Renderer2,
+  ) { }
+
+
+  ngOnInit() {
+
+    this.renderer.setStyle(this.mapElement.nativeElement, 'height', this.height);
   }
 
   ngOnChanges() {
-
-
     console.log('test', this.checkIn$);
     this.coffeeShopsMapCheckIn(this.checkIn$);
     // this.getCurrentLocation().then((res) =>
