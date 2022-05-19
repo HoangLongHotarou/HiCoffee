@@ -15,7 +15,7 @@ class CoffeeShop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     phone_number = models.CharField(max_length=20)
-    location = models.CharField(max_length=1024, null=True,unique=True)
+    location = models.CharField(max_length=1024, null=True, unique=True)
     latitude = models.CharField(max_length=50, null=True, verbose_name="Vĩ độ")
     longitude = models.CharField(
         max_length=50, null=True, verbose_name="Kinh độ")
@@ -47,13 +47,6 @@ class ImageCoffeeShop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Information(models.Model):
-    image_link = models.ImageField(upload_to='images/users/', blank=True)
-    birthday = models.DateTimeField(auto_now_add=True)
-    user_name = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-
 class FeedBack(models.Model):
     customer_fake = models.CharField(max_length=100, null=True)
     vote_rate = models.IntegerField()
@@ -68,3 +61,11 @@ class FeedBack(models.Model):
 
     def __str__(self):
         return f"User: {customer_fake if user == None else user.first_name} - {feedback}"
+
+
+class FeedBackImage(models.Model):
+    feed_back = models.ForeignKey(
+        FeedBack, on_delete=models.CASCADE, related_name='fb_images')
+    image = models.ImageField(
+        upload_to='images/feedbackCFS/', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)

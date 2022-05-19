@@ -10,6 +10,13 @@ class CoffeeShopNameSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
+class CoffeeShopLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CoffeeShop
+        fields = ('id', 'name', 'image_represent',
+                  'location', 'latitude', 'longitude')
+
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -53,17 +60,11 @@ class GetSubImageCoffeeShopSerializer(serializers.ModelSerializer):
         fields = ('image',)
 
 
-class ImageCoffeeShopSerializer(serializers.ModelSerializer):
+class GetImageCoffeeShopSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ImageCoffeeShop
-        fields = ('id', 'coffee_shop', 'image')
-
-
-class InformationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Information
-        fields = ('id', 'image_link', 'birthday', 'user_name')
+        fields = ('id', 'image')
 
 
 class GetFeedBackSerializer(serializers.ModelSerializer):
@@ -87,6 +88,58 @@ class CoffeeShopSerializer(serializers.ModelSerializer):
                   'phone_number', 'location', 'latitude', 'longitude')
 
 
+class PostAndPutImageCoffeeShopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageCoffeeShop
+        fields = ('id', 'image')
+
+    def save(self, **kwargs):
+        with transaction.atomic():
+            self.instance = ImageCoffeeShop.objects.create(
+                image=self.validated_data['image'],
+                coffee_shop_id=kwargs['coffee_shop_id']
+            )
+            return self.instance
+
+    def modify(self, **kwargs):
+        with transaction.atomic():
+            self.instance = get_object_or_404(
+                ImageCoffeeShop, pk=kwargs['id'])
+            self.instance.image = self.validated_data['image']
+            self.instance.save()
+            return self.instance
+
+
+class GetCoffeeShopCategorySerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = CoffeeShopCategory
+        fields = ('id', 'category')
+
+
+class PostAndPutCoffeeShopCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CoffeeShopCategory
+        fields = ('category',)
+
+    def save(self, **kwargs):
+        with transaction.atomic():
+            self.instance = CoffeeShopCategory.objects.create(
+                category=self.validated_data['category'],
+                coffee_shop_id=kwargs['coffee_shop_id']
+            )
+            return self.instance
+
+    def modify(self, **kwargs):
+        with transaction.atomic():
+            self.instance = get_object_or_404(
+                CoffeeShopCategory, pk=kwargs['id'])
+            self.instance.category = self.validated_data['category']
+            self.instance.save()
+            return self.instance
+
+
 class GetCoffeeShopSerializer(serializers.ModelSerializer):
     types_cfs = GetNameCoffeeShopCategorySerializer(many=True)
     imgs_cfs = GetSubImageCoffeeShopSerializer(many=True)
@@ -98,7 +151,7 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
                   'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs')
 
 
-class PostFeedBackSerializer(serializers.ModelSerializer):
+class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
         fields = ('vote_rate', 'feedback', 'user', 'customer_fake')
@@ -117,11 +170,9 @@ class PostFeedBackSerializer(serializers.ModelSerializer):
     def modify(self, **kwargs):
         with transaction.atomic():
             self.instance = get_object_or_404(FeedBack, pk=kwargs['id'])
-            self.instance = FeedBack(
-                vote_rate=self.validated_data['vote_rate'],
-                feedback=self.validated_data['feedback'],
-                customer_fake=self.validated_data['customer_fake'],
-                user=self.validated_data['user'],
-                coffee_shop_id=kwargs['coffee_shop_id']
-            )
+            self.instance.vote_rate = self.validated_data['vote_rate']
+            self.instance.feedback = self.validated_data['feedback']
+            self.instance.customer_fake = self.validated_data['customer_fake']
+            self.instance.user = self.validated_data['user']
+            self.instance.save()
             return self.instance

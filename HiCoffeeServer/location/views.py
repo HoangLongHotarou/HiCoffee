@@ -13,7 +13,6 @@ class CoffeeShopViewSet(ModelViewSet):
     queryset = CoffeeShop.objects.prefetch_related(
         'types_cfs__category', 'imgs_cfs').all()
     pagination_class = DefaultPagination
-    # serializer_class = CoffeeShopSerializer
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -30,30 +29,56 @@ class CategoryViewSet(ModelViewSet):
 
 
 class CoffeeShopCategoryViewSet(ModelViewSet):
-    queryset = CoffeeShopCategory.objects.select_related(
-        'coffee_shop', 'category').all()
 
     pagination_class = DefaultPagination
+
+    def get_queryset(self):
+        return CoffeeShopCategory.objects.select_related('category').filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetCoffeeShopCategorySerializer
-        return CoffeeShopCategorySerializer
+        return PostAndPutCoffeeShopCategorySerializer
+
+    def create(self, request, *args, **kwargs):
+        serializers = PostAndPutCoffeeShopCategorySerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.save(coffee_shop_id=kwargs['coffeeshop_pk'])
+        serializer = GetCoffeeShopCategorySerializer(data)
+        return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        serializers = PostAndPutCoffeeShopCategorySerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.modify(id=kwargs['pk'])
+        serializer = GetCoffeeShopCategorySerializer(data)
+        return Response(serializer.data)
 
 
 class ImageCoffeeShopViewSet(ModelViewSet):
     pagination_class = DefaultPagination
-    queryset = ImageCoffeeShop.objects.select_related('coffee_shop').all()
+
+    def get_queryset(self):
+        return ImageCoffeeShop.objects.filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetImageCoffeeShopSerializer
-        return ImageCoffeeShopSerializer
+        return PostAndPutImageCoffeeShopSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializers = PostAndPutImageCoffeeShopSerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.save(coffee_shop_id=kwargs['coffeeshop_pk'])
+        serializer = GetImageCoffeeShopSerializer(data)
+        return Response(serializer.data)
 
-class InformationViewSet(ModelViewSet):
-    queryset = Information.objects.all()
-    serializer_class = InformationSerializer
+    def update(self, request, *args, **kwargs):
+        serializers = PostAndPutImageCoffeeShopSerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.modify(id=kwargs['pk'])
+        serializer = GetImageCoffeeShopSerializer(data)
+        return Response(serializer.data)
 
 
 class FeedBackViewSet(ModelViewSet):
@@ -68,19 +93,18 @@ class FeedBackViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetFeedBackSerializer
-        return PostFeedBackSerializer
+        return PostAndPutFeedBackSerializer
 
     def create(self, request, *args, **kwargs):
-        serializers = PostFeedBackSerializer(data=request.data)
+        serializers = PostAndPutFeedBackSerializer(data=request.data)
         serializers.is_valid(raise_exception=True)
         data = serializers.save(coffee_shop_id=kwargs['coffeeshop_pk'])
         serializer = GetFeedBackSerializer(data)
         return Response(serializer.data)
 
     def update(self, request, *args, **kwargs):
-        serializers = PostFeedBackSerializer(data=request.data)
+        serializers = PostAndPutFeedBackSerializer(data=request.data)
         serializers.is_valid(raise_exception=True)
-        data = serializers.modify(
-            coffee_shop_id=kwargs['coffeeshop_pk'], id=kwargs['pk'])
+        data = serializers.modify(id=kwargs['pk'])
         serializer = GetFeedBackSerializer(data)
         return Response(serializer.data)
