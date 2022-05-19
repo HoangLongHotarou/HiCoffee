@@ -22,12 +22,17 @@ export class MapComponent implements OnChanges, OnInit {
   constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
+    console.log('test', this.coffeeShop);
+    if (this.coffeeShop !== undefined) {
+      this.showLocation(this.coffeeShop);
+    }
     this.renderer.setStyle(this.mapElement.nativeElement, 'height', this.height);
   }
 
   ngOnChanges() {
-    console.log('test', this.checkIn$);
-    this.coffeeShopsMapCheckIn(this.checkIn$);
+    if (this.checkIn$ !== undefined) {
+      this.coffeeShopsMapCheckIn(this.checkIn$);
+    }
   }
 
   coffeeShopsMapCheckIn(checkIn$: Array<CheckIn>) {
@@ -57,7 +62,7 @@ export class MapComponent implements OnChanges, OnInit {
       center: latLng,
       zoom: defaultZoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      icon: 'Test',
+      icon: 'https://cdn.iconscout.com/icon/premium/png-256-thumb/pikachu-2-625205.png',
       snippet: 'test'
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -66,6 +71,9 @@ export class MapComponent implements OnChanges, OnInit {
         position: new google.maps.LatLng(checkIn.coffee_shop.latitude, checkIn.coffee_shop.longitude),
         map: this.map,
         animation: google.maps.Animation.BOUNCE,
+        label: { color: '#fffff', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
+        optimized: true,
+        visible: true
       });
     });
   }
@@ -96,7 +104,7 @@ export class MapComponent implements OnChanges, OnInit {
     const latLng = new google.maps.LatLng(coffeeShop.latitude, coffeeShop.longitude);
     const mapOptions = {
       center: latLng,
-      zoom: 100,
+      zoom: 20,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
     const marker = new google.maps.Marker(
@@ -105,8 +113,9 @@ export class MapComponent implements OnChanges, OnInit {
         animation: google.maps.Animation.BOUNCE,
       });
     const infowindow = new google.maps.InfoWindow({
-      content: coffeeShop.name
+      content: `<p>${coffeeShop.name}</p><p>${coffeeShop.location}</p>`
     });
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     marker.setMap(this.map);
     infowindow.open(this.map, marker);
   }
@@ -124,7 +133,6 @@ export class MapComponent implements OnChanges, OnInit {
       {
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
-        icon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'
       });
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     const infowindow = new google.maps.InfoWindow({
