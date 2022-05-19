@@ -1,13 +1,15 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from .models import *
 from location.models import *
 from location.serializers import *
 
 
 class InformationSerializer(serializers.ModelSerializer):
+    birthday = fields.DateField(input_formats=['%Y-%m-%d'])
+
     class Meta:
         model = Information
-        fields = ('id', 'image_link', 'birthday', 'user')
+        fields = ('id', 'image_link', 'birthday', 'user', 'role')
 
 
 class HobbySerializer(serializers.ModelSerializer):
@@ -22,14 +24,10 @@ class CheckInOrFavoriteSerializer(serializers.ModelSerializer):
         fields = ('id', 'information', 'coffee_shop', 'type')
 
 
-# class ShowInfoCheckInSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Information
-#         fields
-
 class CheckInMarkerSerializer(serializers.ModelSerializer):
     coffee_shop = CoffeeShopLocationSerializer()
 
     class Meta:
         model = CheckInOrFavorite
         fields = ('id', 'coffee_shop')
+

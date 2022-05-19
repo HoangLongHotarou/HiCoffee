@@ -19,8 +19,8 @@ class CoffeeShop(models.Model):
     latitude = models.CharField(max_length=50, null=True, verbose_name="Vĩ độ")
     longitude = models.CharField(
         max_length=50, null=True, verbose_name="Kinh độ")
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
-                              on_delete=models.SET_NULL, null=True)
+    owner = models.ForeignKey('customer.Information',
+                              on_delete=models.SET_NULL, null=True, related_name='info_cfs')
 
     def __str__(self):
         return self.name
