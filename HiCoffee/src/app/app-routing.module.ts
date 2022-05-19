@@ -7,7 +7,7 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signupcoffee',
+    redirectTo: 'tabs/checkin',
     // redirectTo: 'login',
     pathMatch: 'full'
   },
@@ -47,15 +47,15 @@ const routes: Routes = [
   },
   {
     path: 'detailitem/:itemObj',
-    loadChildren: () => import('./pages/detailitem/detailitem.module').then( m => m.DetailitemPageModule)
+    loadChildren: () => import('./pages/detailitem/detailitem.module').then(m => m.DetailitemPageModule)
   },
   {
     path: 'notification',
-    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+    loadChildren: () => import('./pages/notification/notification.module').then(m => m.NotificationPageModule)
   },
   {
     path: 'signupcoffee',
-    loadChildren: () => import('./pages/signupcoffee/signupcoffee.module').then( m => m.SignupcoffeePageModule)
+    loadChildren: () => import('./pages/signupcoffee/signupcoffee.module').then(m => m.SignupcoffeePageModule)
   }
 
 

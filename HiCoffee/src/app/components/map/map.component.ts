@@ -25,7 +25,6 @@ export class MapComponent implements OnChanges, OnInit {
 
 
   ngOnInit() {
-
     this.renderer.setStyle(this.mapElement.nativeElement, 'height', this.height);
   }
 
@@ -42,7 +41,7 @@ export class MapComponent implements OnChanges, OnInit {
     // const locations = [];
     let sumLat = 0;
     let sumLon = 0;
-    // let defautZoom =
+    let defautZoom = 14.6;
     checkIn$.forEach((checkIn) => {
       sumLat += parseFloat(checkIn.coffee_shop.latitude);
       sumLon += parseFloat(checkIn.coffee_shop.longitude);
@@ -53,7 +52,6 @@ export class MapComponent implements OnChanges, OnInit {
     checkIn$.forEach((checkIn) => {
       const lat = parseFloat(checkIn.coffee_shop.latitude) - meanLat;
       const lon = parseFloat(checkIn.coffee_shop.longitude) - meanLon;
-      // const pathSize = Math.abs(lat) + Math.abs(lon);
       const pathSize = Math.sqrt(lat * lat + lon * lon);
       if (pathSize > maxSize) {
         maxSize = pathSize;
