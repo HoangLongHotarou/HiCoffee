@@ -9,7 +9,7 @@ import { LocalStoreService } from './localstore.service';
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = environment.apiHiCoffee.apiLocalhost;
+  private resourceUrl = environment.apiHiCoffee.apiHeroku;
   constructor(private localStore: LocalStoreService) { }
 
   findAll(urls: string): Promise<HttpResponse> {
