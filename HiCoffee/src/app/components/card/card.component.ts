@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -9,6 +9,7 @@ export class CardComponent implements OnInit {
 
   @Input() image: string;
   @Input() coffeename: string;
+  @Output() clicked = new EventEmitter();
 
   constructor() { }
 

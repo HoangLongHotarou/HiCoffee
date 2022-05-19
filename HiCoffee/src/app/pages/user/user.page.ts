@@ -16,6 +16,8 @@ export class UserPage implements OnInit {
   lastName: string;
   firstName: string;
 
+  showSignUpCafe: boolean = true;
+
   constructor(public loadingController: LoadingController) { 
     this.imgSrc = '../../../assets/images/avatarDefault.jpg'
     this.email = '1911158@dlu.edu.vn';

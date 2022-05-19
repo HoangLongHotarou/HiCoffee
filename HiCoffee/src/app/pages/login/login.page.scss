@@ -7,8 +7,6 @@
 .titleLogin {
     align-content: center;
 }
-
-
 ion-content {
     --background: #f5f5f3;
 
@@ -47,6 +45,29 @@ ion-content {
             --box-shadow: none;
         }
 
+        ion-item{
+            border-radius: 50px;
+            height: 55px;
+            box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.08);
+            --highlight-height: 0px;
+            margin: 10px 0px;
+            
+            ion-input{
+                font-size:  18px;
+                --padding-top: 20px;
+                --padding-bottom: 15px;
+                --padding-start: 5px;
+            }
+        }
+
+        app-inputpassword{
+            ion-input{
+                font-size:  18px;
+                --padding-top: 20px;
+                --padding-bottom: 15px;
+                --padding-start: 5px;
+            }
+        }
         div {
             text-align: center;
         }
