@@ -9,7 +9,7 @@ import { LocalStoreService } from './localstore.service';
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = environment.apiHiCoffee.apiHeroku;
+  private resourceUrl = environment.apiHiCoffee.apiLocalhost;
   constructor(private localStore: LocalStoreService) { }
 
   findAll(urls: string): Promise<HttpResponse> {
@@ -20,12 +20,13 @@ export class FetchAPIService {
     return Http.get(options);
   }
 
-  findAllJWT(urls: string): Promise<HttpResponse> {
+  async findAllJWT(urls: string): Promise<HttpResponse> {
+    // console.log(this.localStore.getToken());
     const options = {
       url: `${this.resourceUrl + urls}`,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `JWT ${this.localStore.getToken()}`
+        Authorization: `JWT ${await this.localStore.getToken()}`
       }
     };
     return Http.get(options);

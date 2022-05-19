@@ -9,4 +9,6 @@ export interface CoffeeShop {
     closed_time: string;
     phone_number: string;
     location: string;
+    latitude: string;
+    longitude: string;
 }

@@ -19,6 +19,7 @@ export class LocalStoreService {
   async getToken(): Promise<string>{
     let token: string | PromiseLike<string>;
     await this.storage.get('ACCESS_TOKEN').then(data=>{token = data;});
+    console.log('test',token);
     return token;
   }
 

@@ -19,19 +19,23 @@ export class TestFeatureIiPage implements OnInit {
 
   async btnSignUp() {
     const user = {
-    username: 'dazai123',
-    first_name: 'Hotarou',
-    last_name: 'Dazai',
-    email: 'dazai@domain.com',
-    password: 'test12345'
+      username: 'dazai124',
+      first_name: 'Hotarou',
+      last_name: 'Dazai',
+      email: 'dazai1@domain.com',
+      password: 'test12345'
     };
-    await this.auth.signUp(user);
+    console.log(await this.auth.signUp(user));
   }
 
   async btnLogin() {
     const user = {
-    username: 'dazai123',
-    password: 'test12345'
+      username: 'user1',
+      password: 'User12345'
+      // username: 'admin',
+      // password: '1'
+      // username: 'longhoangdazai',
+      // password: 'Dazai12345'
     };
     await this.auth.login(user);
   }

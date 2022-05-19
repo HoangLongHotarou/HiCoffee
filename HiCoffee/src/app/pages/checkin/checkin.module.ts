@@ -1,3 +1,4 @@
+import { ComponentsModule } from 'src/app/modules/component/component.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { CheckinPage } from './checkin.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CheckinPageRoutingModule
+    CheckinPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [CheckinPage]
 })

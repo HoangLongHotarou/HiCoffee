@@ -1,4 +1,8 @@
+import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
+import { Pagination } from './../../interfaces/pagination';
 import { Component, OnInit } from '@angular/core';
+import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import { CheckIn } from 'src/app/interfaces/check-in';
 
 @Component({
   selector: 'app-checkin',
@@ -6,14 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkin.page.scss'],
 })
 export class CheckinPage implements OnInit {
+  pagination: Pagination;
+  checkIn$: CheckIn[] = [];
 
-  isLogin: boolean;
-
-  constructor() {
-    this.isLogin = false;
+  constructor(private fetchApi: FetchAPIService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.fetchApi.findAllJWT('customer/checkinmarker/').then((result) => {
+      this.pagination = result.data;
+      this.checkIn$ = this.pagination.results;
+      console.log(this.checkIn$);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
-
 }

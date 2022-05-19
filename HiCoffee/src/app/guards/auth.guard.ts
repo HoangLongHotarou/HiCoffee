@@ -12,7 +12,7 @@ export class AuthGuard implements CanLoad {
     if (await this.auth.checkLogin() === true) {
       return true;
     } else {
-      this.router.navigateByUrl('/test-feature-ii');
+      this.router.navigateByUrl('/tabs/bound');
       return false;
     }
   }

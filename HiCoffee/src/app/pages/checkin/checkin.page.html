@@ -5,12 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="!isLogin" id="not-login" class="container">
-    <ion-img src="../../../assets/images/LogoHiCoffeeNoneBG.png"></ion-img>
-    <ion-label class="ion-text-center">Trải nghiệm chuyến đi tuyệt vời cùng <span>Hi Coffee</span>. Vui lòng đăng nhập để sử dụng tính năng này.</ion-label>
-    <ion-button routerLink="/login">Đăng nhập</ion-button>
-  </div>
-  <div *ngIf="isLogin" id="login" class="container">
-    <h1 class="ion-no-margin ion-padding">Map cho vào đây</h1>
-  </div>
+  {{checkIn$}}
+  <app-map [checkIn$]=checkIn$></app-map>
 </ion-content>

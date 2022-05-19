@@ -7,14 +7,14 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'introduce',
+    redirectTo: 'tabs/checkin',
     // redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-    canLoad: [AutoLoginGuard]
+    // canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'introduce',
     loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
-    canLoad: [AuthGuard]
+    // canLoad: [AuthGuard]
   },
   {
     path: 'tabs',
@@ -44,7 +44,7 @@ const routes: Routes = [
   {
     path: 'test-feature-ii',
     loadChildren: () => import('./pages/test-feature-ii/test-feature-ii.module').then(m => m.TestFeatureIiPageModule),
-  }
+  },
 ];
 
 @NgModule({

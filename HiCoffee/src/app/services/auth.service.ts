@@ -22,16 +22,13 @@ export class AuthService {
   async signUp(user: UserCreate): Promise<boolean> {
     let check = true;
     await this.fetchAPI.post('auth/users/', user).then((res) => {
-      // console.log(res.data);
-      // user = res.data;
-      if (res.status === 200) {
+      if (res.status === 201) {
         user = res.data;
         console.log(user);
       } else {
         check = false;
       }
     });
-    // console.log(user);
     return check;
   }
 

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -14,7 +15,8 @@ const routes: Routes = [
       },
       {
         path: 'checkin',
-        loadChildren: () => import('../../pages/checkin/checkin.module').then( m => m.CheckinPageModule)
+        loadChildren: () => import('../../pages/checkin/checkin.module').then(m => m.CheckinPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: 'user',
@@ -22,12 +24,16 @@ const routes: Routes = [
       },
       {
         path: 'moremenu',
-        loadChildren: () => import('../moremenu/moremenu.module').then( m => m.MoremenuPageModule)
+        loadChildren: () => import('../moremenu/moremenu.module').then(m => m.MoremenuPageModule)
       },
       {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
+      },
+      {
+        path: 'bound',
+        loadChildren: () => import('../../pages/bound/bound.module').then(m => m.BoundPageModule)
       }
     ]
   }
@@ -37,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
