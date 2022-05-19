@@ -37,6 +37,6 @@ export class SlidecategoryComponent implements OnInit {
 
   gotoDetailPage(cafe) {
     let cafeString = JSON.stringify(cafe);
-    this.router.navigate(['/test-feature',cafeString]);
+    this.router.navigate(['/detailitem',cafeString]);
   }
 }

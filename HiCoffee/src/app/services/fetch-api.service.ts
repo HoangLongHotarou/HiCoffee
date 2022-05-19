@@ -60,6 +60,15 @@ export class FetchAPIService {
     return Http.post(options);
   }
 
+  postFile(urls: string, o: any): Promise<HttpResponse> {
+    const options = {
+      url: `${this.resourceUrl + urls}`,
+      data: o,
+      headers: { 'Content-Type': 'application/json' }
+    };
+    return Http.post(options);
+  }
+
   postJWT(urls: string, o: object): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}`,

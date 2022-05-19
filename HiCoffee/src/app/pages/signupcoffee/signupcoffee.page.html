@@ -1,30 +1,54 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/tabs']">
+      <ion-button color="coffee-primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>signupcoffee</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <div id="form">
     <ion-item>
       <ion-input type="text" placeholder="Tên quán" [(ngModel)]="coffeename"></ion-input>
     </ion-item>
+    <div class="image_represent">
+      <ion-label >Ảnh đại diện quán cà phê :</ion-label>
+      <ion-input type="file" [(ngModel)]="image_represent" (change)="onFileSelected($event)"></ion-input>
+    </div>
+    <div class="description">
+      <ion-textarea type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-textarea>
+    </div>
     <ion-item>
-      <ion-input type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-input>
+      <ion-input type="number" placeholder="Giá thấp nhất" [(ngModel)]="min_price"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Giá thấp nhất" [(ngModel)]="min-price"></ion-input>
+      <ion-input type="number" placeholder="Giá cao nhất" [(ngModel)]="max_price"></ion-input>
+    </ion-item>
+    <ion-item class="time">
+      <ion-label>Open Time : </ion-label>
+      <ion-input type="number" placeholder="Giờ" [(ngModel)]="hour_open"></ion-input>
+      <ion-input type="number" placeholder="Phút" [(ngModel)]="minute_open"></ion-input>
+    </ion-item>
+    <ion-item class="time">
+      <ion-label>Close Time : </ion-label>
+      <ion-input type="number" placeholder="Giờ" [(ngModel)]="hour_close"></ion-input>
+      <ion-input type="number" placeholder="Phút" [(ngModel)]="minute_close"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Giá cao nhất" [(ngModel)]="max-price"></ion-input>
+      <ion-input type="text" placeholder="Số điện thoại" [(ngModel)]="phonenumber"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Time</ion-label>
-      <ion-datetime displayFormat="hh-mm-A"></ion-datetime>
+      <ion-input type="text" placeholder="Địa chỉ" [(ngModel)]="location"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Giá cao nhất" [(ngModel)]="max-price"></ion-input>
+      <ion-input type="text" placeholder="Vĩ độ" [(ngModel)]="latitude"></ion-input>
     </ion-item>
-    <ion-button (click)="clickSignup($event)" expand="block" shape="round">Đăng kí</ion-button>
+    <ion-item>
+      <ion-input type="text" placeholder="Kinh độ" [(ngModel)]="longitude"></ion-input>
+    </ion-item>
+    <ion-button (click)="clickSignupCoffee($event)" expand="block" shape="round">Đăng kí</ion-button>
   </div>
 </ion-content>

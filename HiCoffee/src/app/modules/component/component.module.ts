@@ -22,7 +22,7 @@ const COMPONENTS = [
   exports: COMPONENTS,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
   ]
 })
 export class ComponentsModule { }
