@@ -17,6 +17,7 @@ export class FetchAPIService {
       url: `${this.resourceUrl + urls}`,
       headers: { 'Content-Type': 'application/json' }
     };
+    // options = {...o};
     return Http.get(options);
   }
 
@@ -51,7 +52,7 @@ export class FetchAPIService {
     return Http.get(options);
   }
 
-  post(urls: string, o: object): Promise<HttpResponse> {
+  post(urls: string, o: object, auth?: boolean): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}`,
       data: o,
@@ -60,11 +61,20 @@ export class FetchAPIService {
     return Http.post(options);
   }
 
-  postFile(urls: string, o: any): Promise<HttpResponse> {
+  postFormData(urls: string, o: any): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}`,
       data: o,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'multipart/form-data' }
+    };
+    return Http.post(options);
+  }
+
+  postFormDataJWT(urls: string, o: any): Promise<HttpResponse> {
+    const options = {
+      url: `${this.resourceUrl + urls}`,
+      data: o,
+      headers: { 'Content-Type': 'multipart/form-data' }
     };
     return Http.post(options);
   }
