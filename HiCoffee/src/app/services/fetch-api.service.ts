@@ -9,7 +9,7 @@ import { LocalStoreService } from './localstore.service';
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = environment.apiHiCoffee.apiLocalhost;
+  private resourceUrl = environment.apiHiCoffee.apiHeroku;
   constructor(private localStore: LocalStoreService) { }
 
   findAll(urls: string): Promise<HttpResponse> {
@@ -52,6 +52,15 @@ export class FetchAPIService {
   }
 
   post(urls: string, o: object): Promise<HttpResponse> {
+    const options = {
+      url: `${this.resourceUrl + urls}`,
+      data: o,
+      headers: { 'Content-Type': 'application/json' }
+    };
+    return Http.post(options);
+  }
+
+  postFile(urls: string, o: any): Promise<HttpResponse> {
     const options = {
       url: `${this.resourceUrl + urls}`,
       data: o,

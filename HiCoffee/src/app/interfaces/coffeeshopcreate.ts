@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-export interface CoffeeShop {
-    id?: number;
+export interface CoffeeShopCreate {
     name: string;
     description: string;
     total_rate: number;
