@@ -131,7 +131,7 @@ export class SignupcoffeePage implements OnInit {
 
   async signUpCoffee(coffee: any): Promise<boolean> {
     let check = true;
-    await this.fetchAPI.postFile2('location/coffeeshops/', coffee).then((res) => {
+    await this.fetchAPI.postFormData('location/coffeeshops/', coffee).then((res) => {
       console.log(res);
       if (res.status === 201) {
         coffee = res.data;

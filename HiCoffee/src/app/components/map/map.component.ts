@@ -19,10 +19,7 @@ export class MapComponent implements OnChanges, OnInit {
 
   map: any;
 
-  constructor(
-    private renderer: Renderer2,
-  ) { }
-
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
     this.renderer.setStyle(this.mapElement.nativeElement, 'height', this.height);
@@ -31,17 +28,14 @@ export class MapComponent implements OnChanges, OnInit {
   ngOnChanges() {
     console.log('test', this.checkIn$);
     this.coffeeShopsMapCheckIn(this.checkIn$);
-    // this.getCurrentLocation().then((res) =>
-    //   this.coffeeShopsMapCurrentUser(this.checkIn$, res.coords.latitude, res.coords.longitude)
-    // );
   }
 
-
   coffeeShopsMapCheckIn(checkIn$: Array<CheckIn>) {
-    // const locations = [];
     let sumLat = 0;
     let sumLon = 0;
-    let defautZoom = 14.6;
+    const a = -47.273;
+    const b = 14.327;
+    let defaultZoom = 0;
     checkIn$.forEach((checkIn) => {
       sumLat += parseFloat(checkIn.coffee_shop.latitude);
       sumLon += parseFloat(checkIn.coffee_shop.longitude);
@@ -57,11 +51,11 @@ export class MapComponent implements OnChanges, OnInit {
         maxSize = pathSize;
       }
     });
-    console.log(maxSize);
+    defaultZoom = a * maxSize + b;
     const latLng = new google.maps.LatLng(meanLat, meanLon);
     const mapOptions = {
       center: latLng,
-      zoom: 10.5,
+      zoom: defaultZoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       icon: 'Test',
       snippet: 'test'
@@ -77,7 +71,6 @@ export class MapComponent implements OnChanges, OnInit {
   }
 
   coffeeShopsMapCurrentUser(checkIn$: Array<CheckIn>, latitude: any, longitude: any) {
-    // const locations = [];
     const latLng = new google.maps.LatLng(latitude, longitude);
     const mapOptions = {
       center: latLng,
@@ -92,6 +85,9 @@ export class MapComponent implements OnChanges, OnInit {
         position: new google.maps.LatLng(checkIn.coffee_shop.latitude, checkIn.coffee_shop.longitude),
         map: this.map,
         animation: google.maps.Animation.BOUNCE,
+        label: { color: '#00aaff', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
+        optimized: false,
+        visible: true
       });
     });
   }
@@ -102,14 +98,11 @@ export class MapComponent implements OnChanges, OnInit {
       center: latLng,
       zoom: 100,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      icon: 'Test',
-      snippet: 'test'
     };
     const marker = new google.maps.Marker(
       {
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
-        // icon: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'
       });
     const infowindow = new google.maps.InfoWindow({
       content: coffeeShop.name

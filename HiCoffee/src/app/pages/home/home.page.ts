@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService, public loadingController: LoadingController ) { }
+  constructor(private fetchAPI: FetchAPIService, public loadingController: LoadingController) { }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   cafeSlideOpts = {
@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.presentLoading();
-    this.fetchAPI.findAll('location/coffeeshops/?page=2').then((res) => {
+    this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {
       this.pagination = res.data;
       console.log(this.pagination);
       this.coffeeShop$ = this.pagination.results;
