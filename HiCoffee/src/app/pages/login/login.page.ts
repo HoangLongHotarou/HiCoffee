@@ -32,14 +32,14 @@ export class LoginPage implements OnInit {
   }
 
   async clickLogin() {
-    if (this.username == undefined && this.password == undefined) {
+    if (this.username === undefined && this.password === undefined) {
       this.presentSpace();
     } else {
       const user = {
         username: this.username,
         password: this.password
       };
-      let check = await this.auth.login(user);
+      const check = await this.auth.login(user);
       if (check) {
         this.router.navigateByUrl('/tabs');
       }else{
@@ -50,6 +50,4 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-
-
 }

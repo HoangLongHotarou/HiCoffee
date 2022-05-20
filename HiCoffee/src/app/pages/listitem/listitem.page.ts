@@ -20,13 +20,14 @@ export class ListitemPage implements OnInit {
   coffeeShop$: CoffeeShop[] = [];
   textSearch: string;
 
-  isShowSearchBar: boolean = false;
+  isShowSearchBar = false;
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   @ViewChild('container', {read: ElementRef}) container: ElementRef;
 
   constructor(
-    private fetchAPI: FetchAPIService, 
-    public loadingUtils: LoadingUtils, 
+    private fetchAPI: FetchAPIService,
+    public loadingUtils: LoadingUtils,
     private router: Router
   ) {
     this.title = 'Title Default';

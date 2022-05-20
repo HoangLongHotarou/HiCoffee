@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Gesture, GestureConfig, GestureController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
+import { ImageCoffeeShop } from 'src/app/interfaces/image-coffee-shop';
 
 @Component({
   selector: 'app-detailitem',
@@ -22,6 +23,7 @@ export class DetailitemPage implements OnInit {
   isFavorite: boolean;
 
   coffeeShop: CoffeeShop;
+  imageCoffeeShop$: ImageCoffeeShop[];
 
   imageSlideOpts = {
     slidesPerView: 1,
@@ -35,6 +37,7 @@ export class DetailitemPage implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
+    this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
     this.minimumSize = this.height - 100;
     this.maximumSize = (0.25 * this.height) - 50;
     this.isFavorite = false;

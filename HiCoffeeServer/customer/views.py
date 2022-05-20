@@ -26,7 +26,7 @@ class InformationViewSet(ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
-        
+
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
     def role(self, request):
         info = Information.objects.get(user_id=request.user.pk)
@@ -66,6 +66,11 @@ class CheckInMakerViewSet(ModelViewSet):
         info_id = Information.objects.only(
             'id').filter(user_id=user.id).first()
         return CheckInOrFavorite.objects.select_related('coffee_shop').filter(information_id=info_id, type=1)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return CheckInMarkerSerializer
+        return None
 
 
 class CoffeeShopOwnerViewSet(CoffeeShopViewSet):

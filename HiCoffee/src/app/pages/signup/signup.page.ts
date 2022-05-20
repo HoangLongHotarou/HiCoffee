@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -20,7 +21,11 @@ export class SignupPage implements OnInit {
 
   showTipPassword = false;
 
-  constructor(public toastController: ToastController, private auth: AuthService, private router: Router, public loadingController: LoadingController) { }
+  constructor(
+    public toastController: ToastController,
+    private auth: AuthService,
+    private router: Router,
+    public loadingController: LoadingController) { }
 
   async presentSpace() {
     const toast = await this.toastController.create({
@@ -54,11 +59,11 @@ export class SignupPage implements OnInit {
 
   async clickSignup() {
     //console.log(this.firstname);
-    if (this.email == undefined || this.firstname == undefined || this.lastname == undefined ||
-      this.username == undefined || this.password == undefined || this.confirmpassword == undefined) {
+    if (this.email === undefined || this.firstname === undefined || this.lastname === undefined ||
+      this.username === undefined || this.password === undefined || this.confirmpassword === undefined) {
       this.presentSpace();
     } else {
-      if (this.password != this.confirmpassword) {
+      if (this.password !== this.confirmpassword) {
         this.presentErrorPassword();
       }
       else {
@@ -69,9 +74,9 @@ export class SignupPage implements OnInit {
           email: this.email,
           password: this.password
         };
-        let check = await this.auth.signUp(user);
+        const check = await this.auth.signUp(user);
         console.log(check);
-        if (check == true) {
+        if (check === true) {
           this.presentSucess();
           this.router.navigateByUrl('/login');
         } else {

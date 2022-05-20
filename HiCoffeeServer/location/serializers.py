@@ -132,14 +132,15 @@ class PostAndPutCoffeeShopTypeOwnerSerializer(serializers.Serializer):
 
     def save(self, **kwargs):
         with transaction.atomic():
+            coffee_shop_id = kwargs['coffee_shop_id']
             ids = self.validated_data['id_categories'].split(',')
             categories = [CoffeeShopCategory(
-                category_id=id, coffee_shop_id=kwargs['coffee_shop_id']) for id in ids]
+                category_id=id, coffee_shop_id=coffee_shop_id) for id in ids]
             if self.validated_data['type'] == True:
                 cfs_categories = CoffeeShopCategory.objects.bulk_create(
                     categories)
             else:
-                CoffeeShopCategory.objects.filter(coffee_shop_id=kwargs['coffee_shop_id']).delete()
+                CoffeeShopCategory.objects.filter(coffee_shop_id=coffee_shop_id).delete()
                 cfs_categories = CoffeeShopCategory.objects.bulk_create(
                     categories)
             return cfs_categories
