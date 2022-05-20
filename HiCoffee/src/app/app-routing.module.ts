@@ -7,8 +7,9 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signupcoffee',
+    //redirectTo: 'signupcoffee',
     // redirectTo: 'login',
+    redirectTo: 'topic',
     pathMatch: 'full'
   },
   {
@@ -56,7 +57,13 @@ const routes: Routes = [
   {
     path: 'signupcoffee',
     loadChildren: () => import('./pages/signupcoffee/signupcoffee.module').then( m => m.SignupcoffeePageModule)
+  },
+  {
+    path: 'topic',
+    loadChildren: () => import('./pages/topic/topic.module').then( m => m.TopicPageModule)
   }
+
+
 
 
 ];
