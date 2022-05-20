@@ -56,7 +56,7 @@ export class DetailitemPage implements OnInit {
         // console.log(ev);
       },
       onEnd: ev => {
-        // this.renderer.setStyle(this.contenttouch.nativeElement, 'height', '75%');  
+        // this.renderer.setStyle(this.contenttouch.nativeElement, 'height', '75%');
         if (ev.currentY > this.minimumSize) {
           this.renderer.setStyle(this.contenttouch.nativeElement, 'height', '40px');
           this.renderer.setStyle(this.contenttouch.nativeElement, 'background', 'transparent');

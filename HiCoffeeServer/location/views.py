@@ -13,9 +13,9 @@ from .permission import IsAdminOwnerOrReadOnly
 class CoffeeShopViewSet(ModelViewSet):
     queryset = CoffeeShop.objects.prefetch_related(
         'types_cfs__category', 'imgs_cfs').all()
-    
+
     pagination_class = DefaultPagination
-    permission_classes = [IsAdminOwnerOrReadOnly]
+    # permission_classes = [IsAdminOwnerOrReadOnly]
 
     # def get_queryset(self):
     #     queryset = CoffeeShop.objects.prefetch_related('types_cfs__category', 'imgs_cfs').all()
@@ -23,10 +23,7 @@ class CoffeeShopViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetCoffeeShopSerializer
-        return CoffeeShopSerializer
-
-    # def list(self, request, *args, **kwargs):
-    #     return super().list(request, *args, **kwargs)
+        return PostOrPutCoffeeShopSerializer
 
 
 class CategoryViewSet(ModelViewSet):
@@ -114,6 +111,7 @@ class FeedBackViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         serializers = PostAndPutFeedBackSerializer(data=request.data)
         serializers.is_valid(raise_exception=True)
-        data = serializers.modify(id=kwargs['pk'])
+        data = serializers.modify(
+            id=kwargs['pk'], coffee_shop_id=kwargs['coffeeshop_pk'])
         serializer = GetFeedBackSerializer(data)
         return Response(serializer.data)

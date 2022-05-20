@@ -6,6 +6,8 @@ from .serializers import *
 from .models import *
 from .pagination import DefaultPagination
 from location.serializers import *
+from .permissions import IsAdminOwnerOrReadOnly
+from location.views import CoffeeShopViewSet, CoffeeShopCategoryViewSet
 
 
 class InformationViewSet(ModelViewSet):
@@ -19,8 +21,20 @@ class InformationViewSet(ModelViewSet):
         if request.method == 'GET':
             serializer = InformationSerializer(info)
             return Response(serializer.data)
-        elif request.method == 'POST':
+        elif request.method == 'PUT':
             serializer = InformationSerializer(info, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+        
+    @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
+    def role(self, request):
+        info = Information.objects.get(user_id=request.user.pk)
+        if request.method == 'GET':
+            serializer = InformationSerializer(info)
+            return Response(serializer.data)
+        elif request.method == 'PUT':
+            serializer = RoleSerializer(info, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
@@ -54,12 +68,36 @@ class CheckInMakerViewSet(ModelViewSet):
         return CheckInOrFavorite.objects.select_related('coffee_shop').filter(information_id=info_id, type=1)
 
 
-class OwnerPostCoffeeShop(ModelViewSet):
+class CoffeeShopOwnerViewSet(CoffeeShopViewSet):
+    permission_classes = [IsAdminOwnerOrReadOnly]
+
     def get_queryset(self):
         return CoffeeShop.objects.prefetch_related(
-            'types_cfs__category', 'imgs_cfs').filter(owner=self.kwargs['information_pk'])
+            'types_cfs__category', 'imgs_cfs').filter(owner_id=self.request.user.pk)
+
+    def create(self, request, *args, **kwargs):
+        serializers = PostOrPutCoffeeShopSerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.save()
+        data.owner_id = self.request.user.pk
+        data.save()
+        serializer = CoffeeShopSerializer(data)
+        return Response(serializer.data)
+
+
+class CoffeeShopCategoryOwnerViewSet(CoffeeShopCategoryViewSet):
+    permission_classes = [IsAdminOwnerOrReadOnly]
+    http_method_names = ['get', 'post', 'delete']
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return GetCoffeeShopSerializer
-        return CoffeeShopSerializer
+            return GetCoffeeShopCategorySerializer
+        return PostAndPutCoffeeShopTypeOwnerSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializers = PostAndPutCoffeeShopTypeOwnerSerializer(
+            data=request.data)
+        serializers.is_valid(raise_exception=True)
+        data = serializers.save(coffee_shop_id=kwargs['coffeeshop_pk'])
+        serializers = GetCoffeeShopCategorySerializer(data, many=True)
+        return Response(serializers.data)

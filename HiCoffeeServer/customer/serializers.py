@@ -11,6 +11,10 @@ class InformationSerializer(serializers.ModelSerializer):
         model = Information
         fields = ('id', 'image_link', 'birthday', 'user', 'role')
 
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Information
+        fields = ('role',)
 
 class HobbySerializer(serializers.ModelSerializer):
     class Meta:
