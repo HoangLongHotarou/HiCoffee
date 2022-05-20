@@ -7,7 +7,7 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signupcoffee',
+    redirectTo: 'introduce',
     // redirectTo: 'login',
     pathMatch: 'full'
   },

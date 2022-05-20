@@ -2,7 +2,7 @@
 export interface CoffeeShop {
     id?: number;
     name: string;
-    description: number;
+    description: string;
     total_rate: number;
     image_represent?: string;
     open_time: string;
