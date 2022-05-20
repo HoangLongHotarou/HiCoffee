@@ -22,12 +22,12 @@
       <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
     </ion-item>
     <app-inputpassword>
-      <ion-input type="password" placeholder="Mật khẩu" [(ngModel)]="password" (keypress)="onChange($event)" ></ion-input>
+      <ion-input type="password" placeholder="Mật khẩu" [(ngModel)]="password" (keypress)="onChange()" ></ion-input>
     </app-inputpassword>
     <p *ngIf="showTipPassword">Mật khẩu cần chứa ít nhất 8 ký tự, gồm ký tự đặc biệt, chữ in hoa, chữ thường, và số</p>
     <app-inputpassword>
       <ion-input type="password" placeholder="Nhập lại mật khẩu" [(ngModel)]="confirmpassword"></ion-input>
     </app-inputpassword>
-    <ion-button (click)="clickSignup($event)" expand="block" shape="round">Đăng kí</ion-button>
+    <ion-button (click)="clickSignup()" expand="block" shape="round">Đăng kí</ion-button>
   </div>
 </ion-content>

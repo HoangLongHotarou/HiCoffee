@@ -11,7 +11,7 @@
   <div class="container">
     <div class="background">
       <ion-slides [options]="imageSlideOpts">
-        <ion-slide *ngFor="let img of coffeeShop.imgs_cfs">
+        <ion-slide *ngFor="let img of imageCoffeeShop$">
           <ion-img src="{{img.image}}"></ion-img> 
         </ion-slide>  
       </ion-slides>           
@@ -39,7 +39,7 @@
             <div class="header-rate"><span>Đánh giá: </span>{{coffeeShop.total_rate}} <ion-icon name="star"></ion-icon></div>
           </ion-row>
           <ion-row class="ion-justify-content-between">
-            <div class="header-price"><span>Mức giá: </span>{{coffeeShop.minimun_price}}-{{coffeeShop.max_price}}<sup>VND</sup></div>
+            <div class="header-price"><span>Mức giá: </span>{{coffeeShop.minimum_price}}-{{coffeeShop.max_price}}<sup>VND</sup></div>
           </ion-row>         
         </ion-grid>           
         <div class="header-des">Mô tả:</div>

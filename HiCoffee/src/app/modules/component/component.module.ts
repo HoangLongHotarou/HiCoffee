@@ -1,5 +1,5 @@
 import { MapComponent } from '../../components/map/map.component';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '../../components/input/input.component';
 import { IonicModule } from '@ionic/angular';
@@ -27,6 +27,7 @@ const COMPONENTS = [
     CommonModule,
     IonicModule,
     FormsModule
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA,]
 })
 export class ComponentsModule { }
