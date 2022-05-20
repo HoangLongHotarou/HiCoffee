@@ -15,4 +15,8 @@
         }
     }
 
+    .swiper-slide-active {   
+        transition: linear 0.3s;     
+        transform: scale(1.05, 1.05);
+    }
 }
