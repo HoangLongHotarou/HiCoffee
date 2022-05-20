@@ -5,7 +5,6 @@ import { User } from '../interfaces/auth.interface/user';
 import { Injectable } from '@angular/core';
 import { UserLogin } from '../interfaces/auth.interface/userlogin';
 import { LocalStoreService } from './localstore.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 import { LoadingController } from '@ionic/angular';
 
 export default class LoadingUtils {
@@ -9,11 +10,11 @@ export default class LoadingUtils {
     }
 
     async presentLoading(message, duration?) {
-        var loadingController = new LoadingController();
+        const loadingController = new LoadingController();
         this.loading = await loadingController.create({
-          cssClass: 'loading-style',
-          message: message,
-          duration: duration,
+            cssClass: 'loading-style',
+            message: message,
+            duration: duration,
         });
         return this.loading.present();
     }

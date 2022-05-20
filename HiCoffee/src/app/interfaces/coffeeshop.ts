@@ -6,7 +6,7 @@ export interface CoffeeShop {
     total_rate: number;
     image_represent: any;
     min_price: number;
-    max_price:number;
+    max_price: number;
     open_time: string;
     closed_time: string;
     phone_number: string;
