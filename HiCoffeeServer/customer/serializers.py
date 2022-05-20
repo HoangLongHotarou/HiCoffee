@@ -21,6 +21,10 @@ class HobbySerializer(serializers.ModelSerializer):
         model = Hobby
         fields = ('id', 'information', 'category')
 
+class AddHobbySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hobby
+        fields = ('id', 'information', 'category')
 
 class CheckInOrFavoriteSerializer(serializers.ModelSerializer):
     class Meta:
