@@ -1,6 +1,6 @@
 <ion-card (click)="clicked.emit()">
-    <ion-img src={{image}}></ion-img>
-    <div class="ion-text-center">
+    <ion-img [src]=image></ion-img>
+    <div class="title">
       <ion-label>{{coffeename}}</ion-label>
     </div>
 </ion-card>
