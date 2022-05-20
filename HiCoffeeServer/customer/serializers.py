@@ -11,20 +11,24 @@ class InformationSerializer(serializers.ModelSerializer):
         model = Information
         fields = ('id', 'image_link', 'birthday', 'user', 'role')
 
+
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Information
         fields = ('role',)
+
 
 class HobbySerializer(serializers.ModelSerializer):
     class Meta:
         model = Hobby
         fields = ('id', 'information', 'category')
 
+
 class AddHobbySerializer(serializers.ModelSerializer):
     class Meta:
         model = Hobby
         fields = ('id', 'information', 'category')
+
 
 class CheckInOrFavoriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,4 +42,3 @@ class CheckInMarkerSerializer(serializers.ModelSerializer):
     class Meta:
         model = CheckInOrFavorite
         fields = ('id', 'coffee_shop')
-
