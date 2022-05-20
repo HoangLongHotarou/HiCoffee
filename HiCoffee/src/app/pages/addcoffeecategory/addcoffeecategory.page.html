@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Coffee Category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="header">
+    <h1>Đăng kí quán cà phê thành công</h1>
+    <ion-label>Vui lòng chọn thể loại cho quán cà phê: </ion-label>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let category of categories">
+      <ion-label class="category">{{category.type}}</ion-label>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>

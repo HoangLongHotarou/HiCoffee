@@ -1,0 +1,15 @@
+ion-checkbox {
+    --background-checked: var(--ion-color-coffee-primary);
+    --border-color-checked: transparent;
+}
+
+.category{
+    font-size: 12px;
+}
+.header{
+    text-align: center;
+    h1{
+        color: var(--ion-color-coffee-primary);
+        
+    }
+}
