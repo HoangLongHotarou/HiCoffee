@@ -18,17 +18,28 @@ export class AuthService {
     return this.localStore.checkToken();
   }
 
-  async signUp(user: UserCreate): Promise<boolean> {
+  async signUp(user: UserCreate): Promise<Array<any>> {
     let check = true;
+    let err = '';
     await this.fetchAPI.post('auth/users/', user).then((res) => {
+      console.log(res.status);
+      console.log(res);
       if (res.status === 201) {
         user = res.data;
-        console.log(user);
-      } else {
+      } else if (res.status === 400) {
+        if (res.data.email) {
+          err = 'Email đã tồn tại';
+        }
+        if (res.data.password) {
+          err = 'password sai theo quy định';
+        }
+        if (res.data.username) {
+          err = 'username đã tồn tại';
+        }
         check = false;
       }
     });
-    return check;
+    return [err, check];
   }
 
   async login(user: UserLogin): Promise<boolean> {
