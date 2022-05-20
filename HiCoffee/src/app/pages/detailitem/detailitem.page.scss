@@ -9,9 +9,27 @@ ion-content {
             width: 100%;
             height: 100%;
             overflow-y: scroll;
+            overflow-x: hidden;
             background: url("../../../assets/images/background.jpg");
             background-size: cover;
             background-repeat: no-repeat;
+
+            ion-slides {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+
+                ion-slide {
+                    ion-img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }                
+            }
         }
 
         .content-container {
@@ -24,7 +42,8 @@ ion-content {
             border-top-left-radius: 30px;
             border-top-right-radius: 30px;  
             background: var(--ion-color-coffee-light);    
-            overflow: hidden;             
+            overflow: hidden;  
+            z-index: 2;           
 
             .bar { 
                 width: 40%;
@@ -74,7 +93,24 @@ ion-content {
                         justify-content: center;
                         align-items: center;   
                         font-size: 1.5em;
-                        cursor: pointer;                       
+                        cursor: pointer;  
+                        
+                        &.favorited {
+                            ion-icon {
+                                color: var(--ion-color-coffee-primary);                                
+                            }
+                        }
+
+                        ion-icon {
+                            transition: linear 0.2s;
+                        }
+                    }
+
+                    &-address {
+                        font-size: 1.2em;
+                        span {                            
+                            font-weight: 900;
+                        }
                     }
 
                     &-time {
@@ -84,9 +120,14 @@ ion-content {
                         }
                     }
 
-                    &-rate-title {
+                    &-rate {
                         font-size: 1.2em;
-                        font-weight: 900;                        
+                        span {                            
+                            font-weight: 900;   
+                        }  
+                        ion-icon {
+                            color: var(--ion-color-coffee-star);
+                        }                                           
                     }
 
                     &-price {
@@ -94,16 +135,6 @@ ion-content {
                         span {
                             font-weight: 900;
                         }                                               
-                    }
-
-                    &-rate-star {
-                        font-size: 1.2em;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        ion-icon {
-                            color: var(--ion-color-coffee-star);
-                        }
                     }
 
                     &-map-title {
