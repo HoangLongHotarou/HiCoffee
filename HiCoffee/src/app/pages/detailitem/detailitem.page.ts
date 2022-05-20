@@ -12,13 +12,22 @@ export class DetailitemPage implements OnInit {
 
   @ViewChild('contenttouch', { read: ElementRef }) contenttouch: ElementRef;
   @ViewChild('bartouch', { read: ElementRef }) bartouch: ElementRef;
+  @ViewChild('iconFavorite', { read: ElementRef }) favoriteIcon: ElementRef;
+
 
   width: number = window.innerWidth;
   height: number = window.innerHeight;
   minimumSize: number;
   maximumSize: number;
+  isFavorite: boolean;
 
   coffeeShop: CoffeeShop;
+
+  imageSlideOpts = {
+    slidesPerView: 1,
+    centeredSlides: true,
+    autoplay: true,
+  };
 
   constructor(
     private gestureCtrl: GestureController,
@@ -28,6 +37,7 @@ export class DetailitemPage implements OnInit {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.minimumSize = this.height - 100;
     this.maximumSize = (0.25 * this.height) - 50;
+    this.isFavorite = false;
   }
 
   ngOnInit() {
@@ -75,7 +85,15 @@ export class DetailitemPage implements OnInit {
 
     const gesture: Gesture = await this.gestureCtrl.create(options);
     gesture.enable();
+  }
 
-    console.log(this.contenttouch);
+  favoriteClicked() {
+    if (this.isFavorite) {
+      this.isFavorite = false;
+      this.favoriteIcon.nativeElement.setAttribute('name', 'heart-outline');
+    } else {
+      this.isFavorite = true;
+      this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
+    }
   }
 }

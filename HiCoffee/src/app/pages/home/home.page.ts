@@ -4,7 +4,7 @@ import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import { LoadingController } from '@ionic/angular';
+import  LoadingUtils  from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +12,11 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  loading: any;
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService, public loadingController: LoadingController) { }
+  constructor(private fetchAPI: FetchAPIService, private loadingUtils: LoadingUtils ) {
+  }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   cafeSlideOpts = {
@@ -25,22 +25,13 @@ export class HomePage implements OnInit {
   };
 
   ngOnInit() {
-    this.presentLoading();
+    this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
     this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {
       this.pagination = res.data;
       console.log(this.pagination);
       this.coffeeShop$ = this.pagination.results;
       console.log(this.coffeeShop$);
-      this.loading.dismiss();
+      this.loadingUtils.dismiss();
     });
-
-  }
-
-  async presentLoading() {
-    this.loading = await this.loadingController.create({
-      cssClass: 'loading-style',
-      message: 'Đang lấy dữ liệu từ API\nVui lòng chờ',
-    });
-    return this.loading.present();
   }
 }

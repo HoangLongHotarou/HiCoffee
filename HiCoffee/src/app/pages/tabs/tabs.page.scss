@@ -19,7 +19,7 @@ ion-tab-bar {
             }
         }
 
-        &[selected="true"] {
+        &.tab-selected {
             ion-label {
                 display: block;
             }

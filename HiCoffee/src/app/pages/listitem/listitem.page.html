@@ -4,12 +4,17 @@
       <ion-back-button defaultHref="/tabs"></ion-back-button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showSearchBar()" color="coffee-light"><ion-icon name="search-outline"></ion-icon></ion-button>      
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngFor="let shop of coffeeShop$" class="container">
+<ion-content>  
+  <div [ngClass]="isShowSearchBar ? 'container show' : 'container'">
+    <app-searchbar (textChanged)="onTextChanged($event)" placeholder="Tìm quán cà phê"></app-searchbar>
     <app-mainitem
+      *ngFor="let shop of coffeeShop$ | filter:textSearch"
       imgSrc="{{shop.image_represent}}"
       title="{{shop.name}}"
       address="{{shop.location}}"
@@ -17,6 +22,13 @@
       (click)="goToDetailPage(shop)"
     ></app-mainitem>
   </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="circles"
+      refreshingText="Đang tải...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Đang tải...">

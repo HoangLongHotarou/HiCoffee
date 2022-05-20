@@ -7,6 +7,8 @@ import { CardComponent } from '../../components/card/card.component';
 import { InputpasswordComponent } from '../../components/inputpassword/inputpassword.component';
 import { SlidecategoryComponent } from '../../components/slidecategory/slidecategory.component';
 import { MainitemComponent } from 'src/app/components/mainitem/mainitem.component';
+import { SearchbarComponent } from 'src/app/components/searchbar/searchbar.component';
+import { FormsModule } from '@angular/forms';
 
 const COMPONENTS = [
   InputComponent,
@@ -15,6 +17,7 @@ const COMPONENTS = [
   InputpasswordComponent,
   SlidecategoryComponent,
   MainitemComponent,
+  SearchbarComponent,
 ];
 
 @NgModule({
@@ -23,6 +26,7 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule
   ]
 })
 export class ComponentsModule { }
