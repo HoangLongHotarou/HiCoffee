@@ -17,7 +17,7 @@ export class AddcoffeecategoryPage implements OnInit {
 
   ngOnInit() {
     this.presentLoading();
-    this.fetchAPI.findAll('location/categories/').then((res) => {
+    this.fetchAPI.get('location/categories/').then((res) => {
       this.categories = res.data;
       console.log(this.categories);
       this.loading.dismiss();

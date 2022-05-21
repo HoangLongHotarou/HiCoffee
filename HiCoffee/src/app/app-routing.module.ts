@@ -7,14 +7,14 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'addcoffeecategory',
+    redirectTo: 'login',
     // redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-    // canLoad: [AutoLoginGuard]
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
@@ -23,11 +23,12 @@ const routes: Routes = [
   {
     path: 'introduce',
     loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
-    // canLoad: [AuthGuard]
+    //canLoad: [AuthGuard]
   },
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
+    //canLoad: [AuthGuard]
   },
   {
     path: 'forgetpassword',
@@ -47,11 +48,11 @@ const routes: Routes = [
   },
   {
     path: 'detailitem/:itemObj',
-    loadChildren: () => import('./pages/detailitem/detailitem.module').then( m => m.DetailitemPageModule)
+    loadChildren: () => import('./pages/detailitem/detailitem.module').then(m => m.DetailitemPageModule)
   },
   {
     path: 'notification',
-    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+    loadChildren: () => import('./pages/notification/notification.module').then(m => m.NotificationPageModule)
   },
   {
     path: 'signupcoffee',

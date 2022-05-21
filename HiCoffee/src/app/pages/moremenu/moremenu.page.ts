@@ -40,7 +40,11 @@ export class MoremenuPage implements OnInit {
     await alert.present();
   }
 
-  SignupCafe(){
+  SignupCafe() {
     this.presentAlertConfirm();
+  }
+
+  Logout() {
+    
   }
 }

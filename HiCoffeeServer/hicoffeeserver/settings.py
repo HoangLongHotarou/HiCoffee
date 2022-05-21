@@ -148,6 +148,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    'DATE_INPUT_FORMATS': ['iso-8601', '%d-%m-%Y'],
     # "PAGE_SIZE": 40,
 }
 
@@ -179,8 +180,8 @@ REDIS_URL = os.environ.get('REDISCLOUD_URL')
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        # "LOCATION": REDIS_URL,
+        # "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": REDIS_URL,
         "TIME_OUT": 2*60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",

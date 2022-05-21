@@ -17,8 +17,9 @@ export class SlidecategoryComponent implements OnInit {
 
   //coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService,private router:Router) { }
+  constructor(private fetchAPI: FetchAPIService,private router: Router) { }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   cafeSlideOpts = {
     freeMode : true,
     slidesPerView: 2,
@@ -36,7 +37,7 @@ export class SlidecategoryComponent implements OnInit {
   }
 
   gotoDetailPage(cafe) {
-    let cafeString = JSON.stringify(cafe);
+    const cafeString = JSON.stringify(cafe);
     this.router.navigate(['/detailitem',cafeString]);
   }
 }

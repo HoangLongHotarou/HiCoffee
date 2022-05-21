@@ -22,10 +22,10 @@ export class ListitemPage implements OnInit {
   coffeeShop$: CoffeeShop[] = [];
 
   constructor(
-    private fetchAPI: FetchAPIService, 
-    public loadingController: LoadingController, 
+    private fetchAPI: FetchAPIService,
+    public loadingController: LoadingController,
     private router: Router
-    ) {
+  ) {
     this.title = 'Title Default';
   }
 
@@ -35,7 +35,7 @@ export class ListitemPage implements OnInit {
   }
 
   getList(event?): void {
-    this.fetchAPI.findAll(`location/coffeeshops/?page=${this.page}`).then((res) => {
+    this.fetchAPI.get(`location/coffeeshops/?page=${this.page}`).then((res) => {
       this.pagination = res.data;
       this.maximumpage = Math.ceil(this.pagination.count / 10);
       this.coffeeShop$ = this.coffeeShop$.concat(this.pagination.results);
@@ -66,7 +66,7 @@ export class ListitemPage implements OnInit {
   }
 
   goToDetailPage(coffeeShop) {
-    let coffeeString = JSON.stringify(coffeeShop)    
+    const coffeeString = JSON.stringify(coffeeShop);
     this.router.navigate(['detailitem', coffeeString]);
   }
 }

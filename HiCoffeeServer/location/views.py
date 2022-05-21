@@ -6,21 +6,24 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from .permission import IsAdminOwnerOrReadOnly
 # Create your views here.
 
 
 class CoffeeShopViewSet(ModelViewSet):
     queryset = CoffeeShop.objects.prefetch_related(
         'types_cfs__category', 'imgs_cfs').all()
+
     pagination_class = DefaultPagination
+    # permission_classes = [IsAdminOwnerOrReadOnly]
+
+    # def get_queryset(self):
+    #     queryset = CoffeeShop.objects.prefetch_related('types_cfs__category', 'imgs_cfs').all()
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetCoffeeShopSerializer
-        return CoffeeShopSerializer
-
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        return PostOrPutCoffeeShopSerializer
 
 
 class CategoryViewSet(ModelViewSet):
@@ -31,6 +34,9 @@ class CategoryViewSet(ModelViewSet):
 class CoffeeShopCategoryViewSet(ModelViewSet):
 
     pagination_class = DefaultPagination
+
+    # def get_permissions(self):
+    #     if self.request.method in ['PATH',]
 
     def get_queryset(self):
         return CoffeeShopCategory.objects.select_related('category').filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
@@ -105,6 +111,7 @@ class FeedBackViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         serializers = PostAndPutFeedBackSerializer(data=request.data)
         serializers.is_valid(raise_exception=True)
-        data = serializers.modify(id=kwargs['pk'])
+        data = serializers.modify(
+            id=kwargs['pk'], coffee_shop_id=kwargs['coffeeshop_pk'])
         serializer = GetFeedBackSerializer(data)
         return Response(serializer.data)

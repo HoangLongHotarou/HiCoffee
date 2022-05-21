@@ -1,8 +1,11 @@
+/* eslint-disable radix */
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { CoffeeShopCreate } from 'src/app/interfaces/coffeeshopcreate';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signupcoffee',
@@ -72,10 +75,10 @@ export class SignupcoffeePage implements OnInit {
   }
 
   async clickSignupCoffee() {
-    if (this.coffeename == undefined || this.description == undefined || this.image_represent == undefined ||
-      this.min_price == undefined || this.max_price == undefined || this.phonenumber == undefined || this.location == undefined
-      || this.latitude == undefined || this.longitude == undefined || this.hour_open == undefined || this.hour_close == undefined
-      || this.minute_open == undefined || this.minute_close == undefined) {
+    if (this.coffeename === undefined || this.description === undefined || this.image_represent === undefined ||
+      this.min_price === undefined || this.max_price === undefined || this.phonenumber === undefined || this.location === undefined
+      || this.latitude === undefined || this.longitude === undefined || this.hour_open === undefined || this.hour_close === undefined
+      || this.minute_open === undefined || this.minute_close === undefined) {
       this.presentSpace();
     } else {
       if (Number.parseInt(this.hour_close) > 24 || Number.parseInt(this.hour_close) < 0 || Number.parseInt(this.hour_open) > 24 || Number.parseInt(this.hour_open) < 0 ||
@@ -84,46 +87,35 @@ export class SignupcoffeePage implements OnInit {
       }
       else {
         if (Number.parseInt(this.hour_open) < 10) {
-          this.hour_open = "0" + this.hour_open;
+          this.hour_open = '0' + this.hour_open;
         }
         if (Number.parseInt(this.hour_close) < 10) {
-          this.hour_close = "0" + this.hour_close;
+          this.hour_close = '0' + this.hour_close;
         }
         if (Number.parseInt(this.minute_open) < 10) {
-          this.minute_open = "0" + this.minute_open;
+          this.minute_open = '0' + this.minute_open;
         }
         if (Number.parseInt(this.minute_close) < 10) {
-          this.minute_close = "0" + this.minute_close;
+          this.minute_close = '0' + this.minute_close;
         }
-        // const coffee = {
-        //   name: this.coffeename,
-        //   description: this.description,
-        //   image_represent: this.image_file,
-        //   total_rate: 5,
-        //   min_price: this.min_price,
-        //   max_price: this.max_price,
-        //   open_time: this.hour_open + ":" + this.minute_open + ":00",
-        //   closed_time: this.hour_close + ":" + this.minute_close + ":00",
-        //   phone_number: this.phonenumber,
-        //   location: this.location,
-        //   latitude: this.latitude,
-        //   longitude: this.longitude,
-        // }
-        // let coffeeJSon =  JSON.stringify(coffee);
-        let coffee = new FormData();
+        const coffee = new FormData();
         coffee.append('name', this.coffeename);
         coffee.append('description', this.description);
-        coffee.append('total_rate', '5');
-        coffee.append('image_represent', this.image_file);
+        if (this.image_file != null) { coffee.append('image_represent', this.image_file); }
+        coffee.append('min_price', `${this.min_price}`);
+        coffee.append('max_price', `${this.max_price}`);
+        coffee.append('open_time', this.hour_open + ':' + this.minute_open + ':00');
+        coffee.append('closed_time', this.hour_close + ':' + this.minute_close + ':00');
         coffee.append('phone_number', this.phonenumber);
-        console.log(coffee);
-        let check = await this.signUpCoffee(coffee);
-        console.log(check);
-        if (check == true) {
+        coffee.append('location', this.location);
+        coffee.append('latitude', this.latitude);
+        coffee.append('longitude', this.longitude);
+        const check = await this.signUpCoffee(coffee);
+        if (check === true) {
           this.presentSucess();
-          console.log('Success')
+          console.log('Success');
         } else {
-          console.log('Error')
+          console.log('Error');
         }
       }
     }
@@ -132,13 +124,14 @@ export class SignupcoffeePage implements OnInit {
   onFileSelected(event) {
     if (event.target.files.length > 0) {
       console.log(event.target.files[0]);
-      this.image_file = <File>event.target.files[0];
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      this.image_file = event.target.files[0];
     }
   }
 
   async signUpCoffee(coffee: any): Promise<boolean> {
     let check = true;
-    await this.fetchAPI.postFile('location/coffeeshops/', coffee).then((res) => {
+    await this.fetchAPI.postFormData('location/coffeeshops/', coffee).then((res) => {
       console.log(res);
       if (res.status === 201) {
         coffee = res.data;
@@ -149,5 +142,4 @@ export class SignupcoffeePage implements OnInit {
     });
     return check;
   }
-  
 }

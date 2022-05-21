@@ -16,10 +16,9 @@ export class LocalStoreService {
     await this.storage.remove('ACCESS_TOKEN');
   }
 
-  async getToken(): Promise<string>{
+  async getToken(): Promise<string> {
     let token: string | PromiseLike<string>;
-    await this.storage.get('ACCESS_TOKEN').then(data=>{token = data;});
-    console.log('test',token);
+    await this.storage.get('ACCESS_TOKEN').then(data => { token = data; });
     return token;
   }
 

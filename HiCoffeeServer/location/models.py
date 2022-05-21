@@ -7,7 +7,7 @@ class CoffeeShop(models.Model):
     description = models.TextField(null=True)
     total_rate = models.FloatField(null=True)
     max_price = models.BigIntegerField(null=True)
-    minimun_price = models.BigIntegerField(null=True)
+    minimum_price = models.BigIntegerField(null=True)
     image_represent = models.ImageField(
         upload_to='images/coffeshops/', blank=True)
     open_time = models.TimeField()
@@ -20,7 +20,7 @@ class CoffeeShop(models.Model):
     longitude = models.CharField(
         max_length=50, null=True, verbose_name="Kinh độ")
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
-                              on_delete=models.SET_NULL, null=True)
+                              on_delete=models.SET_NULL, null=True, related_name='info_cfs')
 
     def __str__(self):
         return self.name

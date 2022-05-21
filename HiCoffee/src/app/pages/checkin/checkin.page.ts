@@ -17,7 +17,7 @@ export class CheckinPage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.fetchApi.findAllJWT('customer/checkinmarker/').then((result) => {
+    await this.fetchApi.get('customer/checkinmarker/', true).then((result) => {
       this.pagination = result.data;
       this.checkIn$ = this.pagination.results;
       console.log(this.checkIn$);

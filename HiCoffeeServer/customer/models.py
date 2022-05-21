@@ -12,7 +12,9 @@ from location.models import *
 
 class Information(models.Model):
     image_link = models.ImageField(upload_to='images/users/', blank=True)
-    birthday = models.DateTimeField(auto_now_add=True)
+    birthday = models.DateField(auto_now_add=True)
+    TYPE = ((1, 'Customer'), (2, 'Owner'))
+    role = models.IntegerField(choices=TYPE, default=1)
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
