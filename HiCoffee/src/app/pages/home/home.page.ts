@@ -40,20 +40,20 @@ export class HomePage implements OnInit {
     // });
   }
 
-  Alert() {
-    // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
-    this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
-    {
-      OK: () => {
-        console.log('Hello OK');
-      },
-      Cancel: () => {
-        console.log('Hello Cancel'); ;
-      }
-    });
-  }
+  // Alert() {
+  //   // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
+  //   this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
+  //   {
+  //     OK: () => {
+  //       console.log('Hello OK');
+  //     },
+  //     Cancel: () => {
+  //       console.log('Hello Cancel'); ;
+  //     }
+  //   });
+  // }
 
-  Toast() {
-    this.toastUtils.presentToastError('Nội dung', 'middle');
-  }
+  // Toast() {
+  //   this.toastUtils.presentToastError('Nội dung', 'middle');
+  // }
 }
