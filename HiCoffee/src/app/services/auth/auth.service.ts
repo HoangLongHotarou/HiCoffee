@@ -1,10 +1,10 @@
-import { FetchAPIService } from './fetch-api.service';
+import { FetchAPIService } from '../fetch-api.service';
 /* eslint-disable @typescript-eslint/naming-convention */
-import { UserCreate } from '../interfaces/auth.interface/usercreate';
-import { User } from '../interfaces/auth.interface/user';
+import { UserCreate } from '../../interfaces/auth.interface/usercreate';
+import { User } from '../../interfaces/auth.interface/user';
 import { Injectable } from '@angular/core';
-import { UserLogin } from '../interfaces/auth.interface/userlogin';
-import { LocalStoreService } from './localstore.service';
+import { UserLogin } from '../../interfaces/auth.interface/userlogin';
+import { LocalStoreService } from '../localstore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +31,10 @@ export class AuthService {
           err = 'Email đã tồn tại';
         }
         if (res.data.password) {
-          err = 'password sai theo quy định';
+          err = 'Password sai theo quy định';
         }
         if (res.data.username) {
-          err = 'username đã tồn tại';
+          err = 'Username đã tồn tại';
         }
         check = false;
       }

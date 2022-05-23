@@ -8,12 +8,19 @@ from .pagination import DefaultPagination
 from location.serializers import *
 from .permissions import IsAdminOwnerOrReadOnly
 from location.views import CoffeeShopViewSet, CoffeeShopCategoryViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import CheckInOrFavoriteFilter
 
 
 class InformationViewSet(ModelViewSet):
     queryset = Information.objects.all()
     serializer_class = InformationSerializer
     permission_classes = [permissions.IsAdminUser]
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return InformationSerializer
+        return PostOrPutInformationSerializer
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
     def me(self, request):
@@ -55,22 +62,29 @@ class FavoriteViewSet(ModelViewSet):
     serializer_class = CheckInOrFavoriteSerializer
 
 
-class CheckInMakerViewSet(ModelViewSet):
-    http_method_names = ['get']
+class CheckInOrFavoriteMakerViewSet(ModelViewSet):
+    # http_method_names = ['get', 'delete', 'post']
     pagination_class = DefaultPagination
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = CheckInMarkerSerializer
+    # serializer_class = CheckInMarkerSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_class = CheckInOrFavoriteFilter
+
+    INFO_ID = None
 
     def get_queryset(self):
         user = self.request.user
-        info_id = Information.objects.only(
+        self.INFO_ID = Information.objects.only(
             'id').filter(user_id=user.id).first()
-        return CheckInOrFavorite.objects.select_related('coffee_shop').filter(information_id=info_id, type=1)
+        return CheckInOrFavorite.objects.select_related('coffee_shop').filter(information_id=self.INFO_ID)
+
+    def get_serializer_context(self):
+        return {'info': Information.objects.only('id').filter(user_id=self.request.user.id).first()}
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return CheckInMarkerSerializer
-        return None
+            return MarkerSerializer
+        return AddCheckInOfFavoriteSerializer
 
 
 class CoffeeShopOwnerViewSet(CoffeeShopViewSet):

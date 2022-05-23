@@ -1,3 +1,4 @@
+import { CoffeeShopService } from './../../services/coffee-shop/coffee-shop.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
@@ -23,10 +24,10 @@ export class ListitemPage implements OnInit {
   isShowSearchBar = false;
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  @ViewChild('container', {read: ElementRef}) container: ElementRef;
+  @ViewChild('container', { read: ElementRef }) container: ElementRef;
 
   constructor(
-    private fetchAPI: FetchAPIService,
+    private fetchCoffeeShop: CoffeeShopService,
     public loadingUtils: LoadingUtils,
     private router: Router
   ) {
@@ -39,17 +40,26 @@ export class ListitemPage implements OnInit {
   }
 
   getList(event?): void {
-    this.fetchAPI.get(`location/coffeeshops/?page=${this.page}`).then((res) => {
-      this.pagination = res.data;
-      this.maximumpage = Math.ceil(this.pagination.count / 10);
-      this.coffeeShop$ = this.coffeeShop$.concat(this.pagination.results);
-      console.log(this.coffeeShop$);
+    this.fetchCoffeeShop.getAll(this.page).then((res) => {
+      this.maximumpage = res.pages;
+      this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
       this.loadingUtils.dismiss();
-      console.log('1:', this.coffeeShop$.length);
       if (event) {
         event.target.complete();
       }
     });
+
+    // this.fetchAPI.get(`location/coffeeshops/?page=${this.page}`).then((res) => {
+    //   this.pagination = res.data;
+    //   this.maximumpage = Math.ceil(this.pagination.count / 10);
+    //   this.coffeeShop$ = this.coffeeShop$.concat(this.pagination.results);
+    //   console.log(this.coffeeShop$);
+    //   this.loadingUtils.dismiss();
+    //   console.log('1:', this.coffeeShop$.length);
+    //   if (event) {
+    //     event.target.complete();
+    //   }
+    // });
   }
 
   loadMore(event) {

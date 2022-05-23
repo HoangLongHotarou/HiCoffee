@@ -1,3 +1,5 @@
+import { FavoriteOrCheckInService } from '../../services/favorite-or-check-in/favorite-or-check-in.service';
+import { FavoriteOrCheckIn } from './../../interfaces/favorite-or-check-in';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Gesture, GestureConfig, GestureController } from '@ionic/angular';
@@ -35,6 +37,7 @@ export class DetailitemPage implements OnInit {
     private gestureCtrl: GestureController,
     private renderer: Renderer2,
     private route: ActivatedRoute,
+    private markService: FavoriteOrCheckInService
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
@@ -94,9 +97,11 @@ export class DetailitemPage implements OnInit {
     if (this.isFavorite) {
       this.isFavorite = false;
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart-outline');
+      // this.markService.unCheck(this.coffeeShop.id, 2);
     } else {
       this.isFavorite = true;
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
+      // this.markService.check(this.coffeeShop.id, 2);
     }
   }
 }
