@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -49,9 +49,9 @@ export class SignupPage implements OnInit {
     toast.present();
   }
 
-  async presentError() {
+  async presentError(err) {
     const toast = await this.toastController.create({
-      message: 'Lỗi đăng ký!',
+      message: err,
       duration: 2000
     });
     toast.present();
@@ -76,11 +76,11 @@ export class SignupPage implements OnInit {
         };
         const check = await this.auth.signUp(user);
         console.log(check);
-        if (check === true) {
+        if (check[1] === true) {
           this.presentSucess();
           this.router.navigateByUrl('/login');
         } else {
-          this.presentError();
+          this.presentError(check[0]);
         }
       }
     }

@@ -1,4 +1,4 @@
-import { CheckIn } from 'src/app/interfaces/check-in';
+import { FavoriteOrCheckIn } from 'src/app/interfaces/favorite-or-check-in';
 import { Component, ElementRef, Input, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
@@ -14,7 +14,7 @@ export class MapComponent implements OnChanges, OnInit {
   @ViewChild('map', { static: true }) mapElement: ElementRef;
   @Input() coffeeShop: CoffeeShop;
   @Input() coffeeShop$: Array<CoffeeShop>;
-  @Input() checkIn$: CheckIn[];
+  @Input() checkIn$: FavoriteOrCheckIn[];
   @Input() height: string;
 
   map: any;
@@ -35,7 +35,7 @@ export class MapComponent implements OnChanges, OnInit {
     }
   }
 
-  coffeeShopsMapCheckIn(checkIn$: Array<CheckIn>) {
+  coffeeShopsMapCheckIn(checkIn$: Array<FavoriteOrCheckIn>) {
     let sumLat = 0;
     let sumLon = 0;
     const a = -47.273;
@@ -76,7 +76,7 @@ export class MapComponent implements OnChanges, OnInit {
     });
   }
 
-  coffeeShopsMapCurrentUser(checkIn$: Array<CheckIn>, latitude: any, longitude: any) {
+  coffeeShopsMapCurrentUser(checkIn$: Array<FavoriteOrCheckIn>, latitude: any, longitude: any) {
     const latLng = new google.maps.LatLng(latitude, longitude);
     const mapOptions = {
       center: latLng,

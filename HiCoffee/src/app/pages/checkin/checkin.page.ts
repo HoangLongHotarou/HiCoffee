@@ -1,8 +1,9 @@
+import { FavoriteOrCheckInService } from './../../services/favorite-or-check-in/favorite-or-check-in.service';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from './../../interfaces/pagination';
 import { Component, OnInit } from '@angular/core';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import { CheckIn } from 'src/app/interfaces/check-in';
+import { FavoriteOrCheckIn } from 'src/app/interfaces/favorite-or-check-in';
 
 @Component({
   selector: 'app-checkin',
@@ -11,18 +12,14 @@ import { CheckIn } from 'src/app/interfaces/check-in';
 })
 export class CheckinPage implements OnInit {
   pagination: Pagination;
-  checkIn$: CheckIn[] = [];
+  checkIn$: FavoriteOrCheckIn[] = [];
 
-  constructor(private fetchApi: FetchAPIService) {
+  constructor(private fetch: FavoriteOrCheckInService) {
   }
 
   async ngOnInit() {
-    await this.fetchApi.get('customer/checkinmarker/', true).then((result) => {
-      this.pagination = result.data;
-      this.checkIn$ = this.pagination.results;
-      console.log(this.checkIn$);
-    }).catch((err) => {
-      console.log(err);
+    await this.fetch.getAll(1).then(res=>{
+      this.checkIn$ = res;
     });
   }
 }

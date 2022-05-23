@@ -1,17 +1,21 @@
 .container{
+    margin-bottom: 10px;
     .header{
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 10px;
 
         .foryou{
-            font-weight: bold;
-            font-size: 18px;
+            color: var(--ion-color-coffee-primary);
+            font-weight: 700;
+            font-size: 1.2em;
         }
         .more{
-            color: black;
-            font-size: 15px;
+            color: var(--ion-color-coffee-black);
+            font-size: 1em;
+            font-style: italic;
         }
     }
 

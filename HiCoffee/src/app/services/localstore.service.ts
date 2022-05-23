@@ -25,4 +25,12 @@ export class LocalStoreService {
   async checkToken(): Promise<boolean> {
     return await this.getToken() !== null;
   }
+
+  async loadObj(key: string): Promise<object[]> {
+    return this.storage.get(key);
+  }
+
+  async saveObjs(key: string, objs: object[]): Promise<void> {
+    await this.storage.set(key, objs);
+  }
 }

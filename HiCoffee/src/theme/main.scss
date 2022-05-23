@@ -7,7 +7,7 @@ ion-button {
     text-transform: initial;
 }
 
-.btn-nobackground{
+.btn-nobackground {
     --background: #f5f5f3;
     --color: var(--ion-color-coffee-primary);
     border: 2px solid var(--ion-color-coffee-primary);
@@ -17,4 +17,24 @@ ion-button {
     color: var(--ion-color-coffee-primary);
     font-weight: 700;
     --spinner-color: var(--ion-color-coffee-primary);
+}
+
+.custome-toast {
+    --color: var(--ion-color-coffee-light);
+    --border-radius:5px;
+}
+
+.custome-toast-success {
+    --color: var(--ion-color-coffee-light);
+    --background: var(--ion-color-success);
+}
+
+.custome-toast-warning {
+    --color: var(--ion-color-coffee-black);
+    --background: var(--ion-color-warning);
+}
+
+.custome-toast-error {
+    --color: var(--ion-color-coffee-light);
+    --background: var(--ion-color-coffee-primary);
 }

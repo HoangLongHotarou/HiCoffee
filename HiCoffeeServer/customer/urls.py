@@ -9,7 +9,7 @@ router.register('checkins', CheckInViewSet,
                 basename="checkins")
 router.register('favorites', FavoriteViewSet,
                 basename="favorites")
-router.register('checkinmarker', CheckInMakerViewSet, basename='checkinmarker')
+router.register('marker', CheckInOrFavoriteMakerViewSet, basename='marker')
 router.register('cfsowner', CoffeeShopOwnerViewSet, basename='cfsowner')
 
 coffeeshop_router = routers.NestedDefaultRouter(

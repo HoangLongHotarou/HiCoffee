@@ -10,17 +10,17 @@ import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 })
 export class TestFeaturePage implements OnInit {
 
-  cafe : CoffeeShop;
+  cafe: CoffeeShop;
 
-  constructor(private route : ActivatedRoute) {
-    let cafeRec = this.route.snapshot.paramMap.get('cafeObj');
+  constructor(private route: ActivatedRoute) {
+    const cafeRec = this.route.snapshot.paramMap.get('cafeObj');
     this.cafe = JSON.parse(cafeRec);
     // this.Test();
   }
 
   ngOnInit() {
     // this.ionViewDidEnter();
-    console.log(this.cafe)
+    console.log(this.cafe);
   }
 
 }
