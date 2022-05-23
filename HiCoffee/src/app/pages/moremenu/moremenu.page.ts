@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Information } from 'src/app/interfaces/infomation';
+import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-moremenu',
@@ -8,9 +11,27 @@ import { AlertController } from '@ionic/angular';
 })
 export class MoremenuPage implements OnInit {
 
-  constructor(public alert: AlertController) { }
+  info : Information;
+  showSignUpCafe: boolean = true;
+
+  constructor(public alert: AlertController,public loadingUtils: LoadingUtils,private fetchAPI: FetchAPIService,) { }
 
   ngOnInit() {
+    this.loadingUtils.presentLoading('Vui lòng chờ');
+    this.getApiUser();
+  }
+
+  getApiUser(){
+    this.fetchAPI.get(`customer/information/me/`,true).then((res) => {
+      this.info = res.data;
+      this.loadingUtils.dismiss();
+      console.log(this.info.role);
+      if(this.info.role == 1){
+        this.showSignUpCafe = false;
+      }else{
+        this.showSignUpCafe = true;
+      }
+    });
   }
 
   async presentAlertConfirm() {

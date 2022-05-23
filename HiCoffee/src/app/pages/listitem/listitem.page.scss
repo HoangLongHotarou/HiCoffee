@@ -3,3 +3,33 @@ ion-infinite-scroll {
         --color: var(--ion-color-coffee-primary);
     }
 }
+
+ion-refresher {
+    ion-refresher-content {
+        --color: var(--ion-color-coffee-primary) !important;        
+    }   
+  }
+
+.container {
+    transition: linear 0.3s;
+
+    app-searchbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        transition: linear 0.3s;
+        background-color: var(--ion-color-coffee-secondary);
+        visibility: hidden;
+    }
+
+    &.show {
+        margin-top: 65px;
+
+        app-searchbar {
+            top: 60px;
+            visibility: visible;
+        }
+    }
+}

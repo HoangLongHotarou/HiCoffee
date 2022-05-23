@@ -62,8 +62,6 @@ export class MapComponent implements OnChanges, OnInit {
       center: latLng,
       zoom: defaultZoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      icon: 'https://cdn.iconscout.com/icon/premium/png-256-thumb/pikachu-2-625205.png',
-      snippet: 'test'
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     checkIn$.forEach((checkIn) => {

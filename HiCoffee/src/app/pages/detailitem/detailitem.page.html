@@ -10,7 +10,11 @@
 <ion-content>
   <div class="container">
     <div class="background">
-      <ion-img *ngFor="let img of coffeeShop.imgs_cfs" src="{{img.image}}"></ion-img>
+      <ion-slides [options]="imageSlideOpts">
+        <ion-slide *ngFor="let img of imageCoffeeShop$">
+          <ion-img src="{{img.image}}"></ion-img> 
+        </ion-slide>  
+      </ion-slides>           
     </div>
     <div #contenttouch class="content-container">
       <div #bartouch class="bar"></div>
@@ -18,19 +22,21 @@
         <ion-grid class="header ion-no-padding">
           <ion-row class="ion-justify-content-between ion-align-items-center">
             <div class="header-title">{{coffeeShop.name}}</div>
-            <div class="header-favorite"><span></span>
-              <ion-icon name="heart-outline"></ion-icon>
+            <div 
+              (click)="favoriteClicked()" 
+              [ngClass]="isFavorite ? 'header-favorite favorited' : 'header-favorite'">
+              <ion-icon #iconFavorite name="heart-outline"></ion-icon>
             </div>
+          </ion-row>
+          <ion-row>
+            <div class="header-address"><span>Địa chỉ: </span>{{coffeeShop.location}}</div>
           </ion-row>
           <ion-row class="ion-justify-content-between">
             <div class="header-time"><span>Mở cửa: </span>{{coffeeShop.open_time.substring(0, 5)}}</div>
             <div class="header-time"><span>Đóng cửa: </span>{{coffeeShop.closed_time.substring(0, 5)}}</div>
           </ion-row>
           <ion-row class="ion-justify-content-between">
-            <div class="header-rate-title">Đánh giá:</div>
-            <div class="header-rate-star"><span>{{coffeeShop.total_rate}} </span>
-              <ion-icon name="star"></ion-icon>
-            </div>
+            <div class="header-rate"><span>Đánh giá: </span>{{coffeeShop.total_rate}} <ion-icon name="star"></ion-icon></div>
           </ion-row>
           <ion-row class="ion-justify-content-between">
             <div class="header-price"><span>Mức giá:
