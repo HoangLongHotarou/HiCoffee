@@ -5,7 +5,9 @@ import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import LoadingUtils from 'src/app/utils/loading.utils';
+import AlertUtils from 'src/app/utils/alert.utils';
+import  LoadingUtils  from 'src/app/utils/loading.utils';
+import ToastUtils from 'src/app/utils/toast.utils';
 
 @Component({
   selector: 'app-home',
@@ -36,5 +38,22 @@ export class HomePage implements OnInit {
     });
     // this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {
     // });
+  }
+
+  Alert() {
+    // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
+    this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
+    {
+      OK: () => {
+        console.log('Hello OK');
+      },
+      Cancel: () => {
+        console.log('Hello Cancel'); ;
+      }
+    });
+  }
+
+  Toast() {
+    this.toastUtils.presentToastError('Nội dung', 'middle');
   }
 }
