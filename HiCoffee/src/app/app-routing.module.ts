@@ -7,8 +7,8 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs/checkin',
-    // redirectTo: 'login',
+    // redirectTo: 'tabs/checkin',
+    redirectTo: 'introduce',
     pathMatch: 'full'
   },
   {

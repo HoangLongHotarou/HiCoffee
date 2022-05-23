@@ -4,7 +4,9 @@ import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import AlertUtils from 'src/app/utils/alert.utils';
 import  LoadingUtils  from 'src/app/utils/loading.utils';
+import ToastUtils from 'src/app/utils/toast.utils';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,7 @@ export class HomePage implements OnInit {
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchAPI: FetchAPIService, private loadingUtils: LoadingUtils ) {
+  constructor(private fetchAPI: FetchAPIService, private loadingUtils: LoadingUtils, private alertUtils: AlertUtils, private toastUtils: ToastUtils ) {
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -33,5 +35,22 @@ export class HomePage implements OnInit {
       console.log(this.coffeeShop$);
       this.loadingUtils.dismiss();
     });
+  }
+
+  Alert() {
+    // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
+    this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
+    {
+      OK: () => {
+        console.log('Hello OK');
+      },
+      Cancel: () => {
+        console.log('Hello Cancel'); ;
+      }
+    });
+  }
+
+  Toast() {
+    this.toastUtils.presentToastError('Nội dung', 'middle');
   }
 }
