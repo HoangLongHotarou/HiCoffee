@@ -19,7 +19,7 @@ export class SlidecategoryComponent implements OnInit {
 
   width: number = window.innerWidth;
   slidePerView: number = 1;
-  cafeSlideOpts;
+  cafeSlideOpts: any;
 
   constructor(private fetchAPI: FetchAPIService,private router: Router) {
     this.slidePerView = (this.width >= 768) ? 3 : 2; 
@@ -43,7 +43,7 @@ export class SlidecategoryComponent implements OnInit {
     // console.log('Text '+this.coffee)
   }
 
-  gotoDetailPage(cafe) {
+  gotoDetailPage(cafe) {  
     const cafeString = JSON.stringify(cafe);
     this.router.navigate(['/detailitem',cafeString]);
   }

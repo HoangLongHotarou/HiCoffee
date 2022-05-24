@@ -9,6 +9,7 @@ import { SlidecategoryComponent } from '../../components/slidecategory/slidecate
 import { MainitemComponent } from 'src/app/components/mainitem/mainitem.component';
 import { SearchbarComponent } from 'src/app/components/searchbar/searchbar.component';
 import { FormsModule } from '@angular/forms';
+import { FeedbackComponent } from 'src/app/components/feedback/feedback.component';
 
 const COMPONENTS = [
   InputComponent,
@@ -18,6 +19,7 @@ const COMPONENTS = [
   SlidecategoryComponent,
   MainitemComponent,
   SearchbarComponent,
+  FeedbackComponent,
 ];
 
 @NgModule({

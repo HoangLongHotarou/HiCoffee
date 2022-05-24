@@ -6,6 +6,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { CoffeeShopCreate } from 'src/app/interfaces/coffeeshopcreate';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signupcoffee',
@@ -44,7 +45,9 @@ export class SignupcoffeePage implements OnInit {
   //   fileSource: new FormControl('', [Validators.required])
   // });
 
-  constructor(public toastController: ToastController, private fetchAPI: FetchAPIService, public loadingController: LoadingController) { }
+  constructor(public toastController: ToastController, 
+    private fetchAPI: FetchAPIService, 
+    public loadingController: LoadingController,private router: Router) { }
 
   async presentSpace() {
     const toast = await this.toastController.create({
@@ -101,8 +104,8 @@ export class SignupcoffeePage implements OnInit {
         const coffee = new FormData();
         coffee.append('name', this.coffeename);
         coffee.append('description', this.description);
-        if (this.image_file != null) { coffee.append('image_represent', this.image_file); }
-        coffee.append('min_price', `${this.min_price}`);
+        coffee.append('image_represent', this.image_file);
+        coffee.append('minimum_price', `${this.min_price}`);
         coffee.append('max_price', `${this.max_price}`);
         coffee.append('open_time', this.hour_open + ':' + this.minute_open + ':00');
         coffee.append('closed_time', this.hour_close + ':' + this.minute_close + ':00');
@@ -111,9 +114,12 @@ export class SignupcoffeePage implements OnInit {
         coffee.append('latitude', this.latitude);
         coffee.append('longitude', this.longitude);
         const check = await this.signUpCoffee(coffee);
-        if (check === true) {
+        if (check > 0 ) {
           this.presentSucess();
           console.log('Success');
+          console.log(check);
+          const checkstring = JSON.stringify(check);
+          this.router.navigate(['addcoffeecategory',checkstring]);
         } else {
           console.log('Error');
         }
@@ -129,17 +135,19 @@ export class SignupcoffeePage implements OnInit {
     }
   }
 
-  async signUpCoffee(coffee: any): Promise<boolean> {
-    let check = true;
-    await this.fetchAPI.postFormData('location/coffeeshops/', coffee).then((res) => {
+  async signUpCoffee(coffee: any): Promise<number> {
+    let id;
+    await this.fetchAPI.postFormData('customer/cfsowner/', coffee,true).then((res) => {
       console.log(res);
-      if (res.status === 201) {
+      if (res.status === 200) {
         coffee = res.data;
         console.log(coffee);
-      } else {
-        check = false;
+        id=coffee.id;
+        console.log(id);
+      } else{
+        console.log('error!');
       }
     });
-    return check;
+    return id;
   }
 }

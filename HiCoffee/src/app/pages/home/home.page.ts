@@ -4,10 +4,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
-import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import AlertUtils from 'src/app/utils/alert.utils';
 import  LoadingUtils  from 'src/app/utils/loading.utils';
-import ToastUtils from 'src/app/utils/toast.utils';
 
 @Component({
   selector: 'app-home',
@@ -40,20 +37,20 @@ export class HomePage implements OnInit {
     // });
   }
 
-  Alert() {
-    // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
-    this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
-    {
-      OK: () => {
-        console.log('Hello OK');
-      },
-      Cancel: () => {
-        console.log('Hello Cancel'); ;
-      }
-    });
-  }
+  // Alert() {
+  //   // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
+  //   this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
+  //   {
+  //     OK: () => {
+  //       console.log('Hello OK');
+  //     },
+  //     Cancel: () => {
+  //       console.log('Hello Cancel'); ;
+  //     }
+  //   });
+  // }
 
-  Toast() {
-    this.toastUtils.presentToastError('Nội dung', 'middle');
-  }
+  // Toast() {
+  //   this.toastUtils.presentToastError('Nội dung', 'middle');
+  // }
 }

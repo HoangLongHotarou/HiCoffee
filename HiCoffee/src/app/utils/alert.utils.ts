@@ -20,9 +20,9 @@ export default class AlertUtils {
         await this.alert.present();
     }
 
-    async presentAlertConfirm(message, handelrCallBack) {        
+    async presentAlertConfirm(header,message, handelrCallBack) {        
         const alert = await this.alertController.create({
-          header: 'Xác nhận',
+          header: header,
           message: message,
           buttons: [
             {

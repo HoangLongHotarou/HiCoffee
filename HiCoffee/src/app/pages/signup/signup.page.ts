@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import ToastUtils from 'src/app/utils/toast.utils';
 
 @Component({
   selector: 'app-signup',
@@ -22,49 +22,18 @@ export class SignupPage implements OnInit {
   showTipPassword = false;
 
   constructor(
-    public toastController: ToastController,
+    private toastUtils: ToastUtils,
     private auth: AuthService,
-    private router: Router,
-    public loadingController: LoadingController) { }
-
-  async presentSpace() {
-    const toast = await this.toastController.create({
-      message: 'Các ô không được để trống!',
-      duration: 2000
-    });
-    toast.present();
-  }
-  async presentSucess() {
-    const toast = await this.toastController.create({
-      message: 'Đăng kí thành công!',
-      duration: 2000
-    });
-    toast.present();
-  }
-  async presentErrorPassword() {
-    const toast = await this.toastController.create({
-      message: 'Mật khẩu phải giống nhau!',
-      duration: 2000
-    });
-    toast.present();
-  }
-
-  async presentError(err) {
-    const toast = await this.toastController.create({
-      message: err,
-      duration: 2000
-    });
-    toast.present();
-  }
+    private router: Router) { }
 
   async clickSignup() {
     //console.log(this.firstname);
     if (this.email === undefined || this.firstname === undefined || this.lastname === undefined ||
       this.username === undefined || this.password === undefined || this.confirmpassword === undefined) {
-      this.presentSpace();
+      this.toastUtils.presentToastError('Các ô không được để trống!');
     } else {
       if (this.password !== this.confirmpassword) {
-        this.presentErrorPassword();
+        this.toastUtils.presentToastError('Mật khẩu phải giống nhau!');
       }
       else {
         const user = {
@@ -77,10 +46,10 @@ export class SignupPage implements OnInit {
         const check = await this.auth.signUp(user);
         console.log(check);
         if (check[1] === true) {
-          this.presentSucess();
+          this.toastUtils.presentToastSuccess('Đăng kí thành công!');
           this.router.navigateByUrl('/login');
         } else {
-          this.presentError(check[0]);
+          this.toastUtils.presentToastError(check[0]);
         }
       }
     }

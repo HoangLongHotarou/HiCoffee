@@ -1,0 +1,35 @@
+<ion-card class="ion-no-margin ion-no-padding">
+  <ion-card-header>
+      <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
+      <div class="info">
+        <div class="username">{{feedBack.customer_fake}}</div>
+        <div class="rate"><span>{{feedBack.vote_rate}}/5</span><ion-icon name="star"></ion-icon></div>
+      </div>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-p [ngClass]="isShowMore ? 'feedback' : 'feedback show'">{{feedBack.feedback}}</ion-p>
+    <div [hidden]="hiddenShowMore" class="ion-text-right ion-margin-top">
+      <ion-label (click)="showMore()" class="more">{{moreText}}</ion-label>
+    </div>    
+    <ion-slides [options]="SlideOpts" class="img-list ion-margin-top">
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide class="img-item">
+        <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      </ion-slide>
+    </ion-slides>
+  </ion-card-content>
+</ion-card>

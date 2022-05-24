@@ -142,8 +142,13 @@ ion-content {
                         font-weight: 900;
                         margin-bottom: 10px;
                     }
+                    &-feedback {
+                        font-size: 1.2em;
+                        font-weight: 900;
+                        margin: 10px 0;
+                    }
                 }
             }
-        }
+        }        
     }
 }

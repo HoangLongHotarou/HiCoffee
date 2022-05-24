@@ -5,6 +5,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Gesture, GestureConfig, GestureController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { ImageCoffeeShop } from 'src/app/interfaces/image-coffee-shop';
+import { FeedBack } from 'src/app/interfaces/feed-back';
+import { CoffeeShopService } from './../../services/coffee-shop/coffee-shop.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-detailitem',
@@ -23,9 +26,11 @@ export class DetailitemPage implements OnInit {
   minimumSize: number;
   maximumSize: number;
   isFavorite: boolean;
+  isClickedFeedback: boolean;
 
   coffeeShop: CoffeeShop;
   imageCoffeeShop$: ImageCoffeeShop[];
+  feedBack$: FeedBack[] = [];
 
   imageSlideOpts = {
     slidesPerView: 1,
@@ -37,19 +42,20 @@ export class DetailitemPage implements OnInit {
     private gestureCtrl: GestureController,
     private renderer: Renderer2,
     private route: ActivatedRoute,
-    private markService: FavoriteOrCheckInService
+    private markService: FavoriteOrCheckInService,
+    private fetchAPI: CoffeeShopService,
+    private loadingUtils: LoadingUtils,
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
     this.minimumSize = this.height - 100;
     this.maximumSize = (0.25 * this.height) - 50;
     this.isFavorite = false;
+    this.isClickedFeedback = false;
   }
 
   ngOnInit() {
-    console.log(this.coffeeShop);
-    console.log(window.innerHeight);
-    console.log(window.innerWidth);
+    
   }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
@@ -66,10 +72,6 @@ export class DetailitemPage implements OnInit {
         if (ev.currentY < this.minimumSize) {
           this.renderer.setStyle(this.contenttouch.nativeElement, 'background', 'var(--ion-color-coffee-light)');
         }
-        // console.log(ev.currentX);
-        // console.log(ev.currentY);
-        // console.log(ev.deltaY);
-        // console.log(ev);
       },
       onEnd: ev => {
         // this.renderer.setStyle(this.contenttouch.nativeElement, 'height', '75%');
@@ -103,5 +105,16 @@ export class DetailitemPage implements OnInit {
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
       // this.markService.check(this.coffeeShop.id, 2);
     }
+  }
+
+  showFeedBack() {
+    this.loadingUtils.presentLoading('Vui lòng chờ...');
+    this.fetchAPI.getFeedBackByIDCoffee(this.coffeeShop.id).then(res => {
+      // console.log(res);      
+      console.log(res['feedBacks']);  
+      this.feedBack$ = res['feedBacks'];
+      this.isClickedFeedback = true;
+      this.loadingUtils.dismiss();  
+    });
   }
 }
