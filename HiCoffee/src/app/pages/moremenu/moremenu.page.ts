@@ -76,6 +76,9 @@ export class MoremenuPage implements OnInit {
             this.localstore.saveInfo('info',this.info);
             console.log('Success');
             console.log(this.info);
+            this.router.navigateByUrl('/tabs/moremenu').then(() => {
+              window.location.reload();
+            });
           }else{
             this.toastUtils.presentToastError('Lỗi đăng ký');
             console.log('Error');
