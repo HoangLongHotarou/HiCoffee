@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-    // canLoad: [AutoLoginGuard]
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'introduce',
     loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
-    // canLoad: [AuthGuard]
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'tabs',
