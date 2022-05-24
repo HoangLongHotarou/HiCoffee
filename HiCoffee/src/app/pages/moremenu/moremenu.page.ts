@@ -76,6 +76,7 @@ export class MoremenuPage implements OnInit {
             this.localstore.saveInfo('info',this.info);
             console.log('Success');
             console.log(this.info);
+              
           }else{
             this.toastUtils.presentToastError('Lỗi đăng ký');
             console.log('Error');

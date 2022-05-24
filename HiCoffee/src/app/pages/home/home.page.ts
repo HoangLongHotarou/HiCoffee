@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   info: Information;
 
   constructor(private fetchCoffeeShop: CoffeeShopService,
-    private fetchAPI: FetchAPIService, 
+    private fetchAPI: FetchAPIService,
     private loadingUtils: LoadingUtils,
     private localstore: LocalStoreService) {
   }
