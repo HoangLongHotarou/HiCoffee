@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -8,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class MoremenuPage implements OnInit {
 
-  constructor(public alert: AlertController) { }
+  constructor(public alert: AlertController, private router: Router) { }
 
   ngOnInit() {
   }
@@ -42,5 +43,9 @@ export class MoremenuPage implements OnInit {
 
   SignupCafe(){
     this.presentAlertConfirm();
+  }
+
+  goToSettingPage() {
+    this.router.navigateByUrl('/setting-page');
   }
 }
