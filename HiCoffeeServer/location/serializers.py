@@ -20,7 +20,7 @@ class CoffeeShopLocationSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('type',)
+        fields = ('id','type',)
 
 
 class GetCoffeeShopCategorySerializer(serializers.ModelSerializer):
