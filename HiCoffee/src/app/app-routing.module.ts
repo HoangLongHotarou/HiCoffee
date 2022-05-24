@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
-    // canLoad: [AutoLoginGuard]
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'signup',
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'introduce',
     loadChildren: () => import('./pages/introduce/introduce.module').then(m => m.IntroducePageModule),
-    // canLoad: [AuthGuard]
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'tabs',
@@ -64,6 +64,14 @@ const routes: Routes = [
   {
     path: 'addcoffeecategory/:idCoffee',
     loadChildren: () => import('./pages/addcoffeecategory/addcoffeecategory.module').then( m => m.AddcoffeecategoryPageModule)
+  },
+  {
+    path: 'write-feedback/:coffeeShop',
+    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then( m => m.WriteFeedbackPageModule)
+  },
+  {
+    path: 'img-preview-modal',
+    loadChildren: () => import('./pages/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
   }
 ];
 

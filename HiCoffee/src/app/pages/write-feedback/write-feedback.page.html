@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/detailitem/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Viết đánh giá</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container ion-padding">
+    <div class="coffee-name ion-text-center">Tròn quán</div>
+    <div class="coffee-user">
+      <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
+      <ion-label>Lý Võ</ion-label>
+    </div>
+    <!-- <div class="coffee-list-star">
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+    </div> -->
+    <div class="coffee-list-star">
+      <ionic-rating-component #rating
+        activeIcon = "star"
+        defaultIcon = "star-outline"
+        activeColor = "var(--ion-color-coffee-star)" 
+        defaultColor = "var(--ion-color-coffee-gray)"
+        readonly="false"
+        rating="1"
+        fontSize = "1.8em"
+        (ratingChanged)="onRatingChange($event)">
+      </ionic-rating-component>
+    </div>
+    <ion-textarea placeholder="Mô tả chi tiết đánh giá của bạn" rows="6" cols="20" class="coffee-content"></ion-textarea>
+    <div class="ion-text-center">
+      <div class="coffee-insert-picture">
+        <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>      
+        <ion-input class="hidden" type="file"></ion-input>
+      </div>
+    </div>    
+    <div class="ion-text-right ion-margin-top">
+      <ion-button>Đăng Bài Viết</ion-button>
+    </div>
+  </div>  
+</ion-content>

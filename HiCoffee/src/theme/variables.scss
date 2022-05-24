@@ -82,7 +82,7 @@
   --ion-color-coffee-light: #ececec;
   --ion-color-coffee-gray: #acacac;
   --ion-color-coffee-black: #1b1b1b;
-  --ion-color-coffee-star: #c1ce08;
+  --ion-color-coffee-star: #ffff00;
   --ion-color-coffee-glassmorphism: rgba(255, 255, 255, 0.2);
 }
 
@@ -244,3 +244,6 @@
 //     --ion-card-background: #1e1e1e;
 //   }
 // }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

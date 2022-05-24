@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .btn-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        ion-icon {
+            font-size: 1.5em;
+        }
+    }
+}

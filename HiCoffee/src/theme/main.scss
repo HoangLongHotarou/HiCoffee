@@ -38,3 +38,15 @@ ion-button {
     --color: var(--ion-color-coffee-light);
     --background: var(--ion-color-coffee-primary);
 }
+
+ion-button.rate-button {
+    --background: white;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: var(--ion-color-coffee-map);
+}

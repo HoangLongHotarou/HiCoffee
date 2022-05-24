@@ -4,11 +4,14 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Chi tiết</ion-title>
+    <ion-buttons slot="end">
+      <ion-router-link class="ion-margin-horizontal" (click)="gotoWritingFeedback()">Viết đánh giá</ion-router-link>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="container">
+  <div class="container ion-no-padding">
     <div class="background">
       <ion-slides [options]="imageSlideOpts">
         <ion-slide *ngFor="let img of imageCoffeeShop$">
