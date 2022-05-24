@@ -1,7 +1,7 @@
 import { FavoriteOrCheckInService } from '../../services/favorite-or-check-in/favorite-or-check-in.service';
 import { FavoriteOrCheckIn } from './../../interfaces/favorite-or-check-in';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Gesture, GestureConfig, GestureController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { ImageCoffeeShop } from 'src/app/interfaces/image-coffee-shop';
@@ -45,6 +45,7 @@ export class DetailitemPage implements OnInit {
     private markService: FavoriteOrCheckInService,
     private fetchAPI: CoffeeShopService,
     private loadingUtils: LoadingUtils,
+    private router: Router,
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
@@ -116,5 +117,10 @@ export class DetailitemPage implements OnInit {
       this.isClickedFeedback = true;
       this.loadingUtils.dismiss();  
     });
+  }
+
+  gotoWritingFeedback() {
+    const coffeeString = JSON.stringify(this.coffeeShop);
+    this.router.navigate(['write-feedback', coffeeString]);
   }
 }

@@ -7,11 +7,12 @@ ion-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10px;
+            padding: 15px 10px;
             border-bottom: 1px solid var(--ion-color-coffee-gray);
             cursor: pointer;
             p {
                 font-weight: 500;
+                margin: 0;
             }
             ion-icon {
                 font-size: 1.2rem;

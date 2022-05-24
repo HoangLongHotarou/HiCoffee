@@ -64,6 +64,14 @@ const routes: Routes = [
   {
     path: 'addcoffeecategory/:idCoffee',
     loadChildren: () => import('./pages/addcoffeecategory/addcoffeecategory.module').then( m => m.AddcoffeecategoryPageModule)
+  },
+  {
+    path: 'write-feedback/:coffeeShop',
+    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then( m => m.WriteFeedbackPageModule)
+  },
+  {
+    path: 'img-preview-modal',
+    loadChildren: () => import('./pages/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
   }
 ];
 

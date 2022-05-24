@@ -45,6 +45,10 @@ ion-button {
     padding: 5px !important;
 }
 
+ion-button.rate-button {
+    --background: white;
+}
+
 .gm-style .gm-style-iw-d {
     overflow: hidden !important;
 }

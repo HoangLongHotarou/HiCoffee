@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { FeedBack } from 'src/app/interfaces/feed-back';
+import { ImgPreviewModalPage } from 'src/app/pages/img-preview-modal/img-preview-modal.page';
 
 @Component({
   selector: 'app-feedback',
@@ -15,7 +17,9 @@ export class FeedbackComponent implements OnInit {
   hiddenShowMore: boolean;
   moreText: string;
 
-  constructor() {
+  constructor(
+    private modalCtrl: ModalController
+  ) {
     this.SlideOpts = {
       slidesPerView: 2,
       centeredSlides: true,
@@ -46,5 +50,16 @@ export class FeedbackComponent implements OnInit {
     s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
     s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
     return s.split(' ').filter(function(str){return str!="";}).length;
+  }
+
+  async openPreview(imgSrc: string) {
+    const modal = await this.modalCtrl.create({
+      component: ImgPreviewModalPage,
+      componentProps: {
+        imgSrc
+      },
+      cssClass: 'imgPreviewContainer'
+    });
+    modal.present();
   }
 }
