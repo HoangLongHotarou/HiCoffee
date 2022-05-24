@@ -4,10 +4,10 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Category } from 'src/app/interfaces/category';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Pagination } from 'src/app/interfaces/pagination';
-import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import AlertUtils from 'src/app/utils/alert.utils';
 import  LoadingUtils  from 'src/app/utils/loading.utils';
-import ToastUtils from 'src/app/utils/toast.utils';
+import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import { Information } from 'src/app/interfaces/infomation';
+import { LocalStoreService } from 'src/app/services/localstore.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,12 @@ export class HomePage implements OnInit {
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
 
-  constructor(private fetchCoffeeShop: CoffeeShopService, private loadingUtils: LoadingUtils) {
+  info: Information;
+
+  constructor(private fetchCoffeeShop: CoffeeShopService,
+    private fetchAPI: FetchAPIService, 
+    private loadingUtils: LoadingUtils,
+    private localstore: LocalStoreService) {
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -34,6 +39,10 @@ export class HomePage implements OnInit {
       // console.log(this.pagination);
       this.coffeeShop$ = res.coffeeShops;
       console.log(this.coffeeShop$);
+    });
+    this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
+      this.info = res.data;
+      this.localstore.saveInfo('info',this.info);
       this.loadingUtils.dismiss();
     });
     // this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {

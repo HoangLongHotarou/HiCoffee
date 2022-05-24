@@ -73,7 +73,7 @@ export class FetchAPIService {
     return Http.post(options);
   }
 
-  async put(urls: string, o: object, id: number, checkAuth?: boolean): Promise<HttpResponse> {
+  async put(urls: string, o: object, id: any, checkAuth?: boolean): Promise<HttpResponse> {
     let auth = '';
     if (checkAuth === true) {
       auth = `JWT ${await this.localStore.getToken()}`;

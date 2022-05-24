@@ -36,4 +36,14 @@ export class CoffeeShopService {
     // return this.feedBack$;
     return {'feedBacks': this.feedBack$, 'pages': this.pages};
   }
+
+  async getFeedBackByIDCoffee(idCoffee: number): Promise<any> {
+    await this.fetchAPI.get(`location/coffeeshops/${idCoffee}/feedbacks/`).then((res) => {
+      this.pagination = res.data;
+      this.feedBack$ = this.pagination.results;
+      this.pages = Math.ceil(this.pagination.count / 10);
+    });
+    // return this.feedBack$;
+    return {'feedBacks': this.feedBack$, 'pages': this.pages};
+  }
 }

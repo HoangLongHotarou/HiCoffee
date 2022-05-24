@@ -33,4 +33,20 @@ export class LocalStoreService {
   async saveObjs(key: string, objs: object[]): Promise<void> {
     await this.storage.set(key, objs);
   }
+
+  async loadMode(key: string): Promise<boolean> {
+    return this.storage.get(key);
+  }
+
+  async saveMode(key: string, objs: boolean): Promise<void> {
+    await this.storage.set(key, objs);
+  }
+
+  async loadInfo(key: string): Promise<any> {
+    return this.storage.get(key);
+  }
+
+  async saveInfo(key: string, objs: any): Promise<void> {
+    await this.storage.set(key, objs);
+  }
 }

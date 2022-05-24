@@ -34,7 +34,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/forgetpassword/forgetpassword.module').then(m => m.ForgetpasswordPageModule)
   },
   {
-    path: 'listitem',
+    path: 'listitem/:idList',
     loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
@@ -56,9 +56,15 @@ const routes: Routes = [
   {
     path: 'signupcoffee',
     loadChildren: () => import('./pages/signupcoffee/signupcoffee.module').then(m => m.SignupcoffeePageModule)
+  },
+  {
+    path: 'setting-page',
+    loadChildren: () => import('./pages/setting-page/setting-page.module').then( m => m.SettingPagePageModule)
+  },
+  {
+    path: 'addcoffeecategory/:idCoffee',
+    loadChildren: () => import('./pages/addcoffeecategory/addcoffeecategory.module').then( m => m.AddcoffeecategoryPageModule)
   }
-
-
 ];
 
 @NgModule({

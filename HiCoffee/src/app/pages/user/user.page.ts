@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { User } from 'src/app/interfaces/auth.interface/user';
+import { Information } from 'src/app/interfaces/infomation';
+import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import { LocalStoreService } from 'src/app/services/localstore.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-user',
@@ -10,38 +16,41 @@ export class UserPage implements OnInit {
 
   loading: any;
 
-  isLogin: boolean;
-  imgSrc: string;
+  info: Information;
+
+  user: any;
+
   email: string;
   lastName: string;
   firstName: string;
+  imgSrc: string;
+  role: number;
 
   showSignUpCafe: boolean = true;
 
-  constructor(public loadingController: LoadingController) { 
-    this.imgSrc = '../../../assets/images/avatarDefault.jpg'
-    this.email = '1911158@dlu.edu.vn';
-    this.lastName = 'Nguyen';
-    this.firstName = 'Hoang Dang Khoa'
-    this.isLogin = true;    
+  isLogin: boolean = true;
 
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 2000)
+  constructor(public loadingController: LoadingController,
+    private router: Router,
+    private localstore: LocalStoreService) {
+
   }
 
-  async presentLoading() {
-    this.loading = await this.loadingController.create({
-      cssClass: 'loading-style',
-      message: 'Vui lòng chờ',
-    });
-    return this.loading.present();
-  }
-
-  ngOnInit() {
-    if (this.isLogin) {
-      this.presentLoading();
+  async ngOnInit() {
+    this.info = await this.localstore.loadInfo('info');
+    console.log(this.info);
+    this.user = this.info.user;
+    this.email = this.user.email;
+    this.lastName = this.user.last_name;
+    this.firstName = this.user.first_name;
+    this.role= this.info.role;
+    if(this.role == 1){
+      this.showSignUpCafe = true;
+    }else{
+      this.showSignUpCafe = false;
     }
   }
-
+  SignUpCoffee() {
+    this.router.navigateByUrl('/signupcoffee');
+  }
 }

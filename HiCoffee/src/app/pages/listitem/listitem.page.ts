@@ -1,10 +1,11 @@
 import { CoffeeShopService } from './../../services/coffee-shop/coffee-shop.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { Pagination } from 'src/app/interfaces/pagination';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import LoadingUtils from 'src/app/utils/loading.utils';
+import { LocalStoreService } from 'src/app/services/localstore.service';
 
 @Component({
   selector: 'app-listitem',
@@ -20,6 +21,8 @@ export class ListitemPage implements OnInit {
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
   textSearch: string;
+  idList: number;
+  check: boolean;
 
   isShowSearchBar = false;
 
@@ -29,17 +32,37 @@ export class ListitemPage implements OnInit {
   constructor(
     private fetchCoffeeShop: CoffeeShopService,
     public loadingUtils: LoadingUtils,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private localstore: LocalStoreService,private render: Renderer2,
   ) {
-    this.title = 'Title Default';
+
   }
 
   ngOnInit() {
+    this.idList = Number.parseInt(this.route.snapshot.paramMap.get('idList'));
     this.loadingUtils.presentLoading('Vui lòng chờ');
     this.getList();
   }
 
-  getList(event?): void {
+  getList(event?) {
+    switch(this.idList) {
+      case 1:      
+        this.title = 'Dành cho bạn'
+        this.getListCoffeeForYou(event);
+        break;
+      case 2:
+        this.title = 'Dịch vụ cho bạn'
+        this.getListCoffeeForYou(event);
+        break;
+      case 3:
+        this.title = 'Địa điểm được yêu thích'
+        this.getListCoffeeForYou(event);
+        break; 
+    }
+  }
+
+  getListCoffeeForYou(event?) {
     this.fetchCoffeeShop.getAll(this.page).then((res) => {
       this.maximumpage = res.pages;
       this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
@@ -48,18 +71,6 @@ export class ListitemPage implements OnInit {
         event.target.complete();
       }
     });
-
-    // this.fetchAPI.get(`location/coffeeshops/?page=${this.page}`).then((res) => {
-    //   this.pagination = res.data;
-    //   this.maximumpage = Math.ceil(this.pagination.count / 10);
-    //   this.coffeeShop$ = this.coffeeShop$.concat(this.pagination.results);
-    //   console.log(this.coffeeShop$);
-    //   this.loadingUtils.dismiss();
-    //   console.log('1:', this.coffeeShop$.length);
-    //   if (event) {
-    //     event.target.complete();
-    //   }
-    // });
   }
 
   loadMore(event) {
@@ -77,7 +88,6 @@ export class ListitemPage implements OnInit {
   }
 
   onTextChanged(textSearchEvt: string) {
-    // console.log(textSearchEvt);
     this.textSearch = textSearchEvt;
   }
 

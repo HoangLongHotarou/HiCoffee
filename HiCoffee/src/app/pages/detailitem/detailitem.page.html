@@ -39,16 +39,24 @@
             <div class="header-rate"><span>Đánh giá: </span>{{coffeeShop.total_rate}} <ion-icon name="star"></ion-icon></div>
           </ion-row>
           <ion-row class="ion-justify-content-between">
-            <div class="header-price"><span>Mức giá: </span>{{coffeeShop.minimum_price}}-{{coffeeShop.max_price}}<sup>VND</sup></div>
-          </ion-row>         
-        </ion-grid>           
+            <div class="header-price"><span>Mức giá:
+              </span>{{coffeeShop.minimum_price}}-{{coffeeShop.max_price}}<sup>VND</sup></div>
+          </ion-row>
+        </ion-grid>
         <div class="header-des">Mô tả:</div>
         <div class="description ion-padding">
           {{coffeeShop.description}}
         </div>
         <div class="header-map-title">Vị trí quán cà phê</div>
         <app-map [coffeeShop]=coffeeShop height="30vh"></app-map>
-      </div>
+        <div class="ion-text-center">
+          <ion-button [hidden]="isClickedFeedback" (click)="showFeedBack()" class="ion-margin-vertical">Xem đánh giá</ion-button>
+        </div>   
+        <div [hidden]="!isClickedFeedback" class="header-feedback">Các bài đánh giá:</div>  
+        <div class="feedback-content">
+          <app-feedback *ngFor="let feedback of feedBack$" [feedBack]="feedback"></app-feedback>
+        </div>  
+      </div>    
     </div>
   </div>
 </ion-content>

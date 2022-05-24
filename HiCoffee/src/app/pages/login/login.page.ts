@@ -41,8 +41,8 @@ export class LoginPage implements OnInit {
       };
       const check = await this.auth.login(user);
       if (check) {
-        this.router.navigateByUrl('/tabs');
-      }else{
+        this.router.navigate(['/tabs']);
+      } else {
         this.presentErrorLogin();
       }
     }
