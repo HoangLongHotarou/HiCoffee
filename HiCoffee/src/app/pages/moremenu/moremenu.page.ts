@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Information } from 'src/app/interfaces/infomation';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
+import { LocalStoreService } from 'src/app/services/localstore.service';
 import AlertUtils from 'src/app/utils/alert.utils';
 import LoadingUtils from 'src/app/utils/loading.utils';
 import ToastUtils from 'src/app/utils/toast.utils';
@@ -15,30 +16,25 @@ import ToastUtils from 'src/app/utils/toast.utils';
 export class MoremenuPage implements OnInit {
 
   info: Information;
+  role: number;
   showSignUpCafe: boolean = true;
 
   constructor(public loadingUtils: LoadingUtils,
     private router: Router,
     private fetchAPI: FetchAPIService,
     private toastUtils: ToastUtils,
+    private localstore: LocalStoreService,
     private alertUtils: AlertUtils,private auth: AuthService) { }
 
-  ngOnInit() {
-    this.loadingUtils.presentLoading('Vui lòng chờ');
-    this.getApiUser();
-  }
-
-  getApiUser() {
-    this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
-      this.info = res.data;
-      this.loadingUtils.dismiss();
-      console.log(this.info.role);
-      if (this.info.role == 1) {
-        this.showSignUpCafe = false;
-      } else {
-        this.showSignUpCafe = true;
-      }
-    });
+  async ngOnInit() {
+    this.info = await this.localstore.loadInfo('info');
+    console.log(this.info);
+    this.role = this.info.role;
+    if(this.role == 1){
+      this.showSignUpCafe = false;
+    }else{
+      this.showSignUpCafe = true;
+    }
   }
 
   // async presentAlertConfirm() {
@@ -76,7 +72,10 @@ export class MoremenuPage implements OnInit {
           const check = await this.signUpOwnerCoffee(role);
           if(check){
             this.toastUtils.presentToastSuccess('Đăng kí chủ quán cà phê thàng công!!!');
+            this.info.role = 2;
+            this.localstore.saveInfo('info',this.info);
             console.log('Success');
+            console.log(this.info);
           }else{
             this.toastUtils.presentToastError('Lỗi đăng ký');
             console.log('Error');
@@ -93,7 +92,9 @@ export class MoremenuPage implements OnInit {
       {
         OK: async () => {
           await this.auth.logout();
-          this.router.navigateByUrl('/introduce');
+          this.router.navigateByUrl('/introduce').then(() => {
+            window.location.reload();
+          });
         },
         Cancel: () => {
           console.log('Cancel Logout');

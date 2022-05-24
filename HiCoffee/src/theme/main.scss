@@ -5,6 +5,7 @@
 ion-button {
     --background: var(--ion-color-coffee-primary);
     text-transform: initial;
+    --color: var(--ion-color-coffee-light);
 }
 
 .btn-nobackground {
@@ -37,4 +38,17 @@ ion-button {
 .custome-toast-error {
     --color: var(--ion-color-coffee-light);
     --background: var(--ion-color-coffee-primary);
+}
+
+.gm-style-iw.gm-style-iw-c {
+    background-color: var(--ion-color-coffee-map);
+    padding: 5px !important;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: var(--ion-color-coffee-map);
 }

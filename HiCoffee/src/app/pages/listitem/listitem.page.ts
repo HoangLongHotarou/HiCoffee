@@ -1,10 +1,11 @@
 import { CoffeeShopService } from './../../services/coffee-shop/coffee-shop.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { Pagination } from 'src/app/interfaces/pagination';
 import { ActivatedRoute, Router } from '@angular/router';
 import LoadingUtils from 'src/app/utils/loading.utils';
+import { LocalStoreService } from 'src/app/services/localstore.service';
 
 @Component({
   selector: 'app-listitem',
@@ -21,6 +22,7 @@ export class ListitemPage implements OnInit {
   coffeeShop$: CoffeeShop[] = [];
   textSearch: string;
   idList: number;
+  check: boolean;
 
   isShowSearchBar = false;
 
@@ -32,6 +34,7 @@ export class ListitemPage implements OnInit {
     public loadingUtils: LoadingUtils,
     private router: Router,
     private route: ActivatedRoute,
+    private localstore: LocalStoreService,private render: Renderer2,
   ) {
 
   }

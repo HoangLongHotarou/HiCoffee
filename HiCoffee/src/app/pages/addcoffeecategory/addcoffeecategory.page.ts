@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { Category } from 'src/app/interfaces/category';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import LoadingUtils from 'src/app/utils/loading.utils';
+import ToastUtils from 'src/app/utils/toast.utils';
 
 @Component({
   selector: 'app-addcoffeecategory',
@@ -22,6 +23,8 @@ export class AddcoffeecategoryPage implements OnInit {
   constructor(private fetchAPI: FetchAPIService,
     private loadingUtils: LoadingUtils, 
     public loadingController: LoadingController,
+    private toastUltils: ToastUtils,
+    private router: Router,
     private route: ActivatedRoute,) 
     {
       this.idCoffee = JSON.parse(this.route.snapshot.paramMap.get('idCoffee'));
@@ -49,6 +52,8 @@ export class AddcoffeecategoryPage implements OnInit {
     let check = await this.AddCategory(this.idCoffee,category);
     if(check){
       console.log('Them category thanh cong');
+      this.toastUltils.presentToastSuccess('Thêm quán thành công');
+      this.router.navigateByUrl('/tabs/user');
     }else{
       console.log('Error');
     }

@@ -91,7 +91,7 @@ export class MapComponent implements OnChanges, OnInit {
         position: new google.maps.LatLng(checkIn.coffee_shop.latitude, checkIn.coffee_shop.longitude),
         map: this.map,
         animation: google.maps.Animation.BOUNCE,
-        label: { color: '#00aaff', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
+        label: { color: '#666666', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
         optimized: false,
         visible: true
       });
