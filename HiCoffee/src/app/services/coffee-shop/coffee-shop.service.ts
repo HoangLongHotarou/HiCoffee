@@ -33,7 +33,6 @@ export class CoffeeShopService {
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
     });
-    // return this.feedBack$;
     return {'feedBacks': this.feedBack$, 'pages': this.pages};
   }
 
@@ -43,7 +42,6 @@ export class CoffeeShopService {
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
     });
-    // return this.feedBack$;
     return {'feedBacks': this.feedBack$, 'pages': this.pages};
   }
 }

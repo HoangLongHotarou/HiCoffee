@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Information } from 'src/app/interfaces/infomation';
@@ -17,7 +18,7 @@ export class MoremenuPage implements OnInit {
 
   info: Information;
   role: number;
-  showSignUpCafe: boolean = true;
+  showSignUpCafe = true;
 
   constructor(public loadingUtils: LoadingUtils,
     private router: Router,
@@ -30,42 +31,17 @@ export class MoremenuPage implements OnInit {
     this.info = await this.localstore.loadInfo('info');
     console.log(this.info);
     this.role = this.info.role;
-    if(this.role == 1){
+    if(this.role === 1){
       this.showSignUpCafe = false;
     }else{
       this.showSignUpCafe = true;
     }
   }
 
-  // async presentAlertConfirm() {
-  //   const alert = await this.alert.create({
-  //     cssClass: 'my-custom-class',
-  //     header: 'Đăng kí quyền làm chủ quán cà phê',
-  //     message: 'Bạn sẽ có quyền đăng quán cà phê với giá 500.000 đồng\n Bạn đồng ý không?',
-  //     buttons: [
-  //       {
-  //         text: 'Hủy',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         id: 'cancel-button',
-  //         handler: (blah) => {
-  //           console.log('Hủy');
-  //         }
-  //       }, {
-  //         text: 'Đồng ý',
-  //         id: 'confirm-button',
-  //         handler: () => {
-  //           console.log('Đăng ký');
-  //         }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-  // }
-
   SignupCafe() {
-    this.alertUtils.presentAlertConfirm('Đăng kí quyền làm chủ quán cà phê', 'Bạn sẽ có quyền đăng quán cà phê với giá 500.000 đồng. Bạn đồng ý không?',
+    this.alertUtils.presentAlertConfirm(
+      'Đăng kí quyền làm chủ quán cà phê',
+      'Bạn sẽ có quyền đăng quán cà phê với giá 500.000 đồng. Bạn đồng ý không?',
       {
         OK: async () => {
           const role={ role: 2};

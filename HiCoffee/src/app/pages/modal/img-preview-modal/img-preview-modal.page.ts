@@ -24,7 +24,7 @@ export class ImgPreviewModalPage implements OnInit {
     this.slideOtps = {
       slidePerView: 1,
       initialSlide: this.index,
-    }
+    };
   }
 
   closeModal() {
