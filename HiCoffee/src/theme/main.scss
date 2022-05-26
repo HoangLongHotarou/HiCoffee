@@ -5,7 +5,7 @@
 ion-button {
     --background: var(--ion-color-coffee-primary);
     text-transform: initial;
-    --color: var(--ion-color-coffee-light);
+    --color: var(--ion-color-coffee-gray);
 }
 
 .btn-nobackground {
@@ -18,7 +18,7 @@ ion-button {
     color: var(--ion-color-coffee-primary);
     font-weight: 700;
     --spinner-color: var(--ion-color-coffee-primary);
-    --background: var(--ion-color-coffee-light)
+    --background: var(--ion-color-coffee-gray)
 }
 
 .custome-toast {

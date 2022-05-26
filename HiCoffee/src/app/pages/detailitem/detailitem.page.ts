@@ -71,7 +71,7 @@ export class DetailitemPage implements OnInit {
       onMove: ev => {
         this.renderer.setStyle(this.contenttouch.nativeElement, 'height', `${((this.height - ev.currentY + 60) / this.height) * 100}%`);
         if (ev.currentY < this.minimumSize) {
-          this.renderer.setStyle(this.contenttouch.nativeElement, 'background', 'var(--ion-color-coffee-light)');
+          this.renderer.setStyle(this.contenttouch.nativeElement, 'background', 'var(--ion-color-coffee-gray)');
         }
       },
       onEnd: ev => {
