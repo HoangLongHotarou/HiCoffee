@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h4>Vui lòng chọn chủ đề mà bạn yêu thích</h4>
+  <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox color="danger" slot="end" [(ngModel)]="entry.isChecked" (click)="_getSelectedItem()"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <div class="ion-text-center">
+    <ion-button>Tiếp tục</ion-button>
+  </div>
+</ion-content>

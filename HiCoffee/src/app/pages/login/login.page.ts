@@ -1,7 +1,10 @@
+import { LocalStoreService } from './../../services/localstore.service';
+import { FetchAPIService } from './../../services/fetch-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Information } from 'src/app/interfaces/infomation';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +15,15 @@ export class LoginPage implements OnInit {
 
   username: string;
   password: string;
+  info: Information;
 
-  constructor(public toastController: ToastController, private auth: AuthService, private router: Router) { }
+  constructor(
+    public toastController: ToastController,
+    private auth: AuthService,
+    private fetchAPI: FetchAPIService,
+    private router: Router,
+    private localstore: LocalStoreService
+  ) { }
 
   async presentErrorLogin() {
     const toast = await this.toastController.create({
@@ -41,6 +51,10 @@ export class LoginPage implements OnInit {
       };
       const check = await this.auth.login(user);
       if (check) {
+        this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
+          this.info = res.data;
+          this.localstore.saveInfo('info',this.info);
+        });
         this.router.navigate(['/tabs']);
       } else {
         this.presentErrorLogin();

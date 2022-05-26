@@ -72,6 +72,10 @@ const routes: Routes = [
   {
     path: 'img-preview-modal',
     loadChildren: () => import('./pages/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
+  },
+  {
+    path: 'topic',
+    loadChildren: () => import('./pages/topic/topic.module').then( m => m.TopicPageModule)
   }
 ];
 

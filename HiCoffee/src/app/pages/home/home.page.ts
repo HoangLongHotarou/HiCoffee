@@ -35,34 +35,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
     this.fetchCoffeeShop.getAll(2).then((res) => {
-      // this.pagination = res;
-      // console.log(this.pagination);
       this.coffeeShop$ = res.coffeeShops;
       console.log(this.coffeeShop$);
-    });
-    this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
-      this.info = res.data;
-      this.localstore.saveInfo('info',this.info);
       this.loadingUtils.dismiss();
     });
-    // this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {
-    // });
   }
-
-  // Alert() {
-  //   // this.alertUtils.presentAlert('Thông báo', 'Nội dung');
-  //   this.alertUtils.presentAlertConfirm('Bạn có đồng ý?',
-  //   {
-  //     OK: () => {
-  //       console.log('Hello OK');
-  //     },
-  //     Cancel: () => {
-  //       console.log('Hello Cancel'); ;
-  //     }
-  //   });
-  // }
-
-  // Toast() {
-  //   this.toastUtils.presentToastError('Nội dung', 'middle');
-  // }
 }
