@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ export class LoginPage implements OnInit {
   username: string;
   password: string;
 
-  constructor(public toastController: ToastController, private auth: AuthService, private router: Router) { }
+  constructor(
+    public toastController: ToastController, 
+    private auth: AuthService, 
+    private router: Router,
+    private loadingUtils: LoadingUtils,
+    ) { }
 
   async presentErrorLogin() {
     const toast = await this.toastController.create({
@@ -35,11 +41,13 @@ export class LoginPage implements OnInit {
     if (this.username === undefined && this.password === undefined) {
       this.presentSpace();
     } else {
+      this.loadingUtils.presentLoading('Đang đăng nhập')
       const user = {
         username: this.username,
         password: this.password
       };
       const check = await this.auth.login(user);
+      this.loadingUtils.dismiss();
       if (check) {
         this.router.navigate(['/tabs']);
       } else {

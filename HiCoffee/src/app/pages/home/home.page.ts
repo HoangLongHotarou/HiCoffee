@@ -32,19 +32,19 @@ export class HomePage implements OnInit {
     centeredSlides: true,
   };
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
-    this.fetchCoffeeShop.getAll(2).then((res) => {
+    await this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
+      this.info = res.data;
+      this.localstore.saveInfo('info',this.info);      
+    });
+    await this.fetchCoffeeShop.getAll(2).then((res) => {
       // this.pagination = res;
       // console.log(this.pagination);
       this.coffeeShop$ = res.coffeeShops;
       console.log(this.coffeeShop$);
-    });
-    this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
-      this.info = res.data;
-      this.localstore.saveInfo('info',this.info);
-      this.loadingUtils.dismiss();
-    });
+    });   
+    this.loadingUtils.dismiss();
     // this.fetchAPI.get('location/coffeeshops/?page=2').then((res) => {
     // });
   }

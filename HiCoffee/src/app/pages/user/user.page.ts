@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { User } from 'src/app/interfaces/auth.interface/user';
 import { Information } from 'src/app/interfaces/infomation';
-import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { LocalStoreService } from 'src/app/services/localstore.service';
-import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-user',
