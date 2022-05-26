@@ -86,6 +86,8 @@
   --ion-color-coffee-black: #1b1b1b;
   --ion-color-coffee-star: #ffff00;
   --ion-color-coffee-glassmorphism: rgba(255, 255, 255, 0.2);
+
+  --ion-toolbar-background: #ffffff;
 }
 
 //@media (prefers-color-scheme: dark) {
@@ -168,6 +170,13 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;    
+
+    --ion-background-color: #270108;
+    --ion-item-background: #000000;
+    --ion-card-background: #270108;
+    --ion-text-color: #ffffff;
+    --ion-toolbar-background: #3E020C;
+    --ion-tab-bar-background: #3E020C;
   }
 
   /*
