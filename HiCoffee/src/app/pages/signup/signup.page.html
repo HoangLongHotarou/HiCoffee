@@ -10,15 +10,6 @@
 <ion-content>
   <div id="form">
     <ion-item>
-      <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Họ" [(ngModel)]="lastname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Tên" [(ngModel)]="firstname"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
     </ion-item>
     <app-inputpassword>
@@ -28,6 +19,15 @@
     <app-inputpassword>
       <ion-input type="password" placeholder="Nhập lại mật khẩu" [(ngModel)]="confirmpassword"></ion-input>
     </app-inputpassword>
+    <ion-item>
+      <ion-input type="text" placeholder="Họ" [(ngModel)]="lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Tên" [(ngModel)]="firstname"></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+    </ion-item>   
     <ion-button (click)="clickSignup()" expand="block" shape="round">Đăng kí</ion-button>
   </div>
 </ion-content>

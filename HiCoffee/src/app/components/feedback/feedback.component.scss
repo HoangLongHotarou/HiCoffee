@@ -1,5 +1,6 @@
 ion-card {
     margin-top: 8px;
+    border-radius: 8px;
     ion-card-header {
         display: flex;
         ion-img {
@@ -46,7 +47,9 @@ ion-card {
             display: flex;
             gap: 5px;
             ion-img {
-                width: 120px;                
+                width: 120px;   
+                border-radius: 5px;    
+                overflow: hidden;         
             }
         }
         .more {

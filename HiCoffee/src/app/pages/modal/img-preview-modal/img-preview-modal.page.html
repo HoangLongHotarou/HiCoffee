@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="container">
+    <div (click)="closeModal()" class="btn-close">
+      <ion-icon name="close"></ion-icon>
+    </div> 
+    <ion-slides [options]="slideOtps">
+      <ion-slide *ngFor="let img of imgArr">
+        <ion-img [src]="img"></ion-img>
+      </ion-slide>
+    </ion-slides> 
+    <div class="hint ion-text-center">
+      <ion-label>Vuốt sang phải hoặc sang trái để xem thêm hình</ion-label>
+      <div class="icon-touch">
+        <ion-icon name="return-down-back-outline"></ion-icon>
+        <ion-icon name="return-down-forward-outline"></ion-icon>        
+      </div>
+    </div>    
+  </div>  
+</ion-content>

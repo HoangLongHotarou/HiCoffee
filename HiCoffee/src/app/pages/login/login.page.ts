@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Information } from 'src/app/interfaces/infomation';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,10 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     private fetchAPI: FetchAPIService,
     private router: Router,
-    private localstore: LocalStoreService
+    private localstore: LocalStoreService,
+    private loadingUtils: LoadingUtils,
   ) { }
+
 
   async presentErrorLogin() {
     const toast = await this.toastController.create({
@@ -45,6 +48,7 @@ export class LoginPage implements OnInit {
     if (this.username === undefined && this.password === undefined) {
       this.presentSpace();
     } else {
+      this.loadingUtils.presentLoading('Đang đăng nhập');
       const user = {
         username: this.username,
         password: this.password
@@ -53,11 +57,15 @@ export class LoginPage implements OnInit {
       if (check) {
         this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
           this.info = res.data;
-          this.localstore.saveInfo('info',this.info);
+          this.localstore.saveInfo('info', this.info);
+          this.loadingUtils.dismiss();
+          this.router.navigate(['/tabs']).then(()=>{
+            window.location.reload();
+          });
         });
-        this.router.navigate(['/tabs']);
       } else {
         this.presentErrorLogin();
+        this.loadingUtils.dismiss();
       }
     }
   }

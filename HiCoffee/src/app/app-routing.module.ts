@@ -67,11 +67,12 @@ const routes: Routes = [
   },
   {
     path: 'write-feedback/:coffeeShop',
-    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then( m => m.WriteFeedbackPageModule)
+    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then( m => m.WriteFeedbackPageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: 'img-preview-modal',
-    loadChildren: () => import('./pages/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
+    loadChildren: () => import('./pages/modal/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
   },
   {
     path: 'topic',

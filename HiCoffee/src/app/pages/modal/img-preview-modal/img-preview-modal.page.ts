@@ -8,17 +8,26 @@ import { ModalController } from '@ionic/angular';
 })
 export class ImgPreviewModalPage implements OnInit {
 
-  @Input() imgSrc: string;
+  @Input() index: number;
+  @Input() imgArr: string[];
+
+  slideOtps: any;
+  isSlideChanged: boolean;
 
   constructor(
     private modalCtrl: ModalController
-  ) { }
+  ) {
+    this.isSlideChanged = false;
+  }
 
   ngOnInit() {
+    this.slideOtps = {
+      slidePerView: 1,
+      initialSlide: this.index,
+    }
   }
 
   closeModal() {
     this.modalCtrl.dismiss();
   }
-
 }

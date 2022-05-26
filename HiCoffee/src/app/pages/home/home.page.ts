@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
     centeredSlides: true,
   };
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
     this.fetchCoffeeShop.getAll(2).then((res) => {
       this.coffeeShop$ = res.coffeeShops;

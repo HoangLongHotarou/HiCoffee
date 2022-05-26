@@ -4,7 +4,6 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-topics',
   templateUrl: './topic.page.html',
   styleUrls: ['./topic.page.scss'],
-  
 })
 export class TopicPage implements OnInit  {
 
@@ -27,13 +26,13 @@ export class TopicPage implements OnInit  {
   }
 
   _getSelectedItem(selectedItem){
-    console.log('before' + selectedItem.isChecked)
+    console.log('before' + selectedItem.isChecked);
     this.form.forEach(item => {
-      if(item.val == selectedItem.val){
-        item.isChecked = selectedItem.isChecked
+      if(item.val === selectedItem.val){
+        item.isChecked = selectedItem.isChecked;
       }
     });
 
-    console.log(this.form)
+    console.log(this.form);
   }
 }

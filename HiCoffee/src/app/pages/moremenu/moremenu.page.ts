@@ -95,9 +95,10 @@ export class MoremenuPage implements OnInit {
       {
         OK: async () => {
           await this.auth.logout();
-          this.router.navigateByUrl('/introduce').then(() => {
-            window.location.reload();
-          });
+          this.router.navigateByUrl('/introduce');
+          // this.router.navigateByUrl('/introduce').then(() => {
+          //   window.location.reload();
+          // });
         },
         Cancel: () => {
           console.log('Cancel Logout');

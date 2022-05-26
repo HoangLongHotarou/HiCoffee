@@ -9,18 +9,11 @@
 
 <ion-content>
   <div class="container ion-padding">
-    <div class="coffee-name ion-text-center">Tròn quán</div>
+    <div class="coffee-name ion-text-center">{{coffeeShop.name}}</div>
     <div class="coffee-user">
       <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
-      <ion-label>Lý Võ</ion-label>
+      <ion-label>{{userName}}</ion-label>
     </div>
-    <!-- <div class="coffee-list-star">
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-    </div> -->
     <div class="coffee-list-star">
       <ionic-rating-component #rating
         activeIcon = "star"
@@ -41,7 +34,7 @@
       </div>
     </div>    
     <div class="ion-text-right ion-margin-top">
-      <ion-button>Đăng Bài Viết</ion-button>
+      <ion-button (click)="postFeedBack()">Đăng Bài Viết</ion-button>
     </div>
   </div>  
 </ion-content>

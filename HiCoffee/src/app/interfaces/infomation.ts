@@ -3,6 +3,6 @@ export interface Information {
     id: number;
     image_link?: string;
     brithday: string;
-    user: number;
+    user: any;
     role: number;
 }

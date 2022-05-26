@@ -12,15 +12,9 @@
       <ion-label (click)="showMore()" class="more">{{moreText}}</ion-label>
     </div>    
     <ion-slides [options]="SlideOpts" class="img-list ion-margin-top">
-      <ion-slide (click)="openPreview('https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870')" class="img-item">
-        <ion-img src="https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"></ion-img>
-      </ion-slide>
-      <ion-slide (click)="openPreview('https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870')" class="img-item">
-        <ion-img src="https://images.unsplash.com/photo-1653161926627-c4b492a300c9?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"></ion-img>
-      </ion-slide>
-      <ion-slide (click)="openPreview('https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870')" class="img-item" class="img-item">
-        <ion-img src="https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870"></ion-img>
-      </ion-slide>      
+      <ion-slide *ngFor="let img of imgArr; index as i" (click)="openPreview(imgArr, i)" class="img-item">
+        <ion-img src="{{img}}"></ion-img>
+      </ion-slide>         
     </ion-slides>
   </ion-card-content>
 </ion-card>
