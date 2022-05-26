@@ -43,7 +43,7 @@ export class SlidecategoryComponent implements OnInit {
     // console.log('Text '+this.coffee)
   }
 
-  gotoDetailPage(cafe) {  
+  gotoDetailPage(cafe) {
     const cafeString = JSON.stringify(cafe);
     this.router.navigate(['/detailitem',cafeString]);
   }

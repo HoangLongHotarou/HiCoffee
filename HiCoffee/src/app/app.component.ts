@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { LocalStoreService } from './services/localstore.service';
 import AlertUtils from './utils/alert.utils';
@@ -11,7 +12,7 @@ import ToastUtils from './utils/toast.utils';
   providers: [LoadingUtils, ToastUtils, AlertUtils],
 })
 export class AppComponent implements OnInit {
-  constructor(private localstore: LocalStoreService,private render : Renderer2) {
+  constructor(private localstore: LocalStoreService,private render: Renderer2) {
   }
 
   check: boolean;
@@ -19,11 +20,10 @@ export class AppComponent implements OnInit {
   async ngOnInit(){
     this.check = await this.localstore.loadMode('mode');
     console.log(this.check);
-    
     if(this.check){
       this.render.setAttribute(document.body,'color-theme','dark');
     }else{
       this.render.setAttribute(document.body,'color-theme','light');
     }
-  }  
+  }
 }
