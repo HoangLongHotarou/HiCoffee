@@ -55,9 +55,9 @@ export class LoginPage implements OnInit {
       };
       const check = await this.auth.login(user);
       if (check) {
-        this.fetchAPI.get(`customer/information/me/`, true).then((res) => {
+        await this.fetchAPI.get(`customer/information/me/`, true).then(async (res) => {
           this.info = res.data;
-          this.localstore.saveInfo('info', this.info);
+          await this.localstore.saveInfo('info', this.info);
           this.loadingUtils.dismiss();
           this.router.navigate(['/tabs']).then(()=>{
             window.location.reload();

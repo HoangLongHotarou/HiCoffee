@@ -1,3 +1,4 @@
+import LoadingUtils from 'src/app/utils/loading.utils';
 /* eslint-disable radix */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -45,9 +46,12 @@ export class SignupcoffeePage implements OnInit {
   //   fileSource: new FormControl('', [Validators.required])
   // });
 
-  constructor(public toastController: ToastController, 
-    private fetchAPI: FetchAPIService, 
-    public loadingController: LoadingController,private router: Router) { }
+  constructor(public toastController: ToastController,
+    private fetchAPI: FetchAPIService,
+    public loadingController: LoadingController,
+    private router: Router,
+    private loadingUtils: LoadingUtils
+    ) { }
 
   async presentSpace() {
     const toast = await this.toastController.create({
@@ -78,7 +82,8 @@ export class SignupcoffeePage implements OnInit {
   }
 
   async clickSignupCoffee() {
-    if (this.coffeename === undefined || this.description === undefined || this.image_represent === undefined ||
+    this.loadingUtils.presentLoading('Đang tạo mục quán coffee cho bạn');
+    if (this.coffeename === undefined || this.description === undefined  || this.image_represent === undefined||
       this.min_price === undefined || this.max_price === undefined || this.phonenumber === undefined || this.location === undefined
       || this.latitude === undefined || this.longitude === undefined || this.hour_open === undefined || this.hour_close === undefined
       || this.minute_open === undefined || this.minute_close === undefined) {
@@ -120,6 +125,7 @@ export class SignupcoffeePage implements OnInit {
           console.log(check);
           const checkstring = JSON.stringify(check);
           this.router.navigate(['addcoffeecategory',checkstring]);
+          this.loadingUtils.dismiss();
         } else {
           console.log('Error');
         }

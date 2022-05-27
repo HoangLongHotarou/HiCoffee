@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
 import { Category } from 'src/app/interfaces/category';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import LoadingUtils from 'src/app/utils/loading.utils';
@@ -21,11 +21,11 @@ export class AddcoffeecategoryPage implements OnInit {
   idliststring: string;
 
   constructor(private fetchAPI: FetchAPIService,
-    private loadingUtils: LoadingUtils, 
-    public loadingController: LoadingController,
+    private loadingUtils: LoadingUtils,
     private toastUltils: ToastUtils,
     private router: Router,
-    private route: ActivatedRoute,) 
+    private route: ActivatedRoute,
+    )
     {
       this.idCoffee = JSON.parse(this.route.snapshot.paramMap.get('idCoffee'));
       //console.log(this.idCoffee);
@@ -40,6 +40,7 @@ export class AddcoffeecategoryPage implements OnInit {
     });
   }
   async AddCoffeeCategory(){
+    this.loadingUtils.presentLoading('Đang thêm thể loại');
     this.checkedItems =  this.categories.filter(value => value.isChecked);
     this.listidcategory= this.checkedItems.map(value => value.id);
     // console.log(this.checkedItems);
@@ -48,10 +49,11 @@ export class AddcoffeecategoryPage implements OnInit {
     const category={
       id_categories : this.idliststring,
       type: false
-    }
-    let check = await this.AddCategory(this.idCoffee,category);
+    };
+    const check = await this.AddCategory(this.idCoffee,category);
     if(check){
       console.log('Them category thanh cong');
+      this.loadingUtils.dismiss();
       this.toastUltils.presentToastSuccess('Thêm quán thành công');
       this.router.navigateByUrl('/tabs/user');
     }else{
