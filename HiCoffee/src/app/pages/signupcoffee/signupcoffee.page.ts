@@ -55,7 +55,7 @@ export class SignupcoffeePage implements OnInit {
 
   async presentSpace() {
     const toast = await this.toastController.create({
-      message: 'Các ô không được để trống!',
+      message: 'Error!!!!!!!!',
       duration: 2000
     });
     toast.present();
@@ -72,6 +72,14 @@ export class SignupcoffeePage implements OnInit {
   async presentErrorTime() {
     const toast = await this.toastController.create({
       message: 'Thời gian sai !!!',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async test(str) {
+    const toast = await this.toastController.create({
+      message: str,
       duration: 2000
     });
     toast.present();
@@ -145,13 +153,17 @@ export class SignupcoffeePage implements OnInit {
     let id;
     await this.fetchAPI.postFormData('customer/cfsowner/', coffee,true).then((res) => {
       console.log(res);
+      this.test(res.status);
       if (res.status === 200) {
         coffee = res.data;
         console.log(coffee);
         id=coffee.id;
         console.log(id);
+        // this.test(id);
       } else{
+        this.presentSpace();
         console.log('error!');
+        // this.test('error');
       }
     });
     return id;

@@ -66,7 +66,7 @@ export class FetchAPIService {
       url: `${this.resourceUrl + urls}`,
       data: o,
       headers: {
-        'Content-Type': 'multipart/form-data;  boundary=----WebKitFormBoundarydMIgtiA2YeB1Z0kl',
+        'Content-Type': 'multipart/form-data',
         Authorization: auth
       }
     };

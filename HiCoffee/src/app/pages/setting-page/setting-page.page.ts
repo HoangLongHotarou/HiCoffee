@@ -7,14 +7,14 @@ import { LocalStoreService } from 'src/app/services/localstore.service';
   styleUrls: ['./setting-page.page.scss'],
 })
 export class SettingPagePage implements OnInit {
-  
-  check : boolean;
-  
+
+  check: boolean;
+
   constructor(private render: Renderer2,private localstore: LocalStoreService) { }
 
   async ngOnInit() {
     this.check = await this.localstore.loadMode('mode');
-    console.log("check : "+this.check);
+    console.log('check : '+this.check);
   }
 
   onToggleColorTheme(event){
