@@ -27,10 +27,17 @@
       </ionic-rating-component>
     </div>
     <ion-textarea placeholder="Mô tả chi tiết đánh giá của bạn" rows="6" cols="20" class="coffee-content"></ion-textarea>
+    <div class="coffee-list-img-choose">
+      <ion-img *ngFor="let img of imgPhotos" [src]="img.webPath"></ion-img>
+      <!-- <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
+      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img> -->
+    </div>
     <div class="ion-text-center">
-      <div class="coffee-insert-picture">
+      <div (click)="showOptionChoose()" class="coffee-insert-picture">
         <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>      
-        <ion-input class="hidden" type="file"></ion-input>
+        <!-- <ion-input class="hidden" type="file"></ion-input> -->
       </div>
     </div>    
     <div class="ion-text-right ion-margin-top">

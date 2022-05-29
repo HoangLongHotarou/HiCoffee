@@ -41,18 +41,17 @@ ion-content {
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 75%;
-            background-color: var(--ion-color-coffee-secondary);
+            height: 75%;            
             border-top-left-radius: 30px;
             border-top-right-radius: 30px;  
-            background: var(--ion-color-coffee-gray);    
+            background: var(--ion-color-coffee-gray-1);    
             overflow: hidden;  
             z-index: 2;           
 
             .bar { 
                 width: 40%;
                 height: 6px;
-                background-color: var(--ion-color-coffee-light);
+                background-color: var(--ion-color-coffee-gray);
                 margin: 0 auto;
                 margin-top: 20px; 
                 border-radius: 5px;
