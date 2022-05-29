@@ -4,12 +4,13 @@ import { LocalStoreService } from './services/localstore.service';
 import AlertUtils from './utils/alert.utils';
 import LoadingUtils from './utils/loading.utils';
 import ToastUtils from './utils/toast.utils';
+import InformErrorUtils from 'src/app/utils/inform-error.utils';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [LoadingUtils, ToastUtils, AlertUtils],
+  providers: [LoadingUtils, ToastUtils, AlertUtils, InformErrorUtils],
 })
 export class AppComponent implements OnInit {
   constructor(private localstore: LocalStoreService,private render: Renderer2) {

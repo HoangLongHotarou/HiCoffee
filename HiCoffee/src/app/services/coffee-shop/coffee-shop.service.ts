@@ -1,3 +1,4 @@
+import InformErrorUtils from 'src/app/utils/inform-error.utils';
 /* eslint-disable quote-props */
 import { Pagination } from 'src/app/interfaces/pagination';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
@@ -14,16 +15,19 @@ export class CoffeeShopService {
   feedBack$: FeedBack[];
   pagination: Pagination;
   pages: number;
-  constructor(private fetchAPI: FetchAPIService) { }
+  constructor(
+    private fetchAPI: FetchAPIService,
+    private errorUtils: InformErrorUtils
+  ) { }
 
   async getAll(page?: number): Promise<any> {
     await this.fetchAPI.get(`location/coffeeshops/?page=${page}`).then((res) => {
       this.pagination = res.data;
       this.coffeeShop$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
-    }).catch((res) => {
-      console.log(res);
-    });
+    }).catch((error)=>{
+      this.errorUtils.catchError(error.response.status);
+    });;
     return {'coffeeShops': this.coffeeShop$, 'pages': this.pages};
   }
 

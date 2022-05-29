@@ -20,22 +20,24 @@ export class AuthService {
     let check = true;
     let err = '';
     await this.fetchAPI.post('auth/users/', user).then((res) => {
-      console.log(res.status);
-      console.log(res);
-      if (res.status === 201) {
-        user = res.data;
-      } else if (res.status === 400) {
-        if (res.data.email) {
-          err = 'Email đã tồn tại';
+      user = res.data;
+    }).catch((error) => {
+      console.log(error);
+      const response = error.response;
+      if (response.status === 400) {
+        if (response.data.email) {
+          err += '<p>Email đã tồn tại</p>';
         }
-        if (res.data.password) {
-          err = 'Password sai theo quy định';
+        if (response.data.password) {
+          err += '<p>Password sai theo quy định</p>';
         }
-        if (res.data.username) {
-          err = 'Username đã tồn tại';
+        if (response.data.username) {
+          err += '<p>Username đã tồn tại</p>';
         }
-        check = false;
+      } else {
+        err = '<p>Chưa kết nối mạng</p>';
       }
+      check = false;
     });
     return [err, check];
   }
@@ -45,13 +47,11 @@ export class AuthService {
     if (await this.checkLogin() === false) {
       await this.fetchAPI.post('auth/jwt/create/', user).then(
         (res) => {
-          if (res.status === 200) {
-            this.localStore.addToken(res.data.access);
-          } else {
-            check = false;
-          }
+          this.localStore.addToken(res.data.access);
         }
-      );
+      ).catch((err) => {
+        check = false;
+      });
     }
     return check;
   }

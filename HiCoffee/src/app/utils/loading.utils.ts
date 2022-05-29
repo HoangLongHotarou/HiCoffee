@@ -19,7 +19,7 @@ export default class LoadingUtils {
         return this.loading.present();
     }
 
-    dismiss() {
-        this.loading.dismiss();
+    async dismiss() {
+        await this.loading.dismiss();
     }
 }

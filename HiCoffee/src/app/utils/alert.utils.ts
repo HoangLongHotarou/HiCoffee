@@ -21,7 +21,7 @@ export default class AlertUtils {
         await this.alert.present();
     }
 
-    async presentAlertConfirm(header,message, handelrCallBack) {
+    async presentAlertConfirm(header,message, handleCallBack) {
         const alert = await this.alertController.create({
           // eslint-disable-next-line object-shorthand
           header: header,
@@ -30,11 +30,11 @@ export default class AlertUtils {
           buttons: [
             {
                 text: 'Xác nhận',
-                handler: handelrCallBack['OK']
+                handler: handleCallBack['OK']
             },
             {
               text: 'Hủy',
-              handler: handelrCallBack['Cancel']
+              handler: handleCallBack['Cancel']
             }
           ]
         });

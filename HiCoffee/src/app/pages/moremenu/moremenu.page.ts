@@ -1,3 +1,4 @@
+import { InformationService } from './../../services/information/information.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,10 +23,12 @@ export class MoremenuPage implements OnInit {
 
   constructor(public loadingUtils: LoadingUtils,
     private router: Router,
-    private fetchAPI: FetchAPIService,
     private toastUtils: ToastUtils,
     private localstore: LocalStoreService,
-    private alertUtils: AlertUtils,private auth: AuthService) { }
+    private alertUtils: AlertUtils,
+    private auth: AuthService,
+    private infoService: InformationService
+    ) { }
 
   async ngOnInit() {
     this.info = await this.localstore.loadInfo('info');
@@ -45,7 +48,7 @@ export class MoremenuPage implements OnInit {
       {
         OK: async () => {
           const role={ role: 2};
-          const check = await this.signUpOwnerCoffee(role);
+          const check = await this.infoService.signUpOwnerCoffee(role);
           if(check){
             this.toastUtils.presentToastSuccess('Đăng kí chủ quán cà phê thàng công!!!');
             this.info.role = 2;
@@ -83,19 +86,19 @@ export class MoremenuPage implements OnInit {
   }
 
 
-  async signUpOwnerCoffee(role: any): Promise<boolean> {
-    let check = true;
-    await this.fetchAPI.put('customer/information/',role,'role',true).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        role = res.data;
-        console.log(role);
-      } else {
-        check = false;
-      }
-    });
-    return check;
-  }
+  // async signUpOwnerCoffee(role: any): Promise<boolean> {
+  //   let check = true;
+  //   await this.fetchAPI.put('customer/information/',role,'role',true).then((res) => {
+  //     console.log(res);
+  //     if (res.status === 200) {
+  //       role = res.data;
+  //       console.log(role);
+  //     } else {
+  //       check = false;
+  //     }
+  //   });
+  //   return check;
+  // }
 
   goToSettingPage() {
     this.router.navigateByUrl('/setting-page');

@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
@@ -26,20 +27,20 @@ export class WriteFeedbackPage implements OnInit {
     private route: ActivatedRoute,
     private localstore: LocalStoreService,
     private actionSheet: ActionSheetController,
-  ) { 
+  ){
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('coffeeShop'));
-    this.currentRate = 1;  
-    console.log(this.coffeeShop);    
+    this.currentRate = 1;
+    console.log(this.coffeeShop);
   }
 
   async ngOnInit() {
     this.info = await this.localstore.loadInfo('info');
-    this.user = this.info.user; 
-    this.userName = this.user.username;      
+    this.user = this.info.user;
+    this.userName = this.user.username;
   }
 
   onRatingChange(rating){
-    console.log('The evaluation was modified and now its value is: ',rating);   
+    console.log('The evaluation was modified and now its value is: ',rating);
   }
 
   async chooseFromCamera() {
@@ -50,7 +51,7 @@ export class WriteFeedbackPage implements OnInit {
     });
 
     var imageUrl = image.webPath;
-    console.log(imageUrl);       
+    console.log(imageUrl);
   }
 
   async chooseFromGallery() {
@@ -58,10 +59,10 @@ export class WriteFeedbackPage implements OnInit {
       quality: 100,
       limit: 5,
     });
-    console.log(image.photos);      
-    this.imgPhotos = image.photos; 
+    console.log(image.photos);
+    this.imgPhotos = image.photos;
   }
-  
+
   async showOptionChoose() {
     const asheet = await this.actionSheet.create({
       header: 'Tùy chọn ảnh',
@@ -71,14 +72,14 @@ export class WriteFeedbackPage implements OnInit {
           text: 'Chọn ảnh từ thư viện',
           handler: () => {
             this.chooseFromGallery();
-            console.log('Image Selected from Gallery');            
+            console.log('Image Selected from Gallery');
           }
         },
         {
           text: 'Chọn ảnh từ máy ảnh',
-          handler: () => {            
+          handler: () => {
             this.chooseFromCamera();
-            console.log('Camera selected');            
+            console.log('Camera selected');
           }
         },
         {
@@ -91,6 +92,5 @@ export class WriteFeedbackPage implements OnInit {
   }
 
   postFeedBack() {
-    
   }
 }

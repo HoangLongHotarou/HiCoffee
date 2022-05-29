@@ -5,6 +5,7 @@ import { Pagination } from './../../interfaces/pagination';
 import { Component, OnInit } from '@angular/core';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { FavoriteOrCheckIn } from 'src/app/interfaces/favorite-or-check-in';
+import InformErrorUtils from 'src/app/utils/inform-error.utils';
 
 @Component({
   selector: 'app-checkin',
@@ -15,14 +16,18 @@ export class CheckinPage implements OnInit {
   pagination: Pagination;
   checkIn$: FavoriteOrCheckIn[] = [];
 
-  constructor(private fetch: FavoriteOrCheckInService, private loadingUtils: LoadingUtils) {
+  constructor(
+    private fetch: FavoriteOrCheckInService,
+    private loadingUtils: LoadingUtils,
+    private informError: InformErrorUtils,
+  ) {
   }
 
   async ngOnInit() {
-    this.loadingUtils.presentLoading('Vui lòng chờ');
-    await this.fetch.getAll(1).then(res=>{
+    await this.loadingUtils.presentLoading('Vui lòng chờ');
+    await this.fetch.getAll(1).then(res => {
       this.checkIn$ = res;
-      this.loadingUtils.dismiss();
     });
+    this.loadingUtils.dismiss();
   }
 }

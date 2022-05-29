@@ -8,6 +8,7 @@ import  LoadingUtils  from 'src/app/utils/loading.utils';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { Information } from 'src/app/interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
+import InformErrorUtils from 'src/app/utils/inform-error.utils';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,10 @@ export class HomePage implements OnInit {
 
   info: Information;
 
-  constructor(private fetchCoffeeShop: CoffeeShopService,
-    private fetchAPI: FetchAPIService,
+  constructor(
+    private fetchCoffeeShop: CoffeeShopService,
     private loadingUtils: LoadingUtils,
+    private errorUtils: InformErrorUtils,
     private localstore: LocalStoreService) {
   }
 
@@ -33,11 +35,10 @@ export class HomePage implements OnInit {
   };
 
   async ngOnInit() {
-    this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
-    this.fetchCoffeeShop.getAll(2).then((res) => {
+    await this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
+    await this.fetchCoffeeShop.getAll(2).then((res) => {
       this.coffeeShop$ = res.coffeeShops;
-      console.log(this.coffeeShop$);
-      this.loadingUtils.dismiss();
     });
+    this.loadingUtils.dismiss();
   }
 }

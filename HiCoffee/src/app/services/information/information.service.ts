@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { Information } from '../../interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
@@ -15,7 +16,7 @@ export class InformationService {
     private fetchAPI: FetchAPIService,
     private localStore: LocalStoreService,
     private auth: AuthService,
-    private errorUtil: InformErrorUtils
+    private errorUtil: InformErrorUtils,
   ) { }
 
   async getInformation(): Promise<void> {
@@ -26,14 +27,16 @@ export class InformationService {
   }
 
   async signUpOwnerCoffee(role: any): Promise<boolean> {
-    let check = true;
+    let check = false;
     await this.fetchAPI.put('customer/information/', role, 'role', true).then(async (res) => {
       console.log(res);
       if (res.status === 200) {
         role = res.data;
+        check = true;
       } else if (res.status === 401) {
         this.auth.logout();
         await this.errorUtil.unauthenticated();
+        check = false;
       }
       else {
         check = false;
