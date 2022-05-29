@@ -1,9 +1,7 @@
 import { FetchAPIService } from '../fetch-api.service';
 /* eslint-disable @typescript-eslint/naming-convention */
-import { UserCreate } from '../../interfaces/auth.interface/usercreate';
-import { User } from '../../interfaces/auth.interface/user';
+import { User } from '../../interfaces/user';
 import { Injectable } from '@angular/core';
-import { UserLogin } from '../../interfaces/auth.interface/userlogin';
 import { LocalStoreService } from '../localstore.service';
 
 @Injectable({
@@ -18,7 +16,7 @@ export class AuthService {
     return this.localStore.checkToken();
   }
 
-  async signUp(user: UserCreate): Promise<Array<any>> {
+  async signUp(user: User): Promise<Array<any>> {
     let check = true;
     let err = '';
     await this.fetchAPI.post('auth/users/', user).then((res) => {
@@ -42,7 +40,7 @@ export class AuthService {
     return [err, check];
   }
 
-  async login(user: UserLogin): Promise<boolean> {
+  async login(user: User): Promise<boolean> {
     let check = true;
     if (await this.checkLogin() === false) {
       await this.fetchAPI.post('auth/jwt/create/', user).then(

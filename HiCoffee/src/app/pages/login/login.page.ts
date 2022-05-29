@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Information } from 'src/app/interfaces/infomation';
 import LoadingUtils from 'src/app/utils/loading.utils';
+import { InformationService } from 'src/app/services/information/information.service';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,12 @@ export class LoginPage implements OnInit {
 
   username: string;
   password: string;
-  info: Information;
 
   constructor(
     public toastController: ToastController,
     private auth: AuthService,
-    private fetchAPI: FetchAPIService,
     private router: Router,
-    private localstore: LocalStoreService,
+    private infoService: InformationService,
     private loadingUtils: LoadingUtils,
   ) { }
 
@@ -55,11 +54,9 @@ export class LoginPage implements OnInit {
       };
       const check = await this.auth.login(user);
       if (check) {
-        await this.fetchAPI.get(`customer/information/me/`, true).then(async (res) => {
-          this.info = res.data;
-          await this.localstore.saveInfo('info', this.info);
+        await this.infoService.getInformation().then(() => {
           this.loadingUtils.dismiss();
-          this.router.navigate(['/tabs']).then(()=>{
+          this.router.navigate(['/tabs']).then(() => {
             window.location.reload();
           });
         });

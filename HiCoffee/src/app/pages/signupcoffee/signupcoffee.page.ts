@@ -6,7 +6,6 @@ import LoadingUtils from 'src/app/utils/loading.utils';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { CoffeeShopCreate } from 'src/app/interfaces/coffeeshopcreate';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -42,12 +41,6 @@ export class SignupcoffeePage implements OnInit {
   location: string;
   latitude: string;
   longitude: string;
-
-  // myForm = new FormGroup({
-  //   name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //   file: new FormControl('', [Validators.required]),
-  //   fileSource: new FormControl('', [Validators.required])
-  // });
 
   constructor(public toastController: ToastController,
     private fetchAPI: FetchAPIService,

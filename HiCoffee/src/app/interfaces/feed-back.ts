@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { User } from './auth.interface/user';
+import { User } from './user';
 
 export interface FeedBack {
     id: number;

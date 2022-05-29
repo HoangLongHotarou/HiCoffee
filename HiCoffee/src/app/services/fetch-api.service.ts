@@ -8,7 +8,7 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class FetchAPIService {
-  private resourceUrl = environment.apiHiCoffee.apiHeroku;
+  private resourceUrl = environment.apiHiCoffee.apiLocalhost;
   constructor(private localStore: LocalStoreService) { }
 
   async get(urls: string, checkAuth?: boolean) {
