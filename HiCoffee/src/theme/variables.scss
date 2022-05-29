@@ -79,12 +79,18 @@
   /** coffee colors  **/ 
   --ion-color-coffee-primary: #9c061f; 
   --ion-color-coffee-secondary: #f1f1f1;
-  --ion-color-coffee-light: #acacac;
+  --ion-color-coffee-white: #ffffff;
+  --ion-color-coffee-light: #ececec;
+  --ion-color-coffee-light-1: #ececec;
   --ion-color-coffee-map: #ffffff;
   --ion-color-coffee-heart: #e72424;
-  --ion-color-coffee-gray: #ececec;
+  --ion-color-coffee-gray: #acacac;
+  --ion-color-coffee-gray-1: #ececec;
   --ion-color-coffee-black: #1b1b1b;
+  --ion-color-coffee-black-text: #1b1b1b;
   --ion-color-coffee-star: #ffff00;
+  --ion-color-coffee-hover: #ececec;
+  --ion-color-coffee-title-sheet: #acacac;
   --ion-color-coffee-glassmorphism: rgba(255, 255, 255, 0.2);
 
   --ion-toolbar-background: #ffffff;
@@ -100,12 +106,16 @@
     /** coffee colors  **/ 
     --ion-color-coffee-primary: #f5e6e9;
     --ion-color-coffee-secondary: #f1f1f1;
-    --ion-color-coffee-light: #291F15;
-    --ion-color-coffee-gray: #703D0A;
+    --ion-color-coffee-light-1: #703D0A;
+    --ion-color-coffee-white: #703D0A;
+    --ion-color-coffee-gray: #703D0A;    
+    --ion-color-coffee-gray-1: #291F15;    
     --ion-color-coffee-map: #0e0c0b;
     --ion-color-coffee-heart: #e72424;
     --ion-color-coffee-black: #f5e6e9;
     --ion-color-coffee-star: #c1ce08;
+    --ion-color-coffee-hover: #BB9A79;
+    --ion-color-coffee-title-sheet: #cba313;
     --ion-color-coffee-glassmorphism: rgba(0, 0, 0, 0.2);
 
     --ion-color-primary: #428cff;

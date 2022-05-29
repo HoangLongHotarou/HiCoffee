@@ -16,7 +16,10 @@ import { FormsModule } from '@angular/forms';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(),
     AppRoutingModule, ComponentsModule, RouterModule,FormsModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{
+      provide: RouteReuseStrategy, useClass: IonicRouteStrategy
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -61,6 +61,20 @@
             ion-label {
                 margin-left: 5px;                
             }
-        }        
+        }  
+        
+        &-list-img-choose {
+            width: 100%;
+            display: flex; 
+            align-content: stretch;         
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            
+            ion-img {
+                flex: calc(50% - 10px);  
+                object-fit: cover;                             
+            }
+        }
     }
 }
