@@ -1,0 +1,19 @@
+.item {
+    padding: 10px 15px;
+    border-radius: 15px;
+    text-align: center;
+    background: transparent;
+    color: var(--ion-color-coffee-black);
+    font-weight: 500;
+    border: 1px solid var(--ion-color-coffee-primary);
+    transition: linear 0.2s;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.clicked {
+        background: var(--ion-color-coffee-primary);
+        color: var(--ion-color-coffee-white);
+    }
+}

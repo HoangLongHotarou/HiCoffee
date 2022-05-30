@@ -20,15 +20,14 @@ ion-refresher {
         width: 100%;
         z-index: 1;
         transition: linear 0.3s;
-        background-color: var(--ion-color-coffee-secondary);
         visibility: hidden;
     }
 
     &.show {
-        margin-top: 70px;
+        margin-top: 60px;
 
         app-searchbar {
-            top: 70px;
+            top: 55px;
             visibility: visible;
         }
     }

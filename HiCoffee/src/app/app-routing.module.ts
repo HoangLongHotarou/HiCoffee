@@ -77,7 +77,12 @@ const routes: Routes = [
   {
     path: 'topic',
     loadChildren: () => import('./pages/topic/topic.module').then( m => m.TopicPageModule)
+  },
+  {
+    path: 'filter-list',
+    loadChildren: () => import('./pages/modal/filter-list/filter-list.module').then( m => m.FilterListPageModule)
   }
+
 ];
 
 @NgModule({
