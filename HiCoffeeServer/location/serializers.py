@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from customer.models import *
 from django.db import transaction
 from django.shortcuts import get_object_or_404
 
@@ -20,7 +21,7 @@ class CoffeeShopLocationSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id','type',)
+        fields = ('id', 'type',)
 
 
 class GetCoffeeShopCategorySerializer(serializers.ModelSerializer):
@@ -140,7 +141,8 @@ class PostAndPutCoffeeShopTypeOwnerSerializer(serializers.Serializer):
                 cfs_categories = CoffeeShopCategory.objects.bulk_create(
                     categories)
             else:
-                CoffeeShopCategory.objects.filter(coffee_shop_id=coffee_shop_id).delete()
+                CoffeeShopCategory.objects.filter(
+                    coffee_shop_id=coffee_shop_id).delete()
                 cfs_categories = CoffeeShopCategory.objects.bulk_create(
                     categories)
             return cfs_categories
@@ -171,8 +173,6 @@ class PostAndPutCoffeeShopCategorySerializer(serializers.ModelSerializer):
 class GetCoffeeShopSerializer(serializers.ModelSerializer):
     types_cfs = GetNameCoffeeShopCategorySerializer(many=True)
     imgs_cfs = GetSubImageCoffeeShopSerializer(many=True)
-    # total_rate = serializers.SerializerMethodField(
-    #     method_name='calculate_rate')
 
     class Meta:
         model = CoffeeShop

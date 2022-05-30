@@ -20,6 +20,9 @@ class CoffeeShopViewSet(ModelViewSet):
     # def get_queryset(self):
     #     queryset = CoffeeShop.objects.prefetch_related('types_cfs__category', 'imgs_cfs').all()
 
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.pk}
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return GetCoffeeShopSerializer

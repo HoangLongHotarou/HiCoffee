@@ -6,15 +6,6 @@ from django.db import transaction
 from core.serializers import UserSerializer
 
 
-class InformationSerializer(serializers.ModelSerializer):
-    birthday = fields.DateField(input_formats=['%Y-%m-%d'])
-    user = UserSerializer()
-
-    class Meta:
-        model = Information
-        fields = ('id', 'image_link', 'birthday', 'user', 'role')
-
-
 class PostOrPutInformationSerializer(serializers.ModelSerializer):
     birthday = fields.DateField(input_formats=['%Y-%m-%d'])
 
@@ -47,6 +38,11 @@ class CheckInOrFavoriteSerializer(serializers.ModelSerializer):
         fields = ('id', 'information', 'coffee_shop', 'type')
 
 
+class GetSubCheckInOrFavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CheckInOrFavorite
+        fields = ('id','coffee_shop','type')
+
 class MarkerSerializer(serializers.ModelSerializer):
     coffee_shop = CoffeeShopLocationSerializer()
 
@@ -71,3 +67,14 @@ class AddCheckInOfFavoriteSerializer(serializers.ModelSerializer):
                 information_id=info.id
             )
             return self.instance
+
+
+class InformationSerializer(serializers.ModelSerializer):
+    birthday = fields.DateField(input_formats=['%Y-%m-%d'])
+    user = UserSerializer()
+    info_mark = GetSubCheckInOrFavoriteSerializer(many=True)
+
+    class Meta:
+        model = Information
+        fields = ('id', 'image_link', 'birthday',
+                  'user', 'role','info_hobbies','info_mark')

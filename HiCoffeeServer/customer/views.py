@@ -13,7 +13,7 @@ from .filters import CheckInOrFavoriteFilter
 
 
 class InformationViewSet(ModelViewSet):
-    queryset = Information.objects.all()
+    queryset = Information.objects.prefetch_related('info_checkins','info_hobbies').all()
     serializer_class = InformationSerializer
     permission_classes = [permissions.IsAdminUser]
     

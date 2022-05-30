@@ -28,8 +28,8 @@ class Hobby(models.Model):
 
 class CheckInOrFavorite(models.Model):
     information = models.ForeignKey(
-        Information, on_delete=models.CASCADE, related_name='info_checkins')
+        Information, on_delete=models.CASCADE, related_name='info_mark')
     coffee_shop = models.ForeignKey(
-        CoffeeShop, on_delete=models.CASCADE, related_name='cfs_checkins')
+        CoffeeShop, on_delete=models.CASCADE, related_name='cfs_mark')
     TYPE = ((1, 'CheckIn'), (2, 'Favorites'))
     type = models.IntegerField(choices=TYPE)
