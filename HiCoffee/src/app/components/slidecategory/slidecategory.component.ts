@@ -22,7 +22,8 @@ export class SlidecategoryComponent implements OnInit {
   cafeSlideOpts: any;
 
   constructor(private fetchAPI: FetchAPIService,private router: Router) {
-    this.slidePerView = (this.width >= 768) ? 3 : 2; 
+    this.slidePerView = (this.width >= 768) ? 4 : 2; 
+    this.slidePerView = (this.width < 768 && this.width > 480) ? 2.8 : 2;
     this.cafeSlideOpts = {
       slidesPerView: this.slidePerView,
       centeredSlides: true,
@@ -43,8 +44,12 @@ export class SlidecategoryComponent implements OnInit {
     // console.log('Text '+this.coffee)
   }
 
-  gotoDetailPage(cafe) {
+  gotoDetailPage(cafe: CoffeeShop) {
     const cafeString = JSON.stringify(cafe);
     this.router.navigate(['/detailitem',cafeString]);
+  }
+
+  goToListItem(link: string) {
+    this.router.navigateByUrl(link);
   }
 }

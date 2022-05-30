@@ -1,0 +1,41 @@
+ion-header {
+    .sc-ion-buttons-md-s .button-clear {
+        font-size: 1.2em;
+        color: var(--ion-color-coffee-black);
+    }
+}
+
+ion-content {
+    .container {
+        .list-filter-container {
+            .title {
+                width: 100%;
+                margin-bottom: 10px;      
+                display: flex;
+                justify-content: space-between; 
+                align-items: center;
+                
+                h4 {
+                    margin: 0;               
+                }
+
+                ion-icon {
+                    color: var(--ion-color-coffee-black);
+                    font-size: 1.5em;
+                }
+            }           
+        
+            .list-item-filter {
+                display: flex;
+                justify-content: center;
+                align-items: stretch;
+                flex-wrap: wrap;
+                gap: 10px;
+        
+                app-item-filter {
+                    flex: calc(50% - 10px);    
+                }
+            }
+        }
+    }
+}
