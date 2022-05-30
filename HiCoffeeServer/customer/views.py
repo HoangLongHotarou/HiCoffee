@@ -13,10 +13,11 @@ from .filters import CheckInOrFavoriteFilter
 
 
 class InformationViewSet(ModelViewSet):
-    queryset = Information.objects.all()
+    queryset = Information.objects.prefetch_related(
+        "info_marks", "info_hobbies").all()
     serializer_class = InformationSerializer
     permission_classes = [permissions.IsAdminUser]
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return InformationSerializer
@@ -24,7 +25,8 @@ class InformationViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
     def me(self, request):
-        info = Information.objects.get(user_id=request.user.pk)
+        info = Information.objects.prefetch_related(
+            "info_marks", "info_hobbies").get(user_id=request.user.pk)
         if request.method == 'GET':
             serializer = InformationSerializer(info)
             return Response(serializer.data)

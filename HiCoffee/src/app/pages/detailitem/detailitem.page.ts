@@ -59,7 +59,7 @@ export class DetailitemPage implements OnInit {
 
   async ngOnInit() {
     this.isFavorite = await this.storeService.isFavorite(this.coffeeShop.id);
-    if(this.isFavorite){
+    if (this.isFavorite) {
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
     }
   }
@@ -105,11 +105,11 @@ export class DetailitemPage implements OnInit {
     if (this.isFavorite) {
       this.isFavorite = false;
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart-outline');
-      // this.markService.unCheck(this.coffeeShop.id, 2);
+      this.markService.unCheck(this.coffeeShop.id, 2);
     } else {
       this.isFavorite = true;
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
-      // this.markService.check(this.coffeeShop.id, 2);
+      this.markService.check(this.coffeeShop.id, 2);
     }
   }
 

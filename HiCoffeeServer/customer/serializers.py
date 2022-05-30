@@ -6,15 +6,6 @@ from django.db import transaction
 from core.serializers import UserSerializer
 
 
-class InformationSerializer(serializers.ModelSerializer):
-    birthday = fields.DateField(input_formats=['%Y-%m-%d'])
-    user = UserSerializer()
-
-    class Meta:
-        model = Information
-        fields = ('id', 'image_link', 'birthday', 'user', 'role')
-
-
 class PostOrPutInformationSerializer(serializers.ModelSerializer):
     birthday = fields.DateField(input_formats=['%Y-%m-%d'])
 
@@ -33,6 +24,14 @@ class HobbySerializer(serializers.ModelSerializer):
     class Meta:
         model = Hobby
         fields = ('id', 'information', 'category')
+
+
+class SubHobbySerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = Hobby
+        fields = ('id', 'category')
 
 
 class AddHobbySerializer(serializers.ModelSerializer):
@@ -55,6 +54,13 @@ class MarkerSerializer(serializers.ModelSerializer):
         fields = ('id', 'coffee_shop', 'type')
 
 
+class GetMarksSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CheckInOrFavorite
+        fields = ('id', 'coffee_shop', 'type')
+
+
 class AddCheckInOfFavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = CheckInOrFavorite
@@ -71,3 +77,15 @@ class AddCheckInOfFavoriteSerializer(serializers.ModelSerializer):
                 information_id=info.id
             )
             return self.instance
+
+
+class InformationSerializer(serializers.ModelSerializer):
+    birthday = fields.DateField(input_formats=['%Y-%m-%d'])
+    user = UserSerializer()
+    info_hobbies = SubHobbySerializer(many=True)
+    info_marks = GetMarksSerializer(many=True)
+
+    class Meta:
+        model = Information
+        fields = ('id', 'image_link', 'birthday', 'user',
+                  'role', 'info_hobbies', 'info_marks')

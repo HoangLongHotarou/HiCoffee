@@ -8,5 +8,5 @@ export interface Information {
     user: any;
     role: number;
     info_hobbies: Hobby[];
-    info_mark: FavoriteOrCheckIn[];
+    info_marks: FavoriteOrCheckIn[];
 }

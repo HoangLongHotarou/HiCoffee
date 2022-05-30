@@ -53,9 +53,12 @@ export class LocalStoreService {
 
   async isFavorite(idCoffeeShop: number) {
     const info: Information = await this.storage.get('info');
-    const lstFavorites = info.info_mark.filter(
+    console.log(info);
+    console.log(idCoffeeShop);
+    const lstFavorites = info.info_marks.filter(
       (x) => (x.coffee_shop === idCoffeeShop && x.type === 2)
     );
+    console.log('test'+lstFavorites.length);
     return lstFavorites.length > 0 ? true : false;
   }
 }
