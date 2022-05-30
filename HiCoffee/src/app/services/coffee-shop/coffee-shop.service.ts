@@ -25,10 +25,10 @@ export class CoffeeShopService {
       this.pagination = res.data;
       this.coffeeShop$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
-    }).catch((error)=>{
+    }).catch((error) => {
       this.errorUtils.catchError(error.response.status);
-    });;
-    return {'coffeeShops': this.coffeeShop$, 'pages': this.pages};
+    });
+    return { 'coffeeShops': this.coffeeShop$, 'pages': this.pages };
   }
 
   async getFeedBack(page?: number): Promise<any> {
@@ -36,8 +36,10 @@ export class CoffeeShopService {
       this.pagination = res.data;
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
     });
-    return {'feedBacks': this.feedBack$, 'pages': this.pages};
+    return { 'feedBacks': this.feedBack$, 'pages': this.pages };
   }
 
   async getFeedBackByIDCoffee(idCoffee: number): Promise<any> {
@@ -45,7 +47,9 @@ export class CoffeeShopService {
       this.pagination = res.data;
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
     });
-    return {'feedBacks': this.feedBack$, 'pages': this.pages};
+    return { 'feedBacks': this.feedBack$, 'pages': this.pages };
   }
 }

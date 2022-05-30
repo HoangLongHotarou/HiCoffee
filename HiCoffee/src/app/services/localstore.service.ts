@@ -1,3 +1,4 @@
+import { Information } from 'src/app/interfaces/infomation';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
@@ -48,5 +49,13 @@ export class LocalStoreService {
 
   async saveInfo(key: string, objs: any): Promise<void> {
     await this.storage.set(key, objs);
+  }
+
+  async isFavorite(idCoffeeShop: number) {
+    const info: Information = await this.storage.get('info');
+    const lstFavorites = info.info_mark.filter(
+      (x) => (x.coffee_shop === idCoffeeShop && x.type === 2)
+    );
+    return lstFavorites.length > 0 ? true : false;
   }
 }

@@ -42,15 +42,17 @@ export class MapComponent implements OnChanges, OnInit {
     const b = 14.327;
     let defaultZoom = 0;
     checkIn$.forEach((checkIn) => {
-      sumLat += parseFloat(checkIn.coffee_shop.latitude);
-      sumLon += parseFloat(checkIn.coffee_shop.longitude);
+      const coffeeShop =  checkIn.coffee_shop as CoffeeShop;
+      sumLat += parseFloat(coffeeShop.latitude);
+      sumLon += parseFloat(coffeeShop.longitude);
     });
     const meanLat = sumLat / checkIn$.length;
     const meanLon = sumLon / checkIn$.length;
     let maxSize = -1;
     checkIn$.forEach((checkIn) => {
-      const lat = parseFloat(checkIn.coffee_shop.latitude) - meanLat;
-      const lon = parseFloat(checkIn.coffee_shop.longitude) - meanLon;
+      const coffeeShop =  checkIn.coffee_shop as CoffeeShop;
+      const lat = parseFloat(coffeeShop.latitude) - meanLat;
+      const lon = parseFloat(coffeeShop.longitude) - meanLon;
       const pathSize = Math.sqrt(lat * lat + lon * lon);
       if (pathSize > maxSize) {
         maxSize = pathSize;
@@ -65,11 +67,12 @@ export class MapComponent implements OnChanges, OnInit {
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     checkIn$.forEach((checkIn) => {
+      const coffeeShop =  checkIn.coffee_shop as CoffeeShop;
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(checkIn.coffee_shop.latitude, checkIn.coffee_shop.longitude),
+        position: new google.maps.LatLng(coffeeShop.latitude, coffeeShop.longitude),
         map: this.map,
         animation: google.maps.Animation.BOUNCE,
-        label: { color: '#fffff', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
+        label: { color: '#fffff', fontWeight: 'bold', fontSize: '14px', text: `${coffeeShop.name}` },
         optimized: true,
         visible: true
       });
@@ -87,11 +90,12 @@ export class MapComponent implements OnChanges, OnInit {
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     checkIn$.forEach((checkIn) => {
+      const coffeeShop =  checkIn.coffee_shop as CoffeeShop;
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(checkIn.coffee_shop.latitude, checkIn.coffee_shop.longitude),
+        position: new google.maps.LatLng(coffeeShop.latitude, coffeeShop.longitude),
         map: this.map,
         animation: google.maps.Animation.BOUNCE,
-        label: { color: '#666666', fontWeight: 'bold', fontSize: '14px', text: `${checkIn.coffee_shop.name}` },
+        label: { color: '#666666', fontWeight: 'bold', fontSize: '14px', text: `${coffeeShop.name}` },
         optimized: false,
         visible: true
       });

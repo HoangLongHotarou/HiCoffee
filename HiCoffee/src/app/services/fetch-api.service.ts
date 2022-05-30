@@ -64,7 +64,8 @@ export class FetchAPIService {
           'Content-Type': 'multipart/form-data',
           Authorization: auth
         }
-      });
+      }
+    );
   }
 
   async put(urls: string, o: object, id: any, checkAuth?: boolean) {
@@ -78,7 +79,8 @@ export class FetchAPIService {
           'Content-Type': 'application/json',
           Authorization: auth
         }
-      });
+      }
+    );
   }
 
   async putFormData(urls: string, o: any, id: number, checkAuth?: boolean) {
@@ -92,7 +94,8 @@ export class FetchAPIService {
           'Content-Type': 'multipart/form-data',
           Authorization: auth
         }
-      });
+      }
+    );
   }
 
   // async postFormData(urls: string, o: FormData, checkAuth?: boolean): Promise<any> {

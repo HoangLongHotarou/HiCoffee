@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { Information } from '../../interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
@@ -19,29 +18,36 @@ export class InformationService {
     private errorUtil: InformErrorUtils,
   ) { }
 
-  async getInformation(): Promise<void> {
+  async saveLocalInformation(): Promise<void> {
     await this.fetchAPI.get(`customer/information/me/`, true).then(async (res) => {
       this.info = res.data;
       await this.localStore.saveInfo('info', this.info);
-    });
+    }).catch((error) => { this.errorUtil.catchError(error.response.status); });
   }
 
   async signUpOwnerCoffee(role: any): Promise<boolean> {
     let check = false;
-    await this.fetchAPI.put('customer/information/', role, 'role', true).then(async (res) => {
-      console.log(res);
-      if (res.status === 200) {
+    await this.fetchAPI.put('customer/information/', role, 'role', true).then(
+      async (res) => {
+        console.log(res);
         role = res.data;
         check = true;
-      } else if (res.status === 401) {
-        this.auth.logout();
-        await this.errorUtil.unauthenticated();
+      }).catch((error) => {
+        this.errorUtil.catchError(error.response.status);
         check = false;
-      }
-      else {
-        check = false;
-      }
-    });
+      });
     return check;
+  }
+
+  async signUpCoffee(coffee: any): Promise<number> {
+    let id = 0;
+    await this.fetchAPI.postFormData('customer/cfsowner/', coffee, true).then(
+      async (res) => {
+        coffee = res.data;
+        id = coffee.id;
+      }).catch((error) => {
+        this.errorUtil.catchError(error.response.status);
+      });
+    return id;
   }
 }

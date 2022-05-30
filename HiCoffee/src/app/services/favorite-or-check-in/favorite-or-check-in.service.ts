@@ -28,6 +28,7 @@ export class FavoriteOrCheckInService {
     }).catch(async (err) => {
       this.informError.catchError(err.response.status);
     });
+    console.log(this.frOrCi$);
     return this.frOrCi$;
   }
 

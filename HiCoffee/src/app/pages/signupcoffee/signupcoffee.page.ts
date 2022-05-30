@@ -1,3 +1,4 @@
+import { InformationService } from './../../services/information/information.service';
 /* eslint-disable guard-for-in */
 import AlertUtils from 'src/app/utils/alert.utils';
 import LoadingUtils from 'src/app/utils/loading.utils';
@@ -43,12 +44,10 @@ export class SignupcoffeePage implements OnInit {
   longitude: string;
 
   constructor(public toastController: ToastController,
-    private fetchAPI: FetchAPIService,
     public loadingController: LoadingController,
     private router: Router,
     private loadingUtils: LoadingUtils,
-    private alert: AlertUtils,
-    private http: HttpClient,
+    private infoService: InformationService
     // private axios: AxiosInstance
   ) { }
 
@@ -127,18 +126,13 @@ export class SignupcoffeePage implements OnInit {
         coffee.append('location', this.location);
         coffee.append('latitude', this.latitude);
         coffee.append('longitude', this.longitude);
-        const check = await this.signUpCoffee(coffee);
+        const check = await this.infoService.signUpCoffee(coffee);
         if (check > 0) {
           this.presentSucess();
-          console.log('Success');
-          console.log(check);
           const checkstring = JSON.stringify(check);
           this.router.navigate(['addcoffeecategory', checkstring]);
-          this.loadingUtils.dismiss();
-        } else {
-          console.log('Error');
-          this.loadingUtils.dismiss();
         }
+        this.loadingUtils.dismiss();
       }
     }
   }
@@ -151,19 +145,19 @@ export class SignupcoffeePage implements OnInit {
     }
   }
 
-  async signUpCoffee(coffee: any): Promise<number> {
-    let id;
-    await this.fetchAPI.postFormData('customer/cfsowner/', coffee, true).then(async (res) => {
-      if (res.status === 200) {
-        coffee = res.data;
-        console.log(coffee);
-        id = coffee.id;
-        console.log(id);
-      } else {
-        console.log('error!');
-      }
-    });
-    return id;
-  }
+  // async signUpCoffee(coffee: any): Promise<number> {
+  //   let id;
+  //   await this.fetchAPI.postFormData('customer/cfsowner/', coffee, true).then(async (res) => {
+  //     if (res.status === 200) {
+  //       coffee = res.data;
+  //       console.log(coffee);
+  //       id = coffee.id;
+  //       console.log(id);
+  //     } else {
+  //       console.log('error!');
+  //     }
+  //   });
+  //   return id;
+  // }
 }
 

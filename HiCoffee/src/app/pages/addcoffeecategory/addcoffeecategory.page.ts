@@ -43,8 +43,6 @@ export class AddcoffeecategoryPage implements OnInit {
     this.loadingUtils.presentLoading('Đang thêm thể loại');
     this.checkedItems =  this.categories.filter(value => value.isChecked);
     this.listidcategory= this.checkedItems.map(value => value.id);
-    // console.log(this.checkedItems);
-    // console.log(this.listidcategory);
     this.idliststring = this.listidcategory.toString();
     const category={
       id_categories : this.idliststring,

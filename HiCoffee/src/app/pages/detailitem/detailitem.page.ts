@@ -1,3 +1,5 @@
+import { LocalStoreService } from 'src/app/services/localstore.service';
+/* eslint-disable @typescript-eslint/dot-notation */
 import { FavoriteOrCheckInService } from '../../services/favorite-or-check-in/favorite-or-check-in.service';
 import { FavoriteOrCheckIn } from './../../interfaces/favorite-or-check-in';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
@@ -46,17 +48,20 @@ export class DetailitemPage implements OnInit {
     private fetchAPI: CoffeeShopService,
     private loadingUtils: LoadingUtils,
     private router: Router,
+    private storeService: LocalStoreService
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
     this.minimumSize = this.height - 100;
     this.maximumSize = (0.25 * this.height) - 50;
-    this.isFavorite = false;
     this.isClickedFeedback = false;
   }
 
-  ngOnInit() {
-    
+  async ngOnInit() {
+    this.isFavorite = await this.storeService.isFavorite(this.coffeeShop.id);
+    if(this.isFavorite){
+      this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
+    }
   }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
@@ -111,11 +116,10 @@ export class DetailitemPage implements OnInit {
   showFeedBack() {
     this.loadingUtils.presentLoading('Vui lòng chờ...');
     this.fetchAPI.getFeedBackByIDCoffee(this.coffeeShop.id).then(res => {
-      // console.log(res);      
-      console.log(res['feedBacks']);  
+      console.log(res['feedBacks']);
       this.feedBack$ = res['feedBacks'];
       this.isClickedFeedback = true;
-      this.loadingUtils.dismiss();  
+      this.loadingUtils.dismiss();
     });
   }
 

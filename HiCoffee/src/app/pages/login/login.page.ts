@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       };
       const check = await this.auth.login(user);
       if (check) {
-        await this.infoService.getInformation().then(() => {
+        await this.infoService.saveLocalInformation().then(() => {
           this.loadingUtils.dismiss();
           this.router.navigate(['/tabs']).then(() => {
             window.location.reload();

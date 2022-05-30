@@ -40,6 +40,7 @@ export class ListitemPage implements OnInit {
   }
 
   ngOnInit() {
+    // eslint-disable-next-line radix
     this.idList = Number.parseInt(this.route.snapshot.paramMap.get('idList'));
     this.loadingUtils.presentLoading('Vui lòng chờ');
     this.getList();
@@ -47,18 +48,18 @@ export class ListitemPage implements OnInit {
 
   getList(event?) {
     switch(this.idList) {
-      case 1:      
-        this.title = 'Dành cho bạn'
+      case 1:
+        this.title = 'Dành cho bạn';
         this.getListCoffeeForYou(event);
         break;
       case 2:
-        this.title = 'Dịch vụ cho bạn'
+        this.title = 'Dịch vụ cho bạn';
         this.getListCoffeeForYou(event);
         break;
       case 3:
-        this.title = 'Địa điểm được yêu thích'
+        this.title = 'Địa điểm được yêu thích';
         this.getListCoffeeForYou(event);
-        break; 
+        break;
     }
   }
 

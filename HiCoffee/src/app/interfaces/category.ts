@@ -1,5 +1,5 @@
 export interface Category {
+    isChecked: unknown;
     id: number;
-    isChecked: boolean;
     type: string;
 }
