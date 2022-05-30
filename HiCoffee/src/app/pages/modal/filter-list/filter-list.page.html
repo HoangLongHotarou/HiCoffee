@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lọc thông tin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" (click)="closeAction()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container ion-padding">   
+    <div class="list-filter-container">
+      <div class="title">
+        <h4>Mảng test</h4>
+        <ion-icon name="refresh"></ion-icon>
+      </div>     
+      <div class="list-item-filter">
+        <app-item-filter *ngFor="let item of arrayTest" itemID="{{item}}" itemName="{{item}}"></app-item-filter>
+      </div>
+    </div>
+    <div class="list-filter-container ion-margin-top">
+      <div class="title">
+        <h4>Chọn thể loại</h4>
+        <ion-icon (click)="refreshCategory()" name="refresh"></ion-icon>
+      </div>         
+      <div class="list-item-filter">
+        <app-item-filter *ngFor="let item of category$" (clickEvent)="clickedEvent($event)" itemID="{{item.id}}"  itemName="{{item.type}}"></app-item-filter>
+      </div>
+    </div>
+    <div class="ion-text-center ion-margin-top">
+      <ion-button class="btn-nobackground khoacss">Xem kết quả</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -6,6 +6,10 @@ import { Pagination } from 'src/app/interfaces/pagination';
 import { ActivatedRoute, Router } from '@angular/router';
 import LoadingUtils from 'src/app/utils/loading.utils';
 import { LocalStoreService } from 'src/app/services/localstore.service';
+import { ModalController } from '@ionic/angular';
+import { FilterListPage } from '../modal/filter-list/filter-list.page';
+import { Category } from 'src/app/interfaces/category';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-listitem',
@@ -15,11 +19,12 @@ import { LocalStoreService } from 'src/app/services/localstore.service';
 export class ListitemPage implements OnInit {
 
   page = 1;
-  maximumpage;
+  maximumpage: number;
   count: any;
   title: string;
   pagination: Pagination;
   coffeeShop$: CoffeeShop[] = [];
+  category$: Category[] = [];
   textSearch: string;
   idList: number;
   check: boolean;
@@ -31,19 +36,29 @@ export class ListitemPage implements OnInit {
 
   constructor(
     private fetchCoffeeShop: CoffeeShopService,
+    private fetchCategory: CategoryService,
     public loadingUtils: LoadingUtils,
     private router: Router,
     private route: ActivatedRoute,
     private localstore: LocalStoreService,private render: Renderer2,
+    private modalCtrl: ModalController,
   ) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // eslint-disable-next-line radix
     this.idList = Number.parseInt(this.route.snapshot.paramMap.get('idList'));
     this.loadingUtils.presentLoading('Vui lòng chờ');
+    await this.getListCategory();
     this.getList();
+  }
+
+  async getListCategory() {
+    this.fetchCategory.getAll().then((res) => {
+      console.log(res);
+      this.category$ = res;
+    });
   }
 
   getList(event?) {
@@ -101,5 +116,16 @@ export class ListitemPage implements OnInit {
     this.coffeeShop$ = [];
     this.isShowSearchBar = false;
     this.getList(event);
+  }
+
+  async goToFilterAction() {
+    const modal = await this.modalCtrl.create({
+      component: FilterListPage,
+      componentProps: {
+        category$: this.category$
+      },
+      cssClass: 'filterActionContainer'
+    });
+    modal.present();
   }
 }
