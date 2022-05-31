@@ -27,15 +27,25 @@
     <ion-item>
       <ion-input type="number" placeholder="Giá cao nhất" [(ngModel)]="max_price"></ion-input>
     </ion-item>
-    <ion-item class="time">
-      <ion-label>Open Time : </ion-label>
-      <ion-input type="number" placeholder="Giờ" [(ngModel)]="hour_open"></ion-input>
-      <ion-input type="number" placeholder="Phút" [(ngModel)]="minute_open"></ion-input>
+    <ion-item class="time" lines="none">
+      <ion-label>Time Open</ion-label>
+      <ion-select placeholder="Giờ" [(ngModel)]="hourOpen">
+        <ion-select-option *ngFor="let hourOpen of listHour" [value]="hourOpen">{{hourOpen}}</ion-select-option>
+      </ion-select>
+      <ion-label></ion-label>
+      <ion-select placeholder="Phút" [(ngModel)]="minuteOpen">
+        <ion-select-option *ngFor="let minuteOpen of listMinute" [value]="minuteOpen">{{minuteOpen}}</ion-select-option>
+      </ion-select>
     </ion-item>
-    <ion-item class="time">
-      <ion-label>Close Time : </ion-label>
-      <ion-input type="number" placeholder="Giờ" [(ngModel)]="hour_close"></ion-input>
-      <ion-input type="number" placeholder="Phút" [(ngModel)]="minute_close"></ion-input>
+    <ion-item class="time" lines="none">
+      <ion-label>Time Close</ion-label>
+      <ion-select placeholder="Giờ" [(ngModel)]="hourClose">
+        <ion-select-option *ngFor="let hourClose of listHour" [value]="hourClose">{{hourClose}}</ion-select-option>
+      </ion-select>
+      <ion-label></ion-label>
+      <ion-select placeholder="Phút" [(ngModel)]="minuteClose">
+        <ion-select-option *ngFor="let minuteClose of listMinute" [value]="minuteClose">{{minuteClose}}</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Số điện thoại" [(ngModel)]="phonenumber"></ion-input>
