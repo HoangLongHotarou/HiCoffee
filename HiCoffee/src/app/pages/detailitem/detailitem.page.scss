@@ -71,10 +71,30 @@ ion-content {
                     height: 10vh;
                 }
 
-                .description {
-                    text-align: justify;
-                    font-size: 1.2em;
-                    line-height: 1.5em;
+                .description {                   
+                    &-content {
+                        text-align: justify;
+                        font-size: 1.2em;
+                        line-height: 1.5em;
+
+                        &.hidden {
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 3;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                        }
+                    }
+
+                    .showMore {
+                        text-align: right;
+                        font-size: 1em;
+                        margin-top: 10px;
+                        ion-label {
+                            font-style: italic;
+                            color: var(--ion-color-coffee-primary);
+                        }
+                    }
                 }
 
                 .header {
@@ -149,6 +169,12 @@ ion-content {
                         font-size: 1.2em;
                         font-weight: 900;
                         margin: 10px 0;
+                    }
+                    &-category {
+                        font-size: 1.2em;
+                        span:first-child {
+                            font-weight: 900;
+                        }
                     }
                 }
             }

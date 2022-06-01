@@ -28,6 +28,7 @@ export class ListitemPage implements OnInit {
   textSearch: string;
   idList: number;
   check: boolean;
+  listIDCatefory: [] = [];
 
   isShowSearchBar = false;
 
@@ -75,6 +76,10 @@ export class ListitemPage implements OnInit {
         this.title = 'Địa điểm được yêu thích';
         this.getListCoffeeForYou(event);
         break;
+      case 4:
+        this.title = 'Kết quả tìm kiếm';
+        this.getListResult(event);
+        break;
     }
   }
 
@@ -87,6 +92,17 @@ export class ListitemPage implements OnInit {
         event.target.complete();
       }
     });
+  }
+
+  getListResult(event?) {
+    this.listIDCatefory = JSON.parse(this.route.snapshot.paramMap.get('filterList'));
+    console.log(this.listIDCatefory.toString());
+    setTimeout(() => {
+      this.loadingUtils.dismiss();
+    }, 2000);    
+    if (event) {
+      event.target.complete();
+    } 
   }
 
   loadMore(event) {

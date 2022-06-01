@@ -38,6 +38,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
+    path: 'listitem/:idList/:filterList',
+    loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
+  },
+  {
     path: 'test-feature/:cafeObj',
     loadChildren: () => import('./pages/test-feature/test-feature.module').then(m => m.TestFeaturePageModule)
   },

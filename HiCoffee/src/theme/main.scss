@@ -67,3 +67,11 @@ ion-button.rate-button {
     --ion-background-color: var(--ion-color-coffee-glassmorphism);
     backdrop-filter: blur(10px);     
 }
+
+.actionSheetStyle .action-sheet-title.sc-ion-action-sheet-md {
+    color: var(--ion-color-coffee-title-sheet);
+}
+
+.actionSheetStyle .action-sheet-button-inner.sc-ion-action-sheet-md {
+    color: var(--ion-color-coffee-black);
+}
