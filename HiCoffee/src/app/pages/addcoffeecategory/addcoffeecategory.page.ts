@@ -53,7 +53,9 @@ export class AddcoffeecategoryPage implements OnInit {
       console.log('Them category thanh cong');
       this.loadingUtils.dismiss();
       this.toastUltils.presentToastSuccess('Thêm quán thành công');
-      this.router.navigateByUrl('/tabs/user');
+      this.router.navigateByUrl('/tabs/user').then(() => {
+          window.location.reload();
+        });
     }else{
       console.log('Error');
     }

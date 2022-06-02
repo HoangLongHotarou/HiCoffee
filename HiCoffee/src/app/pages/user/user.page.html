@@ -1,7 +1,7 @@
 <ion-content>
   <div *ngIf="!isLogin" id="noneLogin" class="container">
     <div class="info">
-      <p>Đăng nhập để tận hưởng các đặc quyền chưa từng có từ trước tới nay tại ứng dụng <span>Hi Coffee</span></p>      
+      <p>Đăng nhập để tận hưởng các đặc quyền chưa từng có từ trước tới nay tại ứng dụng <span>Hi Coffee</span></p>
       <ion-button routerLink="/login">
         Đăng nhập
       </ion-button>
@@ -12,21 +12,22 @@
     <div class="avatar">
       <ion-label>Ảnh đại diện</ion-label>
       <!-- <ion-img src="{{imgSrc}}"></ion-img>  -->
-      <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>          
-    </div>   
+      <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
+    </div>
     <div class="info-detail ion-padding">
-      <ion-label>Email:</ion-label>  
+      <ion-label>Email:</ion-label>
       <ion-input type="text" [(ngModel)]="email"></ion-input>
       <ion-label>Họ (không dấu):</ion-label>
       <ion-input type="text" [(ngModel)]="lastName"></ion-input>
       <ion-label>Tên đệm & Tên (không dấu):</ion-label>
-      <ion-input type="text" [(ngModel)]="firstName"></ion-input>     
-    </div>   
+      <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+    </div>
+    <app-slidecategory *ngIf="coffeeShop$.length > 0" title="Quán cà phê của bạn : " [coffee]=coffeeShop$></app-slidecategory>
     <div class="ion-text-center">
       <ion-button>Cập nhật thông tin</ion-button>
     </div>
     <div [hidden]="showSignUpCafe" class="ion-text-center" (click)="SignUpCoffee()">
       <ion-button>Đăng ký quán cà phê</ion-button>
-    </div>     
+    </div>
   </div>
 </ion-content>

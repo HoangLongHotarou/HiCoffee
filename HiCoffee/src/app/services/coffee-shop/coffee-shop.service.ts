@@ -31,6 +31,14 @@ export class CoffeeShopService {
     return { 'coffeeShops': this.coffeeShop$, 'pages': this.pages };
   }
 
+  async getCoffeebyUser(): Promise<any>{
+    await this.fetchAPI.get('customer/cfsowner/',true).then((res)=>{
+      this.pagination = res.data;
+      this.coffeeShop$ = this.pagination.results;
+    });
+    return { 'coffeeShops': this.coffeeShop$ };
+  }
+
   async getFeedBack(page?: number): Promise<any> {
     await this.fetchAPI.get(`location/coffeeshops/?page=${page}/feedbacks/`).then((res) => {
       this.pagination = res.data;
