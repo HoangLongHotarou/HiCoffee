@@ -112,7 +112,7 @@ export class DetailitemPage implements OnInit {
     } else {
       await this.loadingUtils.presentLoading('Đang thêm yêu thích');
       this.isFavorite = true;
-      await this.markService.checkFavoriteOrCheckIn(this.coffeeShop.id, 2);
+      this.idFavorite = await this.markService.checkFavoriteOrCheckIn(this.coffeeShop.id, 2);
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
     }
     this.loadingUtils.dismiss();

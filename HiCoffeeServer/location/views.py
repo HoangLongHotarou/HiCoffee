@@ -7,18 +7,25 @@ from rest_framework.response import Response
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from .permission import IsAdminOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import CoffeeShopFilter
 # Create your views here.
 
 
 class CoffeeShopViewSet(ModelViewSet):
+
     queryset = CoffeeShop.objects.prefetch_related(
         'types_cfs__category', 'imgs_cfs').all()
 
     pagination_class = DefaultPagination
+    filter_backends = [DjangoFilterBackend]
+    filter_class = CoffeeShopFilter
+
     # permission_classes = [IsAdminOwnerOrReadOnly]
 
     # def get_queryset(self):
-    #     queryset = CoffeeShop.objects.prefetch_related('types_cfs__category', 'imgs_cfs').all()
+    #     queryset = CoffeeShop.objects.prefetch_related(
+    #         'types_cfs__category', 'imgs_cfs').all()
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
