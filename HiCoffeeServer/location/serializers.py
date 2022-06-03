@@ -181,6 +181,13 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
                   'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs')
 
 
+class GetFilterCoffeeShopSerializer(serializers.ModelSerializer):
+    types_cfs = GetNameCoffeeShopCategorySerializer(many=True)
+
+    class Meta:
+        model = CoffeeShop
+        fields = ('id','types_cfs')
+
 class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
