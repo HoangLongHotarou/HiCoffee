@@ -26,9 +26,9 @@ export class UserPage implements OnInit {
   imgSrc: string;
   role: number;
 
-  showSignUpCafe: boolean = true;
+  showSignUpCafe = true;
 
-  isLogin: boolean = true;
+  isLogin = true;
 
   coffeeShop$: CoffeeShop[]=[];
 
@@ -48,7 +48,7 @@ export class UserPage implements OnInit {
     this.lastName = this.user.last_name;
     this.firstName = this.user.first_name;
     this.role= this.info.role;
-    if(this.role == 1){
+    if(this.role === 1){
       this.showSignUpCafe = true;
     }else{
       this.showSignUpCafe = false;
@@ -60,6 +60,7 @@ export class UserPage implements OnInit {
       console.log(this.coffeeShop$);
     }
   }
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   SignUpCoffee() {
     this.router.navigateByUrl('/signupcoffee');
   }

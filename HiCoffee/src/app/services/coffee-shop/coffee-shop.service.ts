@@ -31,16 +31,17 @@ export class CoffeeShopService {
     return { 'coffeeShops': this.coffeeShop$, 'pages': this.pages };
   }
 
-  async getCoffeebyUser(): Promise<any>{
-    await this.fetchAPI.get('customer/cfsowner/',true).then((res)=>{
+  async getCoffeebyUser(): Promise<any> {
+    await this.fetchAPI.get('customer/cfsowner/', true).then((res) => {
       this.pagination = res.data;
       this.coffeeShop$ = this.pagination.results;
     });
     return { 'coffeeShops': this.coffeeShop$ };
   }
 
-  async getFeedBack(page?: number): Promise<any> {
-    await this.fetchAPI.get(`location/coffeeshops/?page=${page}/feedbacks/`).then((res) => {
+  async getFeedBack(page?: number, idCategories?: string): Promise<any> {
+    const idCtg = idCategories === undefined ? '' : `id_categories=${idCategories}&`;
+    await this.fetchAPI.get(`location/coffeeshops/?${idCtg}page=${page}/feedbacks/`).then((res) => {
       this.pagination = res.data;
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);

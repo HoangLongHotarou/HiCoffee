@@ -114,8 +114,8 @@ export class SignupcoffeePage implements OnInit {
       coffee.append('image_represent', this.image_file);
       coffee.append('minimum_price', `${this.min_price}`);
       coffee.append('max_price', `${this.max_price}`);
-      coffee.append('open_time', this.hourOpen + ":" + this.minuteOpen + ":00");
-      coffee.append('closed_time', this.hourClose + ":" + this.minuteClose + ":00");
+      coffee.append('open_time', this.hourOpen + ':' + this.minuteOpen + ':00');
+      coffee.append('closed_time', this.hourClose + ':' + this.minuteClose + ':00');
       coffee.append('phone_number', this.phonenumber);
       coffee.append('location', this.location);
       coffee.append('latitude', this.latitude);
