@@ -149,6 +149,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DATE_INPUT_FORMATS': ['iso-8601', '%d-%m-%Y'],
     # "PAGE_SIZE": 40,
 }
@@ -214,3 +215,5 @@ if DEBUG:
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/1'

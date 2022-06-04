@@ -5,10 +5,10 @@ from location.views import FeedBackViewSet, CoffeeShopCategoryViewSet, ImageCoff
 router = routers.DefaultRouter()
 router.register('information', InformationViewSet, basename="information")
 router.register('hobbies', HobbyViewSet, basename="hobbies")
-router.register('checkins', CheckInViewSet,
-                basename="checkins")
-router.register('favorites', FavoriteViewSet,
-                basename="favorites")
+# router.register('checkins', CheckInViewSet,
+#                 basename="checkins")
+# router.register('favorites', FavoriteViewSet,
+#                 basename="favorites")
 router.register('marker', CheckInOrFavoriteMakerViewSet, basename='marker')
 router.register('cfsowner', CoffeeShopOwnerViewSet, basename='cfsowner')
 

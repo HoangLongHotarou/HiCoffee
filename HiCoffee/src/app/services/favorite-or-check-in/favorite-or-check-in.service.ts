@@ -5,7 +5,6 @@ import { FavoriteOrCheckIn } from 'src/app/interfaces/favorite-or-check-in';
 import { LocalStoreService } from '../localstore.service';
 import { Injectable } from '@angular/core';
 import { FetchAPIService } from '../fetch-api.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -32,21 +31,31 @@ export class FavoriteOrCheckInService {
     return this.frOrCi$;
   }
 
-  async check(id: number, t: number) {
-    const mark = { coffee_shop: id, type: t };
-    this.fetchApi.post('customer/marker/', mark, true).then((res) => {
-      console.log(res);
+  async isFavoriteOrCheckIn(id_cfs: number, type: number) {
+    return this.localStore.isFavoriteOrCheckIn(id_cfs, type);
+  }
+
+  async checkFavoriteOrCheckIn(cfs_id: number, type: number): Promise<number> {
+    const mark = { coffee_shop: cfs_id, type: 2 };
+    let idMarker = 0;
+    await this.fetchApi.post('customer/marker/', mark, true).then(async (res) => {
+      await this.localStore.setFavoriteOrCheckIn(res.data.id, true, type, cfs_id);
+      idMarker = res.data.id;
     }).catch(async (err) => {
       this.informError.catchError(err.response.status);
     });
+    return idMarker;
   }
 
-  async unCheck(id: number, t: number) {
-    // const mark = { coffee_shop: id, type: t };
-    this.fetchApi.delete('customer/marker/', 13, true).then((res) => {
+  async unCheck(idCFSCategory: number): Promise<boolean> {
+    let isCompleted = false;
+    await this.fetchApi.delete('customer/marker/', idCFSCategory, true).then(async (res) => {
       console.log(res);
+      await this.localStore.setFavoriteOrCheckIn(idCFSCategory, false);
+      isCompleted = true;
     }).catch(async (err) => {
       this.informError.catchError(err.response.status);
-    });;
+    });
+    return isCompleted;
   }
 }

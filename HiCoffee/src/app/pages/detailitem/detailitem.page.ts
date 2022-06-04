@@ -29,6 +29,7 @@ export class DetailitemPage implements OnInit {
   maximumSize: number;
   isFavorite: boolean;
   isClickedFeedback: boolean;
+  idFavorite: number;
 
   coffeeShop: CoffeeShop;
   imageCoffeeShop$: ImageCoffeeShop[];
@@ -48,7 +49,6 @@ export class DetailitemPage implements OnInit {
     private fetchAPI: CoffeeShopService,
     private loadingUtils: LoadingUtils,
     private router: Router,
-    private storeService: LocalStoreService
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
     this.imageCoffeeShop$ = this.coffeeShop.imgs_cfs;
@@ -58,8 +58,10 @@ export class DetailitemPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.isFavorite = await this.storeService.isFavorite(this.coffeeShop.id);
-    if(this.isFavorite){
+    this.idFavorite = await this.markService.isFavoriteOrCheckIn(this.coffeeShop.id, 2);
+    console.log(this.idFavorite);
+    this.isFavorite = this.idFavorite > 0 ? true : false;
+    if (this.isFavorite) {
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
     }
   }
@@ -101,16 +103,19 @@ export class DetailitemPage implements OnInit {
     gesture.enable();
   }
 
-  favoriteClicked() {
+  async favoriteClicked() {
     if (this.isFavorite) {
+      await this.loadingUtils.presentLoading('Đang xoá yêu thích');
       this.isFavorite = false;
+      await this.markService.unCheck(this.idFavorite);
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart-outline');
-      // this.markService.unCheck(this.coffeeShop.id, 2);
     } else {
+      await this.loadingUtils.presentLoading('Đang thêm yêu thích');
       this.isFavorite = true;
+      this.idFavorite = await this.markService.checkFavoriteOrCheckIn(this.coffeeShop.id, 2);
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
-      // this.markService.check(this.coffeeShop.id, 2);
     }
+    this.loadingUtils.dismiss();
   }
 
   showFeedBack() {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Information } from 'src/app/interfaces/infomation';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -51,11 +52,26 @@ export class LocalStoreService {
     await this.storage.set(key, objs);
   }
 
-  async isFavorite(idCoffeeShop: number) {
+  async isFavoriteOrCheckIn(idCoffeeShop: number, type: number) {
     const info: Information = await this.storage.get('info');
-    const lstFavorites = info.info_mark.filter(
-      (x) => (x.coffee_shop === idCoffeeShop && x.type === 2)
+    const lstFavorites = info.info_marks.filter(
+      (x) => (x.coffee_shop === idCoffeeShop && x.type === type)
     );
-    return lstFavorites.length > 0 ? true : false;
+    const id = lstFavorites.length > 0 ? lstFavorites[0].id : 0;
+    return id;
+  }
+
+  async setFavoriteOrCheckIn(id: number, isFavorite: boolean, type?: number, coffee_shop?: number) {
+    const info: Information = await this.storage.get('info');
+    let lstFavorites;
+    if (isFavorite === false) {
+      lstFavorites = info.info_marks.filter(
+        (x) => (x.id !== id)
+      );
+    } else {
+      lstFavorites = [...info.info_marks, { id, coffee_shop, type }];
+    }
+    info.info_marks = lstFavorites;
+    await this.saveInfo('info', info);
   }
 }

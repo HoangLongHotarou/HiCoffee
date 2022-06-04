@@ -21,7 +21,7 @@ class CoffeeShopLocationSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'type',)
+        fields = ('id', 'type')
 
 
 class GetCoffeeShopCategorySerializer(serializers.ModelSerializer):
@@ -181,10 +181,18 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
                   'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs')
 
 
+class GetFilterCoffeeShopSerializer(serializers.ModelSerializer):
+    types_cfs = GetNameCoffeeShopCategorySerializer(many=True)
+
+    class Meta:
+        model = CoffeeShop
+        fields = ('id', 'types_cfs')
+
+
 class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
-        fields = ('vote_rate', 'feedback', 'user', 'customer_fake')
+        fields = ('vote_rate', 'feedback')
 
     def calculate_rate(self, coffee_shop_id):
         cf = CoffeeShop.objects.get(pk=coffee_shop_id)
@@ -200,8 +208,7 @@ class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
             self.instance = FeedBack.objects.create(
                 vote_rate=self.validated_data['vote_rate'],
                 feedback=self.validated_data['feedback'],
-                customer_fake=self.validated_data['customer_fake'],
-                user=self.validated_data['user'],
+                user_id=kwargs['user_id'],
                 coffee_shop_id=kwargs['coffee_shop_id']
             )
             self.calculate_rate(kwargs['coffee_shop_id'])
@@ -212,7 +219,7 @@ class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
             self.instance = get_object_or_404(FeedBack, pk=kwargs['id'])
             self.instance.vote_rate = self.validated_data['vote_rate']
             self.instance.feedback = self.validated_data['feedback']
-            self.instance.customer_fake = self.validated_data['customer_fake']
+            # self.instance.customer_fake = self.validated_data['customer_fake']
             self.instance.user = self.validated_data['user']
             self.instance.save()
             self.calculate_rate(kwargs['coffee_shop_id'])

@@ -26,6 +26,14 @@ class HobbySerializer(serializers.ModelSerializer):
         fields = ('id', 'information', 'category')
 
 
+class SubHobbySerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = Hobby
+        fields = ('id', 'category')
+
+
 class AddHobbySerializer(serializers.ModelSerializer):
     class Meta:
         model = Hobby
@@ -45,6 +53,13 @@ class GetSubCheckInOrFavoriteSerializer(serializers.ModelSerializer):
 
 class MarkerSerializer(serializers.ModelSerializer):
     coffee_shop = CoffeeShopLocationSerializer()
+
+    class Meta:
+        model = CheckInOrFavorite
+        fields = ('id', 'coffee_shop', 'type')
+
+
+class GetMarksSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CheckInOrFavorite
@@ -72,9 +87,19 @@ class AddCheckInOfFavoriteSerializer(serializers.ModelSerializer):
 class InformationSerializer(serializers.ModelSerializer):
     birthday = fields.DateField(input_formats=['%Y-%m-%d'])
     user = UserSerializer()
+<<<<<<< HEAD
     info_mark = GetSubCheckInOrFavoriteSerializer(many=True)
 
     class Meta:
         model = Information
         fields = ('id', 'image_link', 'birthday',
                   'user', 'role','info_hobbies','info_mark')
+=======
+    info_hobbies = SubHobbySerializer(many=True)
+    info_marks = GetMarksSerializer(many=True)
+
+    class Meta:
+        model = Information
+        fields = ('id', 'image_link', 'birthday', 'user',
+                  'role', 'info_hobbies', 'info_marks')
+>>>>>>> api
