@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Category } from 'src/app/interfaces/category';
 
@@ -16,6 +17,7 @@ export class FilterListPage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
+    private router: Router,
   ) { }
 
   ngOnInit() { }
@@ -25,20 +27,31 @@ export class FilterListPage implements OnInit {
   }
 
   refreshCategory() {
-    // this.listIDCategory = [];    
-    // console.log(this.listIDCategory);    
+    // this.listIDCategory = [];
+    // console.log(this.listIDCategory);
   }
 
-  clickedEvent(event: number) {   
+  clickedEvent(event: number) {
     if (this.listIDCategory.includes(event)) {
       const index = this.listIDCategory.indexOf(event);
-      console.log(index);      
+      console.log(index);
       this.listIDCategory.splice(index, 1);
-      console.log(this.listIDCategory);      
+      console.log(this.listIDCategory);
     }
     else {
       this.listIDCategory.push(event);
-      console.log(this.listIDCategory);  
-    }  
+      console.log(this.listIDCategory);
+    }
+  }
+
+  viewResult() {
+    if (this.listIDCategory.length > 0) {
+      const listIDCategoryStr = JSON.stringify(this.listIDCategory);
+      this.router.navigate(['listitem', 4, listIDCategoryStr]);
+      this.closeAction();
+    }
+    else {
+      console.log('error');
+    }
   }
 }

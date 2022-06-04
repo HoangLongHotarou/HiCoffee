@@ -5,7 +5,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Information } from 'src/app/interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
-import { Camera, CameraResultType, GalleryPhoto } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, GalleryPhoto } from '@capacitor/camera';
 
 @Component({
   selector: 'app-write-feedback',
@@ -21,7 +21,8 @@ export class WriteFeedbackPage implements OnInit {
   user: any;
   userName: string;
 
-  imgPhotos: GalleryPhoto[];
+  imgPhotos: any[] = [];
+  desText: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,12 +56,12 @@ export class WriteFeedbackPage implements OnInit {
   }
 
   async chooseFromGallery() {
-    const image = await Camera.pickImages({
+    const image = await Camera.getPhoto({
       quality: 100,
-      limit: 5,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
     });
-    console.log(image.photos);
-    this.imgPhotos = image.photos;
+    this.imgPhotos.push(image);
   }
 
   async showOptionChoose() {
@@ -92,5 +93,10 @@ export class WriteFeedbackPage implements OnInit {
   }
 
   postFeedBack() {
+    console.log(this.desText);
+  }
+
+  deleteImages() {
+    this.imgPhotos = [];
   }
 }

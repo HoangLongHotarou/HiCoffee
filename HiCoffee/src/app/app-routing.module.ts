@@ -7,8 +7,8 @@ import { AutoLoginGuard } from './guards/auto-login.guard';
 const routes: Routes = [
   {
     path: '',
-    // redirectTo: 'tabs/checkin',
-    redirectTo: 'test-feature',
+    redirectTo: 'introduce',
+    // redirectTo: 'test-feature',
     pathMatch: 'full'
   },
   {
@@ -38,7 +38,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
-    path: 'test-feature',
+    path: 'listitem/:idList/:filterList',
+    loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
+  },
+  {
+    path: 'test-feature/:cafeObj',
     loadChildren: () => import('./pages/test-feature/test-feature.module').then(m => m.TestFeaturePageModule)
   },
   {

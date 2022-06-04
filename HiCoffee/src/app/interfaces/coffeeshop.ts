@@ -1,3 +1,4 @@
+import { Category } from './category';
 import { ImageCoffeeShop } from './image-coffee-shop';
 
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -16,4 +17,5 @@ export interface CoffeeShop {
     latitude: string;
     longitude: string;
     imgs_cfs?: ImageCoffeeShop[];
+    types_cfs: Category[];
 }

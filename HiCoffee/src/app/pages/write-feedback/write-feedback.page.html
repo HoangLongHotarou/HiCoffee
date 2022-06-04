@@ -26,13 +26,10 @@
         (ratingChanged)="onRatingChange($event)">
       </ionic-rating-component>
     </div>
-    <ion-textarea placeholder="Mô tả chi tiết đánh giá của bạn" rows="6" cols="20" class="coffee-content"></ion-textarea>
+    <ion-textarea placeholder="Mô tả chi tiết đánh giá của bạn" [(ngModel)]="desText" rows="6" cols="20" class="coffee-content"></ion-textarea>
+    <div *ngIf="imgPhotos.length > 0" class="ion-text-right ion-margin-bottom"><ion-label class="coffee-delete-images" (click)="deleteImages()" >Xóa tất cả ảnh</ion-label></div>
     <div class="coffee-list-img-choose">
       <ion-img *ngFor="let img of imgPhotos" [src]="img.webPath"></ion-img>
-      <!-- <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
-      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
-      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img>
-      <ion-img src="../../../assets/images/toiden1.jpg"></ion-img> -->
     </div>
     <div class="ion-text-center">
       <div (click)="showOptionChoose()" class="coffee-insert-picture">
