@@ -13,8 +13,8 @@ export class TestFeaturePage implements OnInit {
   cafe: CoffeeShop;
 
   constructor(private route: ActivatedRoute) {
-    const cafeRec = this.route.snapshot.paramMap.get('cafeObj');
-    this.cafe = JSON.parse(cafeRec);
+    // const cafeRec = this.route.snapshot.paramMap.get('cafeObj');
+    // this.cafe = JSON.parse(cafeRec);
     // this.Test();
   }
 

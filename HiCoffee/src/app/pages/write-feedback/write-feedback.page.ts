@@ -50,9 +50,7 @@ export class WriteFeedbackPage implements OnInit {
       allowEditing: true,
       resultType: CameraResultType.Uri
     });
-
-    var imageUrl = image.webPath;
-    console.log(imageUrl);
+    this.imgPhotos.push(image);
   }
 
   async chooseFromGallery() {

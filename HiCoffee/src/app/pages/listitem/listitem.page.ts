@@ -28,7 +28,8 @@ export class ListitemPage implements OnInit {
   textSearch: string;
   idList: number;
   check: boolean;
-  listIDCatefory: [] = [];
+  listIDCategory: [] = [];
+  notFound: boolean;
 
   isShowSearchBar = false;
 
@@ -44,7 +45,7 @@ export class ListitemPage implements OnInit {
     private localstore: LocalStoreService,private render: Renderer2,
     private modalCtrl: ModalController,
   ) {
-
+    this.notFound = false;
   }
 
   async ngOnInit() {
@@ -87,6 +88,7 @@ export class ListitemPage implements OnInit {
     this.fetchCoffeeShop.getAll(this.page).then((res) => {
       this.maximumpage = res.pages;
       this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
+      this.checkArrayCoffeeShop();
       this.loadingUtils.dismiss();
       if (event) {
         event.target.complete();
@@ -95,22 +97,27 @@ export class ListitemPage implements OnInit {
   }
 
   getListResult(event?) {
-    this.listIDCatefory = JSON.parse(this.route.snapshot.paramMap.get('filterList'));
-    console.log(this.listIDCatefory.toString());
-    setTimeout(() => {
+    this.listIDCategory = JSON.parse(this.route.snapshot.paramMap.get('filterList'));
+    let listIDStr = this.listIDCategory.toString();
+    this.fetchCoffeeShop.getFilter(this.page, listIDStr).then(res => {
+      this.maximumpage = res.pages;
+      this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
+      console.log(res);
+      this.checkArrayCoffeeShop();
       this.loadingUtils.dismiss();
-    }, 2000);    
-    if (event) {
-      event.target.complete();
-    } 
+      if (event) {
+        event.target.complete();
+      }
+    });
   }
 
-  loadMore(event) {
-    this.page++;
-    this.getList(event);
-    // console.log('2:', this.coffeeShop$.length);
+  loadMore(event) {   
     if (this.page === this.maximumpage) {
       event.target.disabled = true;
+    }
+    else {
+      this.page++;
+      this.getList(event);
     }
   }
 
@@ -143,5 +150,9 @@ export class ListitemPage implements OnInit {
       cssClass: 'filterActionContainer'
     });
     modal.present();
+  }
+
+  checkArrayCoffeeShop() {
+    this.notFound = this.coffeeShop$.length == 0 ? true : false;
   }
 }

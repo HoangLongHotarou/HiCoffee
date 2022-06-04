@@ -1,0 +1,78 @@
+.container {
+    width: 100%;
+    min-height: 100%;
+    background: url("../../../assets/images/background1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    color: white; 
+    
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        ion-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .version {            
+            font-size: 1.1em;
+            span {
+                font-weight: 700;
+                color: #ddec06;
+            }
+        }
+    }
+
+    .content {
+        background: var(--ion-color-coffee-glassmorphism);
+        backdrop-filter: blur(15px);
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--ion-color-coffee-white);
+
+        .title {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .list-member {
+            list-style: none;
+            padding: 0;
+
+            li {
+                padding: 2px 0;
+                font-size: 1.1em;
+                font-style: italic;
+                line-height: 1.5em;
+
+                span {
+                    color: #ddec06;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-style: italic;
+    padding-bottom: 2px;
+
+    div {
+        padding: 2px 0;
+
+        span {
+            color: #ddec06;
+            font-weight: 700;
+        }
+    }
+}

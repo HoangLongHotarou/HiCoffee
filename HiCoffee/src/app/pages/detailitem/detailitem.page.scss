@@ -46,16 +46,17 @@ ion-content {
             border-top-right-radius: 30px;  
             background: var(--ion-color-coffee-gray-1);    
             overflow: hidden;  
-            z-index: 2;           
+            z-index: 2;         
 
             .bar { 
-                width: 40%;
-                height: 6px;
-                background-color: var(--ion-color-coffee-gray);
+                width: 50%;
+                height: 10px;
+                background-color: var(--ion-color-coffee-light-gray);
                 margin: 0 auto;
                 margin-top: 20px; 
                 border-radius: 5px;
                 cursor: pointer;
+                opacity: 0.5;  
             }
 
             .content {
