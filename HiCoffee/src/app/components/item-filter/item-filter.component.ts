@@ -16,10 +16,10 @@ export class ItemFilterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
-  
-  itemClicked(itemID: number) {    
-    this.isClicked = this.isClicked ? false : true;   
+  ngOnInit() { }
+
+  itemClicked(itemID: number) {
+    this.isClicked = this.isClicked ? false : true;
     this.clickEvent.emit(itemID);
   }
 }
