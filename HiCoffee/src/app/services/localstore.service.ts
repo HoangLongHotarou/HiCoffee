@@ -52,6 +52,10 @@ export class LocalStoreService {
     await this.storage.set(key, objs);
   }
 
+  async deleteInfo(): Promise<void> {
+    await this.storage.remove('info');
+  }
+
   async isFavoriteOrCheckIn(idCoffeeShop: number, type: number) {
     const info: Information = await this.storage.get('info');
     const lstFavorites = info.info_marks.filter(

@@ -11,6 +11,7 @@ import { SearchbarComponent } from 'src/app/components/searchbar/searchbar.compo
 import { FormsModule } from '@angular/forms';
 import { FeedbackComponent } from 'src/app/components/feedback/feedback.component';
 import { ItemFilterComponent } from 'src/app/components/item-filter/item-filter.component';
+import { BannerComponent } from 'src/app/components/banner/banner.component';
 
 const COMPONENTS = [
   InputComponent,
@@ -22,6 +23,7 @@ const COMPONENTS = [
   SearchbarComponent,
   FeedbackComponent,
   ItemFilterComponent,
+  BannerComponent
 ];
 
 @NgModule({

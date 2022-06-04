@@ -6,11 +6,14 @@
     <ion-title>Trang Chủ</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <app-slidecategory title="Dành cho bạn" routerlink="/listitem/1" moretext="Xem thêm ..." [coffee]=coffeeShop$></app-slidecategory>
-  <app-slidecategory title="Dịch vụ cho bạn" routerlink="/listitem/2" moretext="Xem thêm ..." [coffee]=coffeeShop$></app-slidecategory>
-  <app-slidecategory title="Địa điểm được yêu thích" routerlink="/listitem/3" moretext="Xem thêm ..." [coffee]=coffeeShop$></app-slidecategory>
+  <app-banner username="{{username}}"></app-banner>
+  <app-slidecategory title="Dành cho bạn" routerlink="/listitem/1" moretext="Xem thêm ..." [coffee]=coffeeShop$>
+  </app-slidecategory>
+  <app-slidecategory title="Dịch vụ cho bạn" routerlink="/listitem/2" moretext="Xem thêm ..." [coffee]=coffeeShop$>
+  </app-slidecategory>
+  <app-slidecategory title="Địa điểm được yêu thích" routerlink="/listitem/3" moretext="Xem thêm ..."
+    [coffee]=coffeeShop$></app-slidecategory>
   <!-- <ion-button (click)="Alert()">Alert</ion-button>
   <ion-button (click)="Toast()">Toast</ion-button> -->
 </ion-content>

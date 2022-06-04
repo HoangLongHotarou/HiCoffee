@@ -33,7 +33,9 @@ export class MoremenuPage implements OnInit {
 
   async ngOnInit() {
     this.info = await this.localstore.loadInfo('info');
-    console.log(this.info);
+    if(this.info == undefined){
+      return;
+    }
     this.role = this.info.role;
     if(this.role === 1){
       this.showSignUpCafe = false;

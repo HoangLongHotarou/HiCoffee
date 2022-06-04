@@ -58,5 +58,6 @@ export class AuthService {
 
   async logout() {
     await this.localStore.deleteToken();
+    await this.localStore.deleteInfo();
   }
 }
