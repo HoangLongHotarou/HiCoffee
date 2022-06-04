@@ -18,6 +18,7 @@ import ToastUtils from 'src/app/utils/toast.utils';
 export class MoremenuPage implements OnInit {
 
   info: Information;
+  checkLogin: boolean = true;
   role: number;
   showSignUpCafe = true;
 
@@ -38,6 +39,9 @@ export class MoremenuPage implements OnInit {
       this.showSignUpCafe = false;
     }else{
       this.showSignUpCafe = true;
+    }
+    if((await this.auth.checkLogin()).valueOf()){
+      this.checkLogin = false;
     }
   }
 
@@ -86,19 +90,6 @@ export class MoremenuPage implements OnInit {
   }
 
 
-  // async signUpOwnerCoffee(role: any): Promise<boolean> {
-  //   let check = true;
-  //   await this.fetchAPI.put('customer/information/',role,'role',true).then((res) => {
-  //     console.log(res);
-  //     if (res.status === 200) {
-  //       role = res.data;
-  //       console.log(role);
-  //     } else {
-  //       check = false;
-  //     }
-  //   });
-  //   return check;
-  // }
 
   goToSettingPage() {
     this.router.navigateByUrl('/setting-page');

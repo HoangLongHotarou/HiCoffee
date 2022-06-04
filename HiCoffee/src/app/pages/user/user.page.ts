@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Information } from 'src/app/interfaces/infomation';
+import { CoffeeShopService } from 'src/app/services/coffee-shop/coffee-shop.service';
 import { LocalStoreService } from 'src/app/services/localstore.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
 
 @Component({
   selector: 'app-user',
@@ -27,8 +30,12 @@ export class UserPage implements OnInit {
 
   isLogin: boolean = true;
 
+  coffeeShop$: CoffeeShop[]=[];
+
   constructor(public loadingController: LoadingController,
     private router: Router,
+    private loadingUtils: LoadingUtils,
+    private fetchCoffeeShop: CoffeeShopService,
     private localstore: LocalStoreService) {
 
   }
@@ -45,6 +52,12 @@ export class UserPage implements OnInit {
       this.showSignUpCafe = true;
     }else{
       this.showSignUpCafe = false;
+      await this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API</br>Vui lòng chờ');
+      await this.fetchCoffeeShop.getCoffeebyUser().then((res) => {
+        this.coffeeShop$ = res.coffeeShops;
+      });
+      this.loadingUtils.dismiss();
+      console.log(this.coffeeShop$);
     }
   }
   SignUpCoffee() {

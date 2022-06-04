@@ -28,15 +28,13 @@ export class SignupcoffeePage implements OnInit {
   min_price: number;
   max_price: number;
 
-  //time
-  hour_open: string;
-  minute_open: string;
-
-  hour_close: string;
-  minute_close: string;
-
-  open_time: string;
-  close_time: string;
+  listHour: string[] = [];
+  value: string;
+  listMinute: string[] = [];
+  hourOpen: string;
+  minuteOpen: string;
+  hourClose: string;
+  minuteClose: string;
 
   phonenumber: string;
   location: string;
@@ -53,7 +51,7 @@ export class SignupcoffeePage implements OnInit {
 
   async presentSpace() {
     const toast = await this.toastController.create({
-      message: 'Error!!!!!!!!',
+      message: 'Các ô không được để trống !!!!!!!!',
       duration: 2000
     });
     toast.present();
@@ -84,56 +82,51 @@ export class SignupcoffeePage implements OnInit {
   }
 
   ngOnInit(): void {
-
+    for (let i = 0; i <= 24; i++) {
+      this.value = i.toString();
+      if (i < 10) {
+        this.value = '0' + i.toString();
+      }
+      this.listHour.push(this.value);
+    }
+    for (let i = 0; i <= 60; i++) {
+      this.value = i.toString();
+      if (i < 10) {
+        this.value = '0' + i.toString();
+      }
+      this.listMinute.push(this.value);
+    }
   }
 
   // this.image_represent === undefined||
 
   async clickSignupCoffee() {
-    this.loadingUtils.presentLoading('Đang tạo mục quán coffee cho bạn');
     if (this.coffeename === undefined || this.description === undefined || this.image_represent === undefined ||
       this.min_price === undefined || this.max_price === undefined || this.phonenumber === undefined || this.location === undefined
-      || this.latitude === undefined || this.longitude === undefined || this.hour_open === undefined || this.hour_close === undefined
-      || this.minute_open === undefined || this.minute_close === undefined) {
+      || this.latitude === undefined || this.longitude === undefined || this.hourOpen === undefined || this.hourClose === undefined
+      || this.minuteOpen === undefined || this.minuteClose === undefined) {
       this.presentSpace();
     } else {
-      if (Number.parseInt(this.hour_close) > 24 || Number.parseInt(this.hour_close) < 0 || Number.parseInt(this.hour_open) > 24 || Number.parseInt(this.hour_open) < 0 ||
-        Number.parseInt(this.minute_open) > 60 || Number.parseInt(this.minute_open) < 0 || Number.parseInt(this.minute_close) > 60 || Number.parseInt(this.minute_close) < 0) {
-        this.presentErrorTime();
+      this.loadingUtils.presentLoading('Đang tạo mục quán coffee cho bạn');
+      const coffee = new FormData();
+      coffee.append('name', this.coffeename);
+      coffee.append('description', this.description);
+      coffee.append('image_represent', this.image_file);
+      coffee.append('minimum_price', `${this.min_price}`);
+      coffee.append('max_price', `${this.max_price}`);
+      coffee.append('open_time', this.hourOpen + ":" + this.minuteOpen + ":00");
+      coffee.append('closed_time', this.hourClose + ":" + this.minuteClose + ":00");
+      coffee.append('phone_number', this.phonenumber);
+      coffee.append('location', this.location);
+      coffee.append('latitude', this.latitude);
+      coffee.append('longitude', this.longitude);
+      const check = await this.infoService.signUpCoffee(coffee);
+      if (check > 0) {
+        this.presentSucess();
+        const checkstring = JSON.stringify(check);
+        this.router.navigate(['addcoffeecategory', checkstring]);
       }
-      else {
-        if (Number.parseInt(this.hour_open) < 10) {
-          this.hour_open = '0' + this.hour_open;
-        }
-        if (Number.parseInt(this.hour_close) < 10) {
-          this.hour_close = '0' + this.hour_close;
-        }
-        if (Number.parseInt(this.minute_open) < 10) {
-          this.minute_open = '0' + this.minute_open;
-        }
-        if (Number.parseInt(this.minute_close) < 10) {
-          this.minute_close = '0' + this.minute_close;
-        }
-        const coffee = new FormData();
-        coffee.append('name', this.coffeename);
-        coffee.append('description', this.description);
-        coffee.append('image_represent', this.image_file);
-        coffee.append('minimum_price', `${this.min_price}`);
-        coffee.append('max_price', `${this.max_price}`);
-        coffee.append('open_time', this.hour_open + ':' + this.minute_open + ':00');
-        coffee.append('closed_time', this.hour_close + ':' + this.minute_close + ':00');
-        coffee.append('phone_number', this.phonenumber);
-        coffee.append('location', this.location);
-        coffee.append('latitude', this.latitude);
-        coffee.append('longitude', this.longitude);
-        const check = await this.infoService.signUpCoffee(coffee);
-        if (check > 0) {
-          this.presentSucess();
-          const checkstring = JSON.stringify(check);
-          this.router.navigate(['addcoffeecategory', checkstring]);
-        }
-        this.loadingUtils.dismiss();
-      }
+      this.loadingUtils.dismiss();
     }
   }
 
