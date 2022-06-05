@@ -22,7 +22,7 @@ export class TestFeaturePage implements OnInit {
   constructor(private route: ActivatedRoute) {
     // const cafeRec = this.route.snapshot.paramMap.get('cafeObj');
     // this.cafe = JSON.parse(cafeRec);
-    // // this.Test();
+    // this.Test();
   }
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class TestFeaturePage implements OnInit {
   }
 
   onClickTest(){
-    console.log(this.hourOpen+":"+this.minuteOpen+":00");
-    console.log(this.hourClose+":"+this.minuteClose+":00");
+    console.log(this.hourOpen+':'+this.minuteOpen+':00');
+    console.log(this.hourClose+':'+this.minuteClose+':00');
   }
 }

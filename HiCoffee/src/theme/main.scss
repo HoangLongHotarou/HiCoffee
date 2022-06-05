@@ -75,3 +75,12 @@ ion-button.rate-button {
 .actionSheetStyle .action-sheet-button-inner.sc-ion-action-sheet-md {
     color: var(--ion-color-coffee-black);
 }
+
+.slide-card .swiper-slide-active  {       
+    transition: linear 0.3s;     
+    transform: scale(1.05, 1.05);        
+}
+
+.slide-card .swiper-slide-active ion-card .title {
+    bottom: 0 !important;
+}

@@ -94,4 +94,8 @@ export class MoremenuPage implements OnInit {
   goToSettingPage() {
     this.router.navigateByUrl('/setting-page');
   }
+
+  goToInformationPage() {
+    this.router.navigateByUrl('/information');
+  }
 }

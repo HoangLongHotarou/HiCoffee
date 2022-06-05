@@ -39,9 +39,19 @@ export class CoffeeShopService {
     return { 'coffeeShops': this.coffeeShop$ };
   }
 
-  async getFeedBack(page?: number, idCategories?: string): Promise<any> {
-    const idCtg = idCategories === undefined ? '' : `id_categories=${idCategories}&`;
-    await this.fetchAPI.get(`location/coffeeshops/?${idCtg}page=${page}/feedbacks/`).then((res) => {
+  async getFilter(page?: number, listFilter?: any): Promise<any> {
+    await this.fetchAPI.get(`location/coffeeshops/?id_categories=${listFilter}&page=${page}`).then((res) => {
+      this.pagination = res.data;
+      this.coffeeShop$ = this.pagination.results;
+      this.pages = Math.ceil(this.pagination.count / 10);
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
+    });
+    return { 'coffeeShops': this.coffeeShop$, 'pages': this.pages };
+  }
+
+  async getFeedBack(page?: number): Promise<any> {
+    await this.fetchAPI.get(`location/coffeeshops/?page=${page}/feedbacks/`).then((res) => {
       this.pagination = res.data;
       this.feedBack$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);

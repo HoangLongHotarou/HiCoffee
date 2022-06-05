@@ -4,27 +4,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-item>
-      <ion-label>Time Open</ion-label>
-      <ion-select placeholder="Giờ" [(ngModel)]="hourOpen">
-        <ion-select-option *ngFor="let hourOpen of listHour" [value]="hourOpen">{{hourOpen}}</ion-select-option>
-      </ion-select>
-      <ion-label></ion-label>
-      <ion-select placeholder="Phút" [(ngModel)]="minuteOpen">
-        <ion-select-option *ngFor="let minuteOpen of listMinute" [value]="minuteOpen">{{minuteOpen}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Time Close</ion-label>
-      <ion-select placeholder="Giờ" [(ngModel)]="hourClose">
-        <ion-select-option *ngFor="let hourClose of listHour" [value]="hourClose">{{hourClose}}</ion-select-option>
-      </ion-select>
-      <ion-label></ion-label>
-      <ion-select placeholder="Phút" [(ngModel)]="minuteClose">
-        <ion-select-option *ngFor="let minuteClose of listMinute" [value]="minuteClose">{{minuteClose}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-button (click)="onClickTest()" expand="block" fill="clear" shape="round">
-      Click me
-    </ion-button>
+
+    <app-not-found></app-not-found>
+    <!-- <h1>{{cafe.name}}</h1>
+    <h3>{{cafe.description}}</h3>
+    <h1>{{cafe.total_rate}}</h1>
+    <ion-img src="{{cafe.image_represent}}"></ion-img> -->
+
   </ion-content>

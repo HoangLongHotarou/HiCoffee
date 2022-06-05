@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TestFeaturePageRoutingModule } from './test-feature-routing.module';
 
 import { TestFeaturePage } from './test-feature.page';
+import { ComponentsModule } from 'src/app/modules/component/component.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TestFeaturePage } from './test-feature.page';
     FormsModule,
     IonicModule,
     TestFeaturePageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [TestFeaturePage]
 })

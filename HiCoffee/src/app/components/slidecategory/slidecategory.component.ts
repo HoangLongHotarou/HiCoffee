@@ -27,9 +27,9 @@ export class SlidecategoryComponent implements OnInit {
     this.cafeSlideOpts = {
       slidesPerView: this.slidePerView,
       centeredSlides: true,
-      autoplay: true,
       loop: true,
-      spaceBetween: 20
+      autoplay: true,
+      spaceBetween: 20,
     };  
   }
 

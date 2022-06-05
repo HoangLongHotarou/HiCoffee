@@ -11,15 +11,15 @@
       <ion-icon name="chevron-forward-outline"></ion-icon>
     </li>
     <li>
-      <p>Hỗ trợ</p>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
-    </li>
-    <li>
       <p>Tin tức</p>
       <ion-icon name="chevron-forward-outline"></ion-icon>
     </li>
     <li>
       <p>Quản lý AI</p>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </li>
+    <li (click)="goToInformationPage()">
+      <p>Thông tin phần mềm</p>
       <ion-icon name="chevron-forward-outline"></ion-icon>
     </li>
     <li [hidden]="showSignUpCafe" (click) = "SignupCafe()" >

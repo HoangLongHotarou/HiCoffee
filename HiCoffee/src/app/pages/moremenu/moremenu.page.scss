@@ -8,7 +8,7 @@ ion-content {
             justify-content: space-between;
             align-items: center;
             padding: 15px 10px;
-            border-bottom: 1px solid var(--ion-color-coffee-gray);
+            border-bottom: 1px solid var(--ion-color-coffee-light-gray);
             cursor: pointer;
             p {
                 font-weight: 500;
@@ -23,6 +23,4 @@ ion-content {
             }
         }
     }
-
-
 }

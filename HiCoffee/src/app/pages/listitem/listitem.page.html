@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="showSearchBar()" color="coffee-light"><ion-icon name="search-outline"></ion-icon></ion-button>      
-      <ion-button (click)="goToFilterAction()"><ion-icon name="funnel-outline"></ion-icon></ion-button>
+      <ion-button [hidden]="notFound" (click)="showSearchBar()" color="coffee-light"><ion-icon name="search-outline"></ion-icon></ion-button>      
+      <ion-button *ngIf="idList != 4" (click)="goToFilterAction()"><ion-icon name="funnel-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,18 +20,23 @@
       title="{{shop.name}}"
       address="{{shop.location}}"
       description="{{shop.description}}"
+      [category$]="shop.types_cfs"
       (click)="goToDetailPage(shop)"
     ></app-mainitem>
   </div>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <div [hidden]="!notFound" class="not-found-container">
+    <app-not-found></app-not-found>
+  </div>  
+
+  <ion-refresher [hidden]="notFound" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       refreshingSpinner="circles"
       refreshingText="Đang tải...">
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll [hidden]="notFound" threshold="15%" (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Đang tải...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -42,7 +42,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listitem/listitem.module').then(m => m.ListitemPageModule)
   },
   {
-    path: 'test-feature/:cafeObj',
+    path: 'test-feature',
     loadChildren: () => import('./pages/test-feature/test-feature.module').then(m => m.TestFeaturePageModule)
   },
   {
@@ -81,7 +81,12 @@ const routes: Routes = [
   {
     path: 'filter-list',
     loadChildren: () => import('./pages/modal/filter-list/filter-list.module').then( m => m.FilterListPageModule)
+  },
+  {
+    path: 'information',
+    loadChildren: () => import('./pages/information/information.module').then( m => m.InformationPageModule)
   }
+
 
 ];
 

@@ -3,7 +3,7 @@
     <ion-label class="foryou">{{title}}</ion-label>
     <ion-label (click)="goToListItem(routerlink)" class="more">{{moretext}}</ion-label>
   </div>
-  <ion-slides [options]="cafeSlideOpts">
+  <ion-slides class="slide-card" [options]="cafeSlideOpts">
     <ion-slide *ngFor="let cafe of coffee">
       <app-card 
         image = "{{cafe.image_represent}}" 
