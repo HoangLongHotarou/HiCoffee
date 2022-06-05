@@ -97,15 +97,4 @@ export class FetchAPIService {
       }
     );
   }
-
-  // async postFormData(urls: string, o: FormData, checkAuth?: boolean): Promise<any> {
-  //   let auth = '';
-  //   if (checkAuth === true) {
-  //     auth = `JWT ${await this.localStore.getToken()}`;
-  //   }
-  //   const header = {
-  //     headers: new HttpHeaders().set('Authorization', auth)
-  //   };
-  //   return this.http.post(`${this.resourceUrl + urls}`, o, header).toPromise();
-  // }
 }

@@ -224,3 +224,9 @@ class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
             self.instance.save()
             self.calculate_rate(kwargs['coffee_shop_id'])
             return self.instance
+
+
+class FeedBackImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedBackImage
+        fields = ('image')

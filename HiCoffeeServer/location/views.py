@@ -130,3 +130,17 @@ class FeedBackViewSet(ModelViewSet):
             id=kwargs['pk'], coffee_shop_id=kwargs['coffeeshop_pk'])
         serializer = GetFeedBackSerializer(data)
         return Response(serializer.data)
+
+
+class ImagesFeedBackViewSet(ModelViewSet):
+    pagination_class = DefaultPagination
+    permission_classes = [IsAdminOwnerOrReadOnly]
+    
+    def get_queryset(self):
+        return FeedBackImage.objects.filter(coffee_shop_id=self.kwargs['feedback_pk'])
+
+    def get_serializer_context(self):
+        return {"request": self.request}
+
+    def get_serializer_class(self):
+        return FeedBackImagesSerializer
