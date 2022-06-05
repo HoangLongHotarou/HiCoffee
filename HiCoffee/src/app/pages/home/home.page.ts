@@ -9,6 +9,7 @@ import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { Information } from 'src/app/interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
 import InformErrorUtils from 'src/app/utils/inform-error.utils';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomePage implements OnInit {
   coffeeShop$: CoffeeShop[] = [];
 
   info: Information;
+  username: string;
 
   constructor(
     private fetchCoffeeShop: CoffeeShopService,
@@ -39,6 +41,12 @@ export class HomePage implements OnInit {
     await this.fetchCoffeeShop.getAll(2).then((res) => {
       this.coffeeShop$ = res.coffeeShops;
     });
+    this.info = await this.localstore.loadInfo('info');
+    if(this.info == undefined){
+      this.username = 'khách';
+    }else{
+      this.username = this.info.user.username;
+    }
     this.loadingUtils.dismiss();
   }
 }

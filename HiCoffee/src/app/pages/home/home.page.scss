@@ -2,3 +2,12 @@ ion-card {
     --width: 30%;
 
 }
+
+ion-content {
+    .header{
+        ion-icon {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
