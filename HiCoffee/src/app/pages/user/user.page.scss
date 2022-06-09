@@ -79,5 +79,18 @@ ion-content {
                 }
             }
         }
+        .category{
+            ion-label {
+                display: block;
+                color: var(--ion-color-coffee-primary);
+                font-weight: 700;
+                margin-left: 10px;
+            }
+            app-item-filter{
+                display: inline-block;
+                margin: 10px;
+                pointer-events: none;
+            }
+        }
     }
 }

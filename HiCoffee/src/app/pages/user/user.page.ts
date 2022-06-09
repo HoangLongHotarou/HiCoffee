@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
+import { Hobby } from 'src/app/interfaces/hobby';
 import { Information } from 'src/app/interfaces/infomation';
 import { CoffeeShopService } from 'src/app/services/coffee-shop/coffee-shop.service';
 import { LocalStoreService } from 'src/app/services/localstore.service';
@@ -31,7 +32,7 @@ export class UserPage implements OnInit {
   isLogin = true;
 
   coffeeShop$: CoffeeShop[]=[];
-
+  hobbies : Hobby[] = [];
   constructor(public loadingController: LoadingController,
     private router: Router,
     private loadingUtils: LoadingUtils,
@@ -44,6 +45,7 @@ export class UserPage implements OnInit {
     this.info = await this.localstore.loadInfo('info');
     console.log(this.info);
     this.user = this.info.user;
+    this.hobbies = this.info.info_hobbies;
     this.email = this.user.email;
     this.lastName = this.user.last_name;
     this.firstName = this.user.first_name;
