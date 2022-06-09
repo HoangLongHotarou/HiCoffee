@@ -23,7 +23,9 @@ export class MainitemComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() { 
-    this.strCategory = this.convertCategoryArrToString();    
+    if (this.category$) {
+      this.strCategory = this.convertCategoryArrToString(); 
+    }   
   }
 
   convertCategoryArrToString(): string {

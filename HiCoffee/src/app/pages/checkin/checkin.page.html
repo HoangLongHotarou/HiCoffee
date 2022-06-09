@@ -6,5 +6,16 @@
 
 <ion-content>
   <!-- {{checkIn$}} -->
-  <app-map [checkIn$]=checkIn$ height="50vh"></app-map>
+  <app-map [hidden]="checkIn$.length == 0" [checkIn$]=checkIn$ height="50%"></app-map>
+  <div [hidden]="checkIn$.length == 0" class="checkIn">
+    <app-mainitem 
+      *ngFor="let shop of checkIn$" 
+      imgSrc="{{shop.coffee_shop.image_represent}}" 
+      title="{{shop.coffee_shop.name}}"
+      address="{{shop.coffee_shop.location}}">
+    </app-mainitem>
+  </div>
+  <div [hidden]="checkIn$.length > 0" class="not-found">
+    <ion-label>Hiện tại chưa có địa điểm nào!</ion-label>
+  </div>
 </ion-content>

@@ -60,4 +60,8 @@ export class AuthService {
     await this.localStore.deleteToken();
     await this.localStore.deleteInfo();
   }
+
+  // async getUserByID(idUser: number) {
+  //   this.fetchAPI.get(`auth/users/${idUser}/`)
+  // }
 }

@@ -5,7 +5,11 @@ import { ActionSheetController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 import { Information } from 'src/app/interfaces/infomation';
 import { LocalStoreService } from 'src/app/services/localstore.service';
-import { Camera, CameraResultType, CameraSource, GalleryPhoto } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, GalleryPhoto, Photo } from '@capacitor/camera';
+import { CoffeeShopService } from 'src/app/services/coffee-shop/coffee-shop.service';
+import LoadingUtils from 'src/app/utils/loading.utils';
+import AlertUtils from 'src/app/utils/alert.utils';
+import { FeedBack } from 'src/app/interfaces/feed-back';
 
 @Component({
   selector: 'app-write-feedback',
@@ -15,6 +19,7 @@ import { Camera, CameraResultType, CameraSource, GalleryPhoto } from '@capacitor
 export class WriteFeedbackPage implements OnInit {
 
   coffeeShop: CoffeeShop;
+  feedBack: FeedBack;
   currentRate: number;
 
   info: Information;
@@ -22,13 +27,17 @@ export class WriteFeedbackPage implements OnInit {
   userName: string;
 
   imgPhotos: any[] = [];
+  rating: number = 1;
   desText: string;
 
   constructor(
     private route: ActivatedRoute,
     private localstore: LocalStoreService,
     private actionSheet: ActionSheetController,
-  ){
+    private coffeeShopService: CoffeeShopService,
+    private loadingUtils: LoadingUtils,
+    private alertUtils: AlertUtils,
+  ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('coffeeShop'));
     this.currentRate = 1;
     console.log(this.coffeeShop);
@@ -40,8 +49,9 @@ export class WriteFeedbackPage implements OnInit {
     this.userName = this.user.username;
   }
 
-  onRatingChange(rating){
-    console.log('The evaluation was modified and now its value is: ',rating);
+  onRatingChange(rating: number) {
+    this.rating = rating;
+    // console.log('The evaluation was modified and now its value is: ',rating);
   }
 
   async chooseFromCamera() {
@@ -50,7 +60,9 @@ export class WriteFeedbackPage implements OnInit {
       allowEditing: true,
       resultType: CameraResultType.Uri
     });
-    this.imgPhotos.push(image);
+    if (this.checkValidPhotosCount()) {
+      this.imgPhotos.push(image);
+    }
   }
 
   async chooseFromGallery() {
@@ -59,7 +71,20 @@ export class WriteFeedbackPage implements OnInit {
       source: CameraSource.Photos,
       resultType: CameraResultType.Uri
     });
-    this.imgPhotos.push(image);
+    if (this.checkValidPhotosCount()) {
+      this.imgPhotos.push(image);
+      let file = await this.getFileFromUrl(image.webPath);
+      console.log(file);
+    }
+  }
+
+  async getFileFromUrl(url: string, defaultType = 'image/jpeg') {
+    const fileName = new Date().getTime() + '.jpeg';
+    const response = await fetch(url);
+    const data = await response.blob();
+    return new File([data], fileName, {
+      type: data.type || defaultType,
+    });
   }
 
   async showOptionChoose() {
@@ -91,10 +116,54 @@ export class WriteFeedbackPage implements OnInit {
   }
 
   postFeedBack() {
-    console.log(this.desText);
+    if (this.desText) {
+      this.loadingUtils.presentLoading("Vui lòng chờ");
+      let feedBackData = {
+        vote_rate: this.rating,
+        feedback: this.desText
+      }
+      this.coffeeShopService.postFeedBackByIDCoffee(this.coffeeShop.id, feedBackData).then(res => {
+        this.feedBack = res;
+        if (this.imgPhotos.length > 0) {
+          this.imgPhotos.forEach(async img => {
+            let file = await this.getFileFromUrl(img.webPath);
+            await this.postImageFeedBack(this.feedBack.id, file);
+          })          
+        }
+        this.loadingUtils.dismiss();
+        this.alertUtils.presentAlert('Thông báo', 'Cảm ơn bạn đã gửi phản hồi!');
+        this.resetAll();
+      });
+    }
+    else {
+      this.alertUtils.presentAlert('Cảnh báo', 'Vui lòng nhập đầy đủ thông tin!');
+    }
+  }
+
+  async postImageFeedBack(idFeedBack: number, imgFile: File) {
+    let imgFeedbackData = new FormData();    
+    imgFeedbackData.append('image', imgFile);
+    await this.coffeeShopService.postImagesFeedBackByIDCoffee(this.coffeeShop.id, idFeedBack, imgFeedbackData).catch(err => {
+      this.alertUtils.presentAlert('Lỗi', 'Không thể tải ảnh lên!');
+      this.loadingUtils.dismiss();
+    });
   }
 
   deleteImages() {
+    this.imgPhotos = [];
+  }
+
+  checkValidPhotosCount(): boolean {
+    let check = true;
+    if (this.imgPhotos.length >= 3) {
+      this.alertUtils.presentAlert("Cảnh báo", "Số lượng ảnh không được vượt quá 3 ảnh");
+      check = false;
+    }
+    return check;
+  }
+
+  resetAll() {
+    this.desText = "";
     this.imgPhotos = [];
   }
 }
