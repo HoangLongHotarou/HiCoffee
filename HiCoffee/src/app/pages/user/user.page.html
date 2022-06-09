@@ -22,7 +22,15 @@
       <ion-label>Tên đệm & Tên (không dấu):</ion-label>
       <ion-input type="text" [(ngModel)]="firstName"></ion-input>
     </div>
-    <app-slidecategory *ngIf="coffeeShop$.length > 0" title="Quán cà phê của bạn : " [coffee]=coffeeShop$></app-slidecategory>
+    <div class="category">
+      <div>
+        <ion-label>Thể loại coffee yêu thích của bạn : </ion-label>
+      </div>
+      <app-item-filter *ngFor="let hobby of hobbies" itemName="{{hobby.category.type}}"></app-item-filter>
+    </div>
+    <div>
+      <app-slidecategory *ngIf="coffeeShop$.length > 0" title="Quán cà phê của bạn : " [coffee]=coffeeShop$ moretext="Cập nhật" routerlink=""></app-slidecategory>
+    </div>
     <div class="ion-text-center">
       <ion-button>Cập nhật thông tin</ion-button>
     </div>
