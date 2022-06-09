@@ -49,8 +49,10 @@ ion-card {
             gap: 5px;
             ion-img {
                 width: 120px;   
+                height: 80px;
                 border-radius: 5px;    
-                overflow: hidden;         
+                overflow: hidden;  
+                object-fit: cover;       
             }
         }
         .more {

@@ -8,7 +8,7 @@
         <p class="address ion-no-margin"><span>Địa chỉ: </span>{{address}}</p>
     </ion-col>    
   </ion-row>  
-  <ion-card-content>
+  <ion-card-content [hidden]="!description || !category$">
     <p class="description ion-no-margin"><span>Mô tả: </span>{{description}}</p>
     <p class="description ion-no-margin"><span>Thể loại: </span>{{strCategory}}</p>
   </ion-card-content>

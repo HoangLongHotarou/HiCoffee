@@ -2,7 +2,7 @@
   <ion-card-header>
       <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
       <div class="info">
-        <div class="username">{{feedBack.customer_fake}}</div>
+        <div class="username">{{userName}}</div>
         <div class="rate"><span>{{feedBack.vote_rate}}/5</span><ion-icon name="star"></ion-icon></div>
       </div>
   </ion-card-header>
@@ -12,8 +12,8 @@
       <ion-label (click)="showMore()" class="more">{{moreText}}</ion-label>
     </div>    
     <ion-slides [options]="SlideOpts" class="img-list ion-margin-top">
-      <ion-slide *ngFor="let img of imgArr; index as i" (click)="openPreview(imgArr, i)" class="img-item">
-        <ion-img src="{{img}}"></ion-img>
+      <ion-slide *ngFor="let img of feedBack.fb_images; index as i" (click)="openPreview(feedBack.fb_images, i)" class="img-item">
+        <ion-img src="{{img.image}}"></ion-img>
       </ion-slide>         
     </ion-slides>
   </ion-card-content>

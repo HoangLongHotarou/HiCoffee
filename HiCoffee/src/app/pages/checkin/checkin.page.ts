@@ -25,9 +25,11 @@ export class CheckinPage implements OnInit {
 
   async ngOnInit() {
     await this.loadingUtils.presentLoading('Vui lòng chờ');
-    await this.fetch.getAll(1).then(res => {
+    await this.fetch.getAll(2).then(res => {
       this.checkIn$ = res;
     });
     this.loadingUtils.dismiss();
   }
+
+  
 }

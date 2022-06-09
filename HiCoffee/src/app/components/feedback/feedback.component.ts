@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FeedBack } from 'src/app/interfaces/feed-back';
+import { User } from 'src/app/interfaces/user';
 import { ImgPreviewModalPage } from 'src/app/pages/modal/img-preview-modal/img-preview-modal.page';
 
 @Component({
@@ -12,14 +13,15 @@ export class FeedbackComponent implements OnInit {
 
   SlideOpts: any;
   @Input() feedBack: FeedBack;
-  imgArr: string[];
+  // imgArr: string[];
 
   isShowMore: boolean;
   hiddenShowMore: boolean;
   moreText: string;
+  userName: string;
 
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
   ) {
     this.SlideOpts = {
       slidesPerView: 2,
@@ -28,17 +30,18 @@ export class FeedbackComponent implements OnInit {
     };
     this.isShowMore = false;
     this.moreText = 'Xem thêm';    
-    this.imgArr = [
-      'https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
-      'https://images.unsplash.com/photo-1653161926627-c4b492a300c9?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
-      'https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
-      'https://images.unsplash.com/photo-1653183693639-cffc9d75c769?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
-      'https://images.unsplash.com/photo-1653330670377-dcbeb441f14d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
-    ];
+    // this.imgArr = [
+    //   'https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
+    //   'https://images.unsplash.com/photo-1653161926627-c4b492a300c9?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
+    //   'https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
+    //   'https://images.unsplash.com/photo-1653183693639-cffc9d75c769?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
+    //   'https://images.unsplash.com/photo-1653330670377-dcbeb441f14d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870',
+    // ];
   }
 
   ngOnInit() {
     this.hiddenShowMore = (this.countWords(this.feedBack.feedback) > 20 ? false : true);
+    this.setUserName();
   }
 
   showMore() {
@@ -69,5 +72,9 @@ export class FeedbackComponent implements OnInit {
       cssClass: 'imgPreviewContainer'
     });
     modal.present();
+  }
+
+  setUserName() {
+    this.userName = this.feedBack.user ? this.feedBack.user.username : this.feedBack.customer_fake; 
   }
 }
