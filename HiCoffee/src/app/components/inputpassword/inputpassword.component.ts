@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ContentChild, Input, ViewChild } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 
@@ -13,9 +14,9 @@ export class InputpasswordComponent {
   @Input() placeholder: string;
 
   @ContentChild(IonInput) input: IonInput;
-  
+
   constructor() { }
-  
+
   toggleShow() {
     this.showPassword = !this.showPassword;
     this.input.type = this.showPassword ? 'text' : 'password';

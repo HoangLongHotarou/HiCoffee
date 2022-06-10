@@ -107,6 +107,7 @@ export class CoffeeShopService {
       this.result = res.data;
     }).catch((error)=>{
       this.errorUtils.catchError(error.response.status);
+      // console.log(error);
     });
     return this.result;
   }

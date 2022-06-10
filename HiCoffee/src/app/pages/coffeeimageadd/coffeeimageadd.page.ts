@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
@@ -79,7 +80,7 @@ export class CoffeeimageaddPage implements OnInit {
     });
     if (this.checkValidPhotosCount()) {
       this.imgPhotos.push(image);
-      let file = await this.getFileFromUrl(image.webPath);
+      const file = await this.getFileFromUrl(image.webPath);
       console.log(file);
     }
   }
@@ -100,7 +101,7 @@ export class CoffeeimageaddPage implements OnInit {
   checkValidPhotosCount(): boolean {
     let check = true;
     if (this.imgPhotos.length >= 3) {
-      this.alertUtils.presentAlert("Cảnh báo", "Số lượng ảnh không được vượt quá 3 ảnh");
+      this.alertUtils.presentAlert('Cảnh báo', 'Số lượng ảnh không được vượt quá 3 ảnh');
       check = false;
     }
     return check;
@@ -108,7 +109,7 @@ export class CoffeeimageaddPage implements OnInit {
 
 
   async postCoffeeImage(imgFile: File) {
-    let imgData = new FormData();
+    const imgData = new FormData();
     imgData.append('image', imgFile);
     await this.coffeeShopService.postImagesByIDCoffee(this.idCoffee, imgData).catch(err => {
       this.alertUtils.presentAlert('Lỗi', 'Không thể tải ảnh lên!');
@@ -118,19 +119,19 @@ export class CoffeeimageaddPage implements OnInit {
 
   async AddCoffeeImage() {
     if (this.imgPhotos.length > 0) {
-      await this.loadingUtils.presentLoading("Vui lòng chờ");
-      await this.imgPhotos.forEach(async img => {
-        let file = await this.getFileFromUrl(img.webPath);
+      this.loadingUtils.presentLoading('Đang thêm ảnh trong quán\nVui lòng chờ');
+      console.log(this.imgPhotos);
+      await Promise.all(this.imgPhotos.map(async (img) => {
+        const file = await this.getFileFromUrl(img.webPath);
         await this.postCoffeeImage(file);
-      });
-      await this.loadingUtils.dismiss();
-      this.toastUtils.presentToastSuccess("Thêm ảnh quán coffee thành công");
-      //this.router.navigateByUrl('/tabs/user');
+      }));
+      this.loadingUtils.dismiss();
+      await this.toastUtils.presentToastSuccess('Thêm ảnh quán coffee thành công');
       this.router.navigateByUrl('/tabs/user').then(() => {
         window.location.reload();
       });
     } else {
-      this.toastUtils.presentToastError("Vui lòng thêm ảnh quán coffee");
+      this.toastUtils.presentToastError('Vui lòng thêm ảnh quán coffee');
     }
   }
 }

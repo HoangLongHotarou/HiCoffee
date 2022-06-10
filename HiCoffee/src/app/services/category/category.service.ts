@@ -12,7 +12,7 @@ export class CategoryService {
 
   category$: Category[];
   pagination: Pagination;
-  categoryuser : CategoryUser[];
+  categoryuser: CategoryUser[];
 
   constructor(
     private fetchAPI: FetchAPIService,
@@ -28,11 +28,11 @@ export class CategoryService {
     return this.category$;
   }
 
-  async getCategoryByIdCoffee(idCoffee : number) : Promise<any>{
-    await this.fetchAPI.get(`customer/cfsowner/${idCoffee}/cfstypes/`).then((res)=>{
+  async getCategoryByIdCoffee(idCoffee: number): Promise<any> {
+    await this.fetchAPI.get(`customer/cfsowner/${idCoffee}/cfstypes/`, true).then((res) => {
       this.pagination = res.data;
       this.categoryuser = this.pagination.results;
-      this.category$ = this.categoryuser.map(value=> value.category);
+      this.category$ = this.categoryuser.map(value => value.category);
     }).catch((err) => {
       this.informError.catchError(err.response.status);
     });

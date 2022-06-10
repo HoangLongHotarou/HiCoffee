@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
 import { CategoryService } from './../../services/category/category.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
@@ -63,11 +64,8 @@ export class AddcoffeecategoryPage implements OnInit {
     if (check) {
       console.log('Thêm thể loại thành công');
       this.toastUltils.presentToastSuccess('Thêm thể loại thành công');
-      // this.router.navigateByUrl('/tabs/user').then(() => {
-      //   window.location.reload();
-      // });
       const idCoffeeString = JSON.stringify(this.idCoffee);
-      this.router.navigate(['coffeeimageadd',idCoffeeString]);
+      this.router.navigate(['coffeeimageadd', idCoffeeString]);
     } else {
       console.log('Error');
     }
