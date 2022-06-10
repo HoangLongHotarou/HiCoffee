@@ -1,4 +1,9 @@
 .image_represent {
+
+    ion-label {
+        font-size: 1.1em;
+    }
+
     .image {
         text-align: center;
         ion-img {
@@ -10,15 +15,21 @@
         }
     }
 
+    .image-picker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: 1.2em;
+    }
+
 }
 
 ion-item{
     border-radius: 20px;
-    height: 55px;
     box-shadow: 1px 8px 8px 0px var(--shadow);
     --highlight-height: 0px;
     align-items: center;
-    display: flex;
     margin: 10px 0px;
 
     ion-input{
@@ -43,6 +54,7 @@ ion-item{
     box-shadow: 1px 8px 8px 0px var(--shadow);
     --highlight-height: 0px;
     margin: 10px 0px;
+    font-size: 1.2em;
     ion-textarea{
         padding-left: 20px;
         padding-top: 10px;
@@ -50,5 +62,6 @@ ion-item{
 }
 
 .time{
+    --color: var(--ion-color-coffee-black);
     font-size: 15px;
 }

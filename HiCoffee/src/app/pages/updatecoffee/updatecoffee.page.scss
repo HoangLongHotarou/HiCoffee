@@ -1,6 +1,11 @@
 .image_represent {
+    ion-label {
+        font-size: 1.05em;
+    }
+    
     .image {
         text-align: center;
+        margin: 10px 0;
 
         ion-img {
             width: 100%;
@@ -11,15 +16,25 @@
         }
     }
 
+    .pick-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        ion-icon {     
+            font-size: 1.2em;       
+            color: var(--ion-color-coffee-primary);
+        }
+        ion-label {
+            margin-top: 0;
+        }
+    }
 }
 
 .description {
-    background-color: var(--ion-color-coffee-white);
-    height: 100px;
-    border-radius: 20px;
-    border: 1px solid var(--ion-color-coffee-primary1);
     --highlight-height: 0px;
     margin: 10px 0px;
+    font-size: 1.1em;
 
     ion-label {
         margin-left: 10px;
@@ -27,29 +42,29 @@
     }
 
     ion-textarea {
+        background-color: var(--ion-color-coffee-white);
+        --padding: 0;
+        border-radius: 20px;
+        border: 1px solid var(--ion-color-coffee-primary);
         padding-left: 20px;
-        padding-top: 5px;
+        padding-top: 5px;        
     }
 }
 
 ion-item {
+    width: 100%;
     border-radius: 20px;
-    height: 55px;
-    border: 1px solid var(--ion-color-coffee-primary1);
+    border: 1px solid var(--ion-color-coffee-primary);
     --highlight-height: 0px;
-    align-items: center;
-    display: flex;
     margin: 10px 0px;
 
     ion-label {
-        color: var(--ion-color-coffee-primary1);
+        color: var(--ion-color-coffee-primary);
     }
 
     ion-input {
         font-size: 18px;
-        --padding-top: 20px;
-        --padding-bottom: 15px;
-        --padding-start: 5px;
+        --padding: 0;
         --color: var(--ion-color-coffee-black);
 
         a {
@@ -63,5 +78,5 @@ ion-item {
 ion-label {
     margin-top: 10px;
     font-weight: bold;
-    color: var(--ion-color-coffee-primary1);
+    color: var(--ion-color-coffee-primary);
 }

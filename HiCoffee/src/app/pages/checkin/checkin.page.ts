@@ -28,13 +28,15 @@ export class CheckinPage implements OnInit {
   async ngOnInit() {
     await this.loadingUtils.presentLoading('Vui lòng chờ');
     await this.fetch.getAll(2).then(res => {
-      this.checkIn$ = res;   
-      if (this.checkIn$.length == 0) {
+      this.checkIn$ = res;
+      if (this.checkIn$.length === 0) {
         this.isNotFound = false;
-      }   
+      }
     });
     this.loadingUtils.dismiss();
   }
 
-  
+  doRefresh() {
+    window.location.reload();
+  }
 }
