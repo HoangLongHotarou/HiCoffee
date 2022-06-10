@@ -1,8 +1,8 @@
-import { IntroGuard } from './guards/intro.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AutoLoginGuard } from './guards/auto-login.guard';
+import { CheckHobbiesGuard } from './guards/check-hobbies.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +28,7 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
+    canLoad: [CheckHobbiesGuard]
   },
   {
     path: 'forgetpassword',
@@ -59,39 +60,37 @@ const routes: Routes = [
   },
   {
     path: 'setting-page',
-    loadChildren: () => import('./pages/setting-page/setting-page.module').then( m => m.SettingPagePageModule)
+    loadChildren: () => import('./pages/setting-page/setting-page.module').then(m => m.SettingPagePageModule)
   },
   {
     path: 'addcoffeecategory/:idCoffee',
-    loadChildren: () => import('./pages/addcoffeecategory/addcoffeecategory.module').then( m => m.AddcoffeecategoryPageModule)
+    loadChildren: () => import('./pages/addcoffeecategory/addcoffeecategory.module').then(m => m.AddcoffeecategoryPageModule)
   },
   {
     path: 'write-feedback/:coffeeShop',
-    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then( m => m.WriteFeedbackPageModule),
+    loadChildren: () => import('./pages/write-feedback/write-feedback.module').then(m => m.WriteFeedbackPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'img-preview-modal',
-    loadChildren: () => import('./pages/modal/img-preview-modal/img-preview-modal.module').then( m => m.ImgPreviewModalPageModule)
+    loadChildren: () => import('./pages/modal/img-preview-modal/img-preview-modal.module').then(m => m.ImgPreviewModalPageModule)
   },
   {
     path: 'topic',
-    loadChildren: () => import('./pages/topic/topic.module').then( m => m.TopicPageModule)
+    loadChildren: () => import('./pages/topic/topic.module').then(m => m.TopicPageModule)
   },
   {
     path: 'filter-list',
-    loadChildren: () => import('./pages/modal/filter-list/filter-list.module').then( m => m.FilterListPageModule)
+    loadChildren: () => import('./pages/modal/filter-list/filter-list.module').then(m => m.FilterListPageModule)
   },
   {
     path: 'information',
-    loadChildren: () => import('./pages/information/information.module').then( m => m.InformationPageModule)
-  },  {
+    loadChildren: () => import('./pages/information/information.module').then(m => m.InformationPageModule)
+  },
+  {
     path: 'info-update',
-    loadChildren: () => import('./pages/info-update/info-update.module').then( m => m.InfoUpdatePageModule)
+    loadChildren: () => import('./pages/info-update/info-update.module').then(m => m.InfoUpdatePageModule)
   }
-
-
-
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { Hobby } from './../interfaces/hobby';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Information } from 'src/app/interfaces/infomation';
 import { Injectable } from '@angular/core';
@@ -56,8 +57,15 @@ export class LocalStoreService {
     await this.storage.remove('info');
   }
 
+  async checkHadHobbies(): Promise<boolean> {
+    const info: Information = await this.loadInfo('info');
+    if (info.info_hobbies.length === 0) { return false; }
+    return true;
+  }
+
   async isFavoriteOrCheckIn(idCoffeeShop: number, type: number) {
     const info: Information = await this.storage.get('info');
+    if (info === null || info === undefined) { return 0; }
     const lstFavorites = info.info_marks.filter(
       (x) => (x.coffee_shop === idCoffeeShop && x.type === type)
     );
@@ -77,5 +85,19 @@ export class LocalStoreService {
     }
     info.info_marks = lstFavorites;
     await this.saveInfo('info', info);
+  }
+
+  async setHobbies(hobbies: Hobby[]) {
+    const info: Information = await this.storage.get('info');
+    info.info_hobbies = hobbies;
+    await this.saveInfo('info', info);
+  }
+
+  async getHobbies(): Promise<string> {
+    const info: Information = await this.storage.get('info');
+    // console.log(info);
+    if (info === undefined || info === null) { return ''; }
+    const ids = info.info_hobbies.map(x => x.category.id).toString();
+    return ids;
   }
 }

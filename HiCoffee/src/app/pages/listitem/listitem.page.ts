@@ -42,7 +42,7 @@ export class ListitemPage implements OnInit {
     public loadingUtils: LoadingUtils,
     private router: Router,
     private route: ActivatedRoute,
-    private localstore: LocalStoreService,private render: Renderer2,
+    private localstore: LocalStoreService, private render: Renderer2,
     private modalCtrl: ModalController,
   ) {
     this.notFound = false;
@@ -63,8 +63,8 @@ export class ListitemPage implements OnInit {
     });
   }
 
-  getList(event?) {
-    switch(this.idList) {
+  async getList(event?) {
+    switch (this.idList) {
       case 1:
         this.title = 'Dành cho bạn';
         this.getListCoffeeForYou(event);
@@ -75,7 +75,7 @@ export class ListitemPage implements OnInit {
         break;
       case 3:
         this.title = 'Địa điểm được yêu thích';
-        this.getListCoffeeForYou(event);
+        await this.getListCoffeeFavorites(event);
         break;
       case 4:
         this.title = 'Kết quả tìm kiếm';
@@ -85,7 +85,7 @@ export class ListitemPage implements OnInit {
   }
 
   getListCoffeeForYou(event?) {
-    this.fetchCoffeeShop.getAll(this.page).then((res) => {
+    this.fetchCoffeeShop.getAll(this.page, true,).then((res) => {
       this.maximumpage = res.pages;
       this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
       this.checkArrayCoffeeShop();
@@ -96,9 +96,23 @@ export class ListitemPage implements OnInit {
     });
   }
 
+  async getListCoffeeFavorites(event?) {
+    const ids = await this.localstore.getHobbies();
+    this.fetchCoffeeShop.getAll(this.page, true, ids).then((res) => {
+      this.maximumpage = res.pages;
+      this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
+      this.checkArrayCoffeeShop();
+      this.loadingUtils.dismiss();
+      if (event) {
+        event.target.complete();
+      }
+    });
+  }
+
+
   getListResult(event?) {
     this.listIDCategory = JSON.parse(this.route.snapshot.paramMap.get('filterList'));
-    let listIDStr = this.listIDCategory.toString();
+    const listIDStr = this.listIDCategory.toString();
     this.fetchCoffeeShop.getFilter(this.page, listIDStr).then(res => {
       this.maximumpage = res.pages;
       this.coffeeShop$ = this.coffeeShop$.concat(res.coffeeShops);
@@ -111,13 +125,13 @@ export class ListitemPage implements OnInit {
     });
   }
 
-  loadMore(event) {   
+  async loadMore(event) {
     if (this.page === this.maximumpage) {
       event.target.disabled = true;
     }
     else {
       this.page++;
-      this.getList(event);
+      await this.getList(event);
     }
   }
 
@@ -153,6 +167,6 @@ export class ListitemPage implements OnInit {
   }
 
   checkArrayCoffeeShop() {
-    this.notFound = this.coffeeShop$.length == 0 ? true : false;
+    this.notFound = this.coffeeShop$.length === 0 ? true : false;
   }
 }

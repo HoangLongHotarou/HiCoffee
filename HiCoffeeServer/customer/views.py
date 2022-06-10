@@ -149,3 +149,4 @@ class CoffeeShopCategoryOwnerViewSet(CoffeeShopCategoryViewSet):
         data = serializers.save(coffee_shop_id=kwargs['coffeeshop_pk'])
         serializers = GetCoffeeShopCategorySerializer(data, many=True)
         return Response(serializers.data)
+

@@ -6,10 +6,11 @@ from .serializers import GetFilterCoffeeShopSerializer
 
 class CoffeeShopFilter(FilterSet):
     id_categories = filters.CharFilter(method='filterCategories')
+    id_hobbies_user = filters.CharFilter(method='filterForUser')
 
     class Meta:
         model = CoffeeShop
-        fields = ('id_categories',)
+        fields = ('id_categories','id_hobbies_user')
 
     def filterCategories(self, queryset, name, value):
         ids_categories = value.split(',')
@@ -26,6 +27,25 @@ class CoffeeShopFilter(FilterSet):
             for i in ids_categories:
                 if i not in types_cfs_id:
                     check = False
+                    break
+            if check:
+                ids_coffee_shops.append(cf['id'])
+        queryset = queryset.filter(pk__in=ids_coffee_shops)
+        return queryset
+
+    def filterForUser(self, queryset, name, value):
+        ids_hobbies = value.split(',')
+        ids_hobbies = [int(i) for i in ids_hobbies]
+        coffeeShop = queryset.all()
+        cfs = GetFilterCoffeeShopSerializer(coffeeShop, many=True)
+        ids_coffee_shops = []
+        for cf in cfs.data:
+            check = False
+            if len(cf['types_cfs']) == 0:
+                continue
+            for category in cf['types_cfs']:
+                if category['category']['id'] in ids_hobbies:
+                    check = True
                     break
             if check:
                 ids_coffee_shops.append(cf['id'])

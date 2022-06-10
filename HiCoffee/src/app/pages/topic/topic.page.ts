@@ -1,38 +1,46 @@
+import { InformationService } from 'src/app/services/information/information.service';
+/* eslint-disable @typescript-eslint/naming-convention */
+import LoadingUtils from 'src/app/utils/loading.utils';
 import { Component, Input, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/category/category.service';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/interfaces/category';
 
 @Component({
   selector: 'app-topics',
   templateUrl: './topic.page.html',
   styleUrls: ['./topic.page.scss'],
 })
-export class TopicPage implements OnInit  {
+export class TopicPage implements OnInit {
 
-  private form = [
-      { val: 'Yên tĩnh', isChecked: true },
-      { val: 'Phong cảnh', isChecked: false },
-      { val: 'Truyền thống', isChecked: false },
-      { val: 'Manga/Anime', isChecked: false },
-      { val: 'Nhà hàng', isChecked: false },
-      { val: 'Nhượng quyền thương hiệu', isChecked: false },
-      { val: 'Sách', isChecked: false },
-      { val: 'Acoustic', isChecked: false },
-      { val: 'Sân vườn', isChecked: false },
-      { val: 'Thú cưng', isChecked: false },
-      { val: '24h', isChecked: false },
-      { val: 'Co-Working Space', isChecked: false }
-  ];
-  constructor() { }
-  ngOnInit() {
+  categories: Category[];
+
+  constructor(
+    private fetchAPIInfo: InformationService,
+    private fetchAPICtg: CategoryService,
+    private loadingUtils: LoadingUtils,
+    private router: Router
+  ) { }
+  async ngOnInit() {
+    this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API\nVui lòng chờ');
+    await this.fetchAPICtg.getAll().then((res) => {
+      this.categories = res;
+    });
+    this.loadingUtils.dismiss();
   }
 
-  _getSelectedItem(selectedItem){
-    console.log('before' + selectedItem.isChecked);
-    this.form.forEach(item => {
-      if(item.val === selectedItem.val){
-        item.isChecked = selectedItem.isChecked;
-      }
-    });
-
-    console.log(this.form);
+  async AddHobbies() {
+    this.loadingUtils.presentLoading('Đang thêm sở thích');
+    const checkedItems: Category[] = this.categories.filter(value => value.isChecked);
+    const idChecked: number[] = checkedItems.map(value => value.id);
+    const idCategoriesString = idChecked.toString();
+    const hobbies = {
+      id_categories: idCategoriesString
+    };
+    const check = await this.fetchAPIInfo.addHobbies(hobbies);
+    if (check) {
+      this.router.navigateByUrl('/tabs');
+    }
+    this.loadingUtils.dismiss();
   }
 }

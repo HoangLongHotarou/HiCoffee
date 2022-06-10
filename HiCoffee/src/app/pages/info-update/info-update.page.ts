@@ -4,7 +4,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { Information } from 'src/app/interfaces/infomation';
 import { User } from 'src/app/interfaces/user';
 import { LocalStoreService } from 'src/app/services/localstore.service';
-import { Camera, CameraResultType, CameraSource, Photo} from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { InformationService } from 'src/app/services/information/information.service';
 import LoadingUtils from 'src/app/utils/loading.utils';
 import AlertUtils from 'src/app/utils/alert.utils';
@@ -15,7 +15,7 @@ import AlertUtils from 'src/app/utils/alert.utils';
   styleUrls: ['./info-update.page.scss'],
 })
 export class InfoUpdatePage implements OnInit, OnChanges {
-  
+
   info: Information;
   user: User;
 
@@ -66,7 +66,6 @@ export class InfoUpdatePage implements OnInit, OnChanges {
     this.file = await this.getFileFromUrl(image.webPath);
     this.imageLink = image.webPath;
     console.log(this.file);
-    
   }
 
   async chooseFromGallery() {
@@ -119,20 +118,20 @@ export class InfoUpdatePage implements OnInit, OnChanges {
 
   updateInfo() {
     this.loadingUtils.presentLoading('Vui lòng chờ');
-    let formData = new FormData();
+    const formData = new FormData();
     if (this.file) {
       formData.append('image_link', this.file);
     }
-    formData.append('birthday', this.date); 
-    formData.append('user', this.info.user.id); 
-    formData.append('first_name', this.firstName); 
-    formData.append('last_name', this.lastName); 
-    this.informationService.updateInformation(formData).then(res => {      
-      console.log(res); 
+    formData.append('birthday', this.date);
+    formData.append('user', this.info.user.id);
+    formData.append('first_name', this.firstName);
+    formData.append('last_name', this.lastName);
+    this.informationService.updateInformation(formData).then(res => {
+      console.log(res);
       this.loadingUtils.dismiss();
       if (res) {
         this.updateInfoLocal(res);
-        this.alertUtils.presentAlert('Thông báo', 'Đã cập nhật thông tin thành công!');  
+        this.alertUtils.presentAlert('Thông báo', 'Đã cập nhật thông tin thành công!');
       }
     });
   }
@@ -146,6 +145,8 @@ export class InfoUpdatePage implements OnInit, OnChanges {
   }
 
   backPage() {
-    this.router.navigateByUrl('/tabs/user');
+    this.router.navigateByUrl('/tabs/user').then(() => {
+      window.location.reload();
+    });
   }
 }

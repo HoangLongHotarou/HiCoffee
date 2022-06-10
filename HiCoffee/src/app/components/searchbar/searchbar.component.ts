@@ -12,14 +12,15 @@ export class SearchbarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   emit() {
-    
+
   }
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   TextInput(event) {
-    let textSearch = event.target.value;
-    this.textChanged.emit(textSearch);    
+    const textSearch = event.target.value;
+    this.textChanged.emit(textSearch);
   }
 }

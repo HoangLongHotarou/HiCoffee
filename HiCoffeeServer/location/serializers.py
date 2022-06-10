@@ -175,6 +175,19 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
     types_cfs = GetNameCoffeeShopCategorySerializer(many=True)
     imgs_cfs = GetSubImageCoffeeShopSerializer(many=True)
 
+    # total_rate = serializers.SerializerMethodField(
+    #     method_name='calculate_rate')
+
+    # def calculate_rate(self, coffeeShop: CoffeeShop):
+    #     # cf = CoffeeShop.objects.get(pk=coffee_shop_id)
+    #     vote_rates = FeedBack.objects.select_related('coffee_shop').filter(
+    #         coffee_shop=coffeeShop).values_list('vote_rate', flat=True)
+    #     count = len(vote_rates)
+    #     mean_rate = round(sum(vote_rates)/count, 2) if count > 0 else 0
+    #     coffeeShop.total_rate = mean_rate
+    #     coffeeShop.save()
+    #     return mean_rate
+
     class Meta:
         model = CoffeeShop
         fields = ('id', 'name', 'description', 'total_rate', 'max_price', 'minimum_price',

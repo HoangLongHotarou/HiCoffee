@@ -5,7 +5,7 @@ from django.conf import settings
 class CoffeeShop(models.Model):
     name = models.CharField(max_length=1024)
     description = models.TextField(null=True)
-    total_rate = models.FloatField(null=True)
+    total_rate = models.FloatField(default=0)
     max_price = models.BigIntegerField(null=True)
     minimum_price = models.BigIntegerField(null=True)
     image_represent = models.ImageField(
