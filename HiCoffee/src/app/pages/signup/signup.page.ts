@@ -1,3 +1,4 @@
+import LoadingUtils from 'src/app/utils/loading.utils';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -23,11 +24,13 @@ export class SignupPage implements OnInit {
 
   constructor(
     private toastUtils: ToastUtils,
+    private loadingUtils: LoadingUtils,
     private auth: AuthService,
     private router: Router) { }
 
   async clickSignup() {
     //console.log(this.firstname);
+    this.loadingUtils.presentLoading('Vui lòng chờ');
     if (this.email === undefined || this.firstname === undefined || this.lastname === undefined ||
       this.username === undefined || this.password === undefined || this.confirmpassword === undefined) {
       this.toastUtils.presentToastError('Các ô không được để trống!');
@@ -53,6 +56,7 @@ export class SignupPage implements OnInit {
         }
       }
     }
+    this.loadingUtils.dismiss();
   }
   ngOnInit() {
 

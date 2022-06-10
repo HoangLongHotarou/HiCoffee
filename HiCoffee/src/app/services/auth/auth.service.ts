@@ -3,6 +3,7 @@ import { FetchAPIService } from '../fetch-api.service';
 import { User } from '../../interfaces/user';
 import { Injectable } from '@angular/core';
 import { LocalStoreService } from '../localstore.service';
+import InformErrorUtils from 'src/app/utils/inform-error.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ import { LocalStoreService } from '../localstore.service';
 export class AuthService {
   user: User;
 
-  constructor(private fetchAPI: FetchAPIService, private localStore: LocalStoreService) { }
+  constructor(
+    private fetchAPI: FetchAPIService,
+    private localStore: LocalStoreService,
+    private errorUtils: InformErrorUtils
+  ) { }
 
   async checkLogin(): Promise<boolean> {
     return this.localStore.checkToken();
@@ -43,14 +48,15 @@ export class AuthService {
   }
 
   async login(user: User): Promise<boolean> {
-    let check = true;
+    let check = false;
     if (await this.checkLogin() === false) {
       await this.fetchAPI.post('auth/jwt/create/', user).then(
         (res) => {
+          check = true;
           this.localStore.addToken(res.data.access);
         }
       ).catch((err) => {
-        check = false;
+        this.errorUtils.catchError(err.response.status);
       });
     }
     return check;

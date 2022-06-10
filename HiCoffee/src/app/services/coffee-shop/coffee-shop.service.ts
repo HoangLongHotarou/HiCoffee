@@ -35,6 +35,8 @@ export class CoffeeShopService {
     await this.fetchAPI.get('customer/cfsowner/', true).then((res) => {
       this.pagination = res.data;
       this.coffeeShop$ = this.pagination.results;
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
     });
     return { 'coffeeShops': this.coffeeShop$ };
   }
