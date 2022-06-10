@@ -29,7 +29,7 @@ export class CategoryService {
   }
 
   async getCategoryByIdCoffee(idCoffee : number) : Promise<any>{
-    await this.fetchAPI.get(`customer/cfsowner/${idCoffee}/cfstypes/`).then((res)=>{
+    await this.fetchAPI.get(`customer/cfsowner/${idCoffee}/cfstypes/`, true).then((res)=>{
       this.pagination = res.data;
       this.categoryuser = this.pagination.results;
       this.category$ = this.categoryuser.map(value=> value.category);

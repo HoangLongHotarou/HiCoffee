@@ -118,8 +118,8 @@ export class CoffeeimageaddPage implements OnInit {
 
   async AddCoffeeImage() {
     if (this.imgPhotos.length > 0) {
-      await this.loadingUtils.presentLoading("Vui lòng chờ");
-      await this.imgPhotos.forEach(async img => {
+      this.loadingUtils.presentLoading("Vui lòng chờ");
+      this.imgPhotos.forEach(async img => {
         let file = await this.getFileFromUrl(img.webPath);
         await this.postCoffeeImage(file);
       });

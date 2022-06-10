@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="coffee-primary">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Update Coffee</ion-title>
   </ion-toolbar>
@@ -13,19 +11,19 @@
   <div id="form">
     <ion-item>
       <ion-label>Tên quán : </ion-label>
-      <ion-input type="text" [(ngModel)]="coffeename"></ion-input>
+      <ion-input class="coffee-name" type="text" [(ngModel)]="coffeename"></ion-input>
     </ion-item>
     <div class="image_represent">
-      <ion-label>Ảnh đại diện quán cà phê :</ion-label>
-      <div (click)="chooseFromGallery()">
-        <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>  
-      </div>    
+      <ion-label>Ảnh đại diện quán cà phê :</ion-label>  
       <div class="image">
         <ion-img src="{{image_represent}}" alt="Ảnh đại diện của quán"></ion-img>
       </div>
+      <div (click)="chooseFromGallery()" class="ion-text-center pick-image">
+        <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>  
+      </div>  
     </div>
-    <ion-label>Mô tả : </ion-label>
     <div class="description">
+      <ion-label>Mô tả : </ion-label>
       <ion-textarea type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-textarea>
     </div>
     <ion-item>

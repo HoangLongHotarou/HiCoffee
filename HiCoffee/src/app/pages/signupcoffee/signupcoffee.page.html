@@ -16,7 +16,7 @@
     </ion-item>
     <div class="image_represent">
       <ion-label >Ảnh đại diện quán cà phê :</ion-label>
-      <div (click)="chooseFromGallery()">
+      <div (click)="chooseFromGallery()" class="ion-margin-vertical ion-text-center image-picker">
         <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>  
       </div>    
       <div class="image" *ngIf="showImage">
