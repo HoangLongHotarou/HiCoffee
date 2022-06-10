@@ -48,15 +48,14 @@ export class AuthService {
   }
 
   async login(user: User): Promise<boolean> {
-    let check = false;
+    let check = true;
     if (await this.checkLogin() === false) {
       await this.fetchAPI.post('auth/jwt/create/', user).then(
         (res) => {
-          check = true;
           this.localStore.addToken(res.data.access);
         }
       ).catch((err) => {
-        this.errorUtils.catchError(err.response.status);
+        check = false;
       });
     }
     return check;

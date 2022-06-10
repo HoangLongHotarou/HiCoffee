@@ -55,11 +55,11 @@ export class InformationService {
     let result;
     await this.fetchAPI.putFormData(`customer/information/`, data, 'me', true).then(
       async (res) => {
-        console.log(res.data);        
+        console.log(res.data);
         result = res.data;
       }).catch((error) => {
         // this.errorUtil.catchError(error.response.status);
-        console.log(error);        
+        console.log(error);
       });
     return result;
   }

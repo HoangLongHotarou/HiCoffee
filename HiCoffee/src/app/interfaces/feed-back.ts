@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from './user';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 export interface FeedBack {
