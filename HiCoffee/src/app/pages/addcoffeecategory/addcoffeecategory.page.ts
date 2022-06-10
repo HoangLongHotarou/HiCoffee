@@ -62,10 +62,12 @@ export class AddcoffeecategoryPage implements OnInit {
     const check = await this.fetchAPI.addCategory(this.idCoffee, category);
     if (check) {
       console.log('Thêm thể loại thành công');
-      this.toastUltils.presentToastSuccess('Thêm quán thành công');
-      this.router.navigateByUrl('/tabs/user').then(() => {
-        window.location.reload();
-      });
+      this.toastUltils.presentToastSuccess('Thêm thể loại thành công');
+      // this.router.navigateByUrl('/tabs/user').then(() => {
+      //   window.location.reload();
+      // });
+      const idCoffeeString = JSON.stringify(this.idCoffee);
+      this.router.navigate(['coffeeimageadd',idCoffeeString]);
     } else {
       console.log('Error');
     }

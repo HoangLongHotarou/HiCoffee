@@ -89,10 +89,11 @@ const routes: Routes = [
   {
     path: 'updatecoffee/:cafeObj',
     loadChildren: () => import('./pages/updatecoffee/updatecoffee.module').then( m => m.UpdatecoffeePageModule)
+  },
+  {
+    path: 'coffeeimageadd/:idCoffee',
+    loadChildren: () => import('./pages/coffeeimageadd/coffeeimageadd.module').then( m => m.CoffeeimageaddPageModule)
   }
-
-
-
 ];
 
 @NgModule({

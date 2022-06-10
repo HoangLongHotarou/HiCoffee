@@ -1,17 +1,13 @@
 import { InformationService } from './../../services/information/information.service';
 /* eslint-disable guard-for-in */
-import AlertUtils from 'src/app/utils/alert.utils';
 import LoadingUtils from 'src/app/utils/loading.utils';
 /* eslint-disable radix */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Camera, CameraResultType, CameraSource, GalleryPhoto, Photo } from '@capacitor/camera';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 
 @Component({
   selector: 'app-signupcoffee',
@@ -42,6 +38,8 @@ export class SignupcoffeePage implements OnInit {
   location: string;
   latitude: string;
   longitude: string;
+
+  showImage: boolean = false;
 
 
   constructor(public toastController: ToastController,
@@ -100,6 +98,7 @@ export class SignupcoffeePage implements OnInit {
       }
       this.listMinute.push(this.value);
     }
+
   }
 
   // this.image_represent === undefined||
@@ -134,27 +133,25 @@ export class SignupcoffeePage implements OnInit {
     }
   }
 
-  onFileSelected(event) {
-    if (event.target.files.length > 0) {
-      console.log(event.target.files[0]);
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      this.image_file = event.target.files[0];
-    }
+  async chooseFromGallery() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
+    });
+    this.image_file = await this.getFileFromUrl(image.webPath);
+    this.image_represent = image.webPath;
+    console.log(this.image_file);
+    this.showImage = true;
   }
 
-  // async signUpCoffee(coffee: any): Promise<number> {
-  //   let id;
-  //   await this.fetchAPI.postFormData('customer/cfsowner/', coffee, true).then(async (res) => {
-  //     if (res.status === 200) {
-  //       coffee = res.data;
-  //       console.log(coffee);
-  //       id = coffee.id;
-  //       console.log(id);
-  //     } else {
-  //       console.log('error!');
-  //     }
-  //   });
-  //   return id;
-  // }
+  async getFileFromUrl(url: string, defaultType = 'image/jpeg') {
+    const fileName = new Date().getTime() + '.jpeg';
+    const response = await fetch(url);
+    const data = await response.blob();
+    return new File([data], fileName, {
+      type: data.type || defaultType,
+    });
+  }
 }
 

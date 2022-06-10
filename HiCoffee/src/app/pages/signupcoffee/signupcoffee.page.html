@@ -16,7 +16,12 @@
     </ion-item>
     <div class="image_represent">
       <ion-label >Ảnh đại diện quán cà phê :</ion-label>
-      <ion-input type="file" [(ngModel)]="image_represent" (change)="onFileSelected($event)"></ion-input>
+      <div (click)="chooseFromGallery()">
+        <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>  
+      </div>    
+      <div class="image" *ngIf="showImage">
+        <ion-img src="{{image_represent}}" alt="Ảnh đại diện của quán"></ion-img>
+      </div>
     </div>
     <div class="description">
       <ion-textarea type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-textarea>
@@ -32,7 +37,6 @@
       <ion-select placeholder="Giờ" [(ngModel)]="hourOpen">
         <ion-select-option *ngFor="let hourOpen of listHour" [value]="hourOpen">{{hourOpen}}</ion-select-option>
       </ion-select>
-      <ion-label></ion-label>
       <ion-select placeholder="Phút" [(ngModel)]="minuteOpen">
         <ion-select-option *ngFor="let minuteOpen of listMinute" [value]="minuteOpen">{{minuteOpen}}</ion-select-option>
       </ion-select>
@@ -42,7 +46,6 @@
       <ion-select placeholder="Giờ" [(ngModel)]="hourClose">
         <ion-select-option *ngFor="let hourClose of listHour" [value]="hourClose">{{hourClose}}</ion-select-option>
       </ion-select>
-      <ion-label></ion-label>
       <ion-select placeholder="Phút" [(ngModel)]="minuteClose">
         <ion-select-option *ngFor="let minuteClose of listMinute" [value]="minuteClose">{{minuteClose}}</ion-select-option>
       </ion-select>

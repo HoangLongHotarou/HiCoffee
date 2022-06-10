@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/addcoffeecategory/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Thêm hình cho quán coffee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="imgPhotos.length > 0" class="ion-text-right ion-margin-bottom">
+    <ion-label class="coffee-delete-images" (click)="deleteImages()">Xóa tất cả ảnh</ion-label>
+  </div>
+  <div class="chooseImage">
+    <div (click)="showOptionChoose()" class="coffee-insert-picture">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-label>Thêm ảnh</ion-label>
+      <!-- <ion-input class="hidden" type="file"></ion-input> -->
+    </div>
+  </div>
+  <div class="coffee-list-img-choose">
+    <ion-img *ngFor="let img of imgPhotos" [src]="img.webPath"></ion-img>
+  </div>
+  <ion-button expand="block" shape="round" (click)="AddCoffeeImage()" >Thêm hình</ion-button>
+</ion-content>
