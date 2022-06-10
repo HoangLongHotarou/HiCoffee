@@ -15,7 +15,7 @@
       address="{{shop.coffee_shop.location}}">
     </app-mainitem>
   </div>
-  <div [hidden]="checkIn$.length > 0" class="not-found">
+  <div [hidden]="isNotFound" class="not-found">
     <ion-label>Hiện tại chưa có địa điểm nào!</ion-label>
   </div>
 </ion-content>

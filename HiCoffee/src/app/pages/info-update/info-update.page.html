@@ -1,0 +1,24 @@
+<ion-content>
+  <div id="info-user" class="container">
+    <h4>Cập nhật thông tin cá nhân</h4>
+    <div class="avatar">
+      <!-- <ion-img src="{{imgSrc}}"></ion-img>  -->
+      <ion-img [src]="imageLink"></ion-img>
+      <ion-label (click)="getImage()" class="pick-image"><ion-icon name="camera-outline"></ion-icon>Chọn ảnh đại diện</ion-label>
+    </div>
+    <div class="info-detail ion-padding">
+      <ion-label>Email:</ion-label>
+      <ion-input type="text" readonly [(ngModel)]="email"></ion-input>
+      <ion-label>Họ:</ion-label>
+      <ion-input type="text" [(ngModel)]="lastName"></ion-input>
+      <ion-label>Tên đệm & Tên:</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+      <ion-label>Ngày sinh:</ion-label>
+      <ion-input type="date" [(ngModel)]="date"></ion-input>
+    </div>
+    <div class="ion-text-center">
+      <ion-button (click)=updateInfo()>Cập nhật</ion-button>
+      <ion-button class="btn-nobackground khoacss" (click)=backPage()>Quay lại</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -15,18 +15,23 @@ import InformErrorUtils from 'src/app/utils/inform-error.utils';
 export class CheckinPage implements OnInit {
   pagination: Pagination;
   checkIn$: FavoriteOrCheckIn[] = [];
+  isNotFound: boolean;
 
   constructor(
     private fetch: FavoriteOrCheckInService,
     private loadingUtils: LoadingUtils,
     private informError: InformErrorUtils,
   ) {
+    this.isNotFound = true;
   }
 
   async ngOnInit() {
     await this.loadingUtils.presentLoading('Vui lòng chờ');
     await this.fetch.getAll(2).then(res => {
-      this.checkIn$ = res;
+      this.checkIn$ = res;   
+      if (this.checkIn$.length == 0) {
+        this.isNotFound = false;
+      }   
     });
     this.loadingUtils.dismiss();
   }

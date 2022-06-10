@@ -38,7 +38,6 @@ export class UserPage implements OnInit {
     private loadingUtils: LoadingUtils,
     private fetchCoffeeShop: CoffeeShopService,
     private localstore: LocalStoreService) {
-
   }
 
   async ngOnInit() {
@@ -50,6 +49,7 @@ export class UserPage implements OnInit {
     this.lastName = this.user.last_name;
     this.firstName = this.user.first_name;
     this.role= this.info.role;
+    this.imgSrc = this.info.image_link ? this.info.image_link : '../../../assets/images/avatarDefault.jpg';
     if(this.role === 1){
       this.showSignUpCafe = true;
     }else{
@@ -65,5 +65,9 @@ export class UserPage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   SignUpCoffee() {
     this.router.navigateByUrl('/signupcoffee');
+  }
+
+  goToInfoUpdatePage() {
+    this.router.navigateByUrl('/info-update');
   }
 }

@@ -83,7 +83,7 @@ export class FetchAPIService {
     );
   }
 
-  async putFormData(urls: string, o: any, id: number, checkAuth?: boolean) {
+  async putFormData(urls: string, o: any, id: any, checkAuth?: boolean) {
     let auth = '';
     if (checkAuth === true) {
       auth = `JWT ${await this.localStore.getToken()}`;

@@ -12,15 +12,15 @@
     <div class="avatar">
       <ion-label>Ảnh đại diện</ion-label>
       <!-- <ion-img src="{{imgSrc}}"></ion-img>  -->
-      <ion-img src="../../../assets/images/avatarDefault.jpg"></ion-img>
+      <ion-img [src]="imgSrc"></ion-img>
     </div>
     <div class="info-detail ion-padding">
       <ion-label>Email:</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
-      <ion-label>Họ (không dấu):</ion-label>
-      <ion-input type="text" [(ngModel)]="lastName"></ion-input>
-      <ion-label>Tên đệm & Tên (không dấu):</ion-label>
-      <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+      <ion-label class="field">{{email}}</ion-label>
+      <ion-label>Họ:</ion-label>
+      <ion-label class="field">{{lastName || 'Không có'}}</ion-label>
+      <ion-label>Tên đệm & Tên:</ion-label>
+      <ion-label class="field">{{firstName || 'Không có'}}</ion-label>
     </div>
     <div class="category">
       <div>
@@ -29,10 +29,10 @@
       <app-item-filter *ngFor="let hobby of hobbies" itemName="{{hobby.category.type}}"></app-item-filter>
     </div>
     <div>
-      <app-slidecategory *ngIf="coffeeShop$.length > 0" title="Quán cà phê của bạn : " [coffee]=coffeeShop$ moretext="Cập nhật" routerlink=""></app-slidecategory>
+      <app-slidecategory *ngIf="coffeeShop$.length > 0" title="Quán cà phê của bạn : " [coffee]=coffeeShop$></app-slidecategory>
     </div>
     <div class="ion-text-center">
-      <ion-button>Cập nhật thông tin</ion-button>
+      <ion-button (click)=goToInfoUpdatePage()>Cập nhật thông tin</ion-button>
     </div>
     <div [hidden]="showSignUpCafe" class="ion-text-center" (click)="SignUpCoffee()">
       <ion-button>Đăng ký quán cà phê</ion-button>
