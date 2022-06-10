@@ -18,4 +18,5 @@ export interface CoffeeShop {
     longitude: string;
     imgs_cfs?: ImageCoffeeShop[];
     types_cfs: Category[];
+    owner: number;
 }

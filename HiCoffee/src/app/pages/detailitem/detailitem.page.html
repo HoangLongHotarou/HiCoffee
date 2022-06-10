@@ -5,7 +5,8 @@
     </ion-buttons>
     <ion-title>Chi tiết</ion-title>
     <ion-buttons slot="end">
-      <ion-router-link class="ion-margin-horizontal" (click)="gotoWritingFeedback()">Viết đánh giá</ion-router-link>
+      <ion-router-link [hidden]="showOwner" class="ion-margin-horizontal" (click)="gotoWritingFeedback()">Viết đánh giá</ion-router-link>
+      <ion-router-link [hidden]="!showOwner" class="ion-margin-horizontal" (click)="gotoUpdateCoffee()">Cập nhật</ion-router-link>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

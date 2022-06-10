@@ -12,6 +12,7 @@ import { CoffeeShopService } from './../../services/coffee-shop/coffee-shop.serv
 import LoadingUtils from 'src/app/utils/loading.utils';
 import { Category } from 'src/app/interfaces/category';
 import ToastUtils from 'src/app/utils/toast.utils';
+import { Information } from 'src/app/interfaces/infomation';
 
 @Component({
   selector: 'app-detailitem',
@@ -27,6 +28,7 @@ export class DetailitemPage implements OnInit {
 
   width: number = window.innerWidth;
   height: number = window.innerHeight;
+  info: Information;
   minimumSize: number;
   maximumSize: number;
   isFavorite: boolean;
@@ -34,6 +36,7 @@ export class DetailitemPage implements OnInit {
   idFavorite: number;
   isShowMore: boolean;
   moreTextDes: string;
+  showOwner = false;
 
   coffeeShop: CoffeeShop;
   imageCoffeeShop$: ImageCoffeeShop[];
@@ -54,6 +57,7 @@ export class DetailitemPage implements OnInit {
     private markService: FavoriteOrCheckInService,
     private fetchAPI: CoffeeShopService,
     private loadingUtils: LoadingUtils,
+    private localstore: LocalStoreService,
     private router: Router,
   ) {
     this.coffeeShop = JSON.parse(this.route.snapshot.paramMap.get('itemObj'));
@@ -73,6 +77,11 @@ export class DetailitemPage implements OnInit {
     this.isFavorite = this.idFavorite > 0 ? true : false;
     if (this.isFavorite) {
       this.favoriteIcon.nativeElement.setAttribute('name', 'heart');
+    }
+    this.info = await this.localstore.loadInfo('info');
+    if(this.info===undefined || this.info===null){return;}
+    if (this.info.user.id === this.coffeeShop.owner) {
+      this.showOwner = true;
     }
   }
 
@@ -141,6 +150,11 @@ export class DetailitemPage implements OnInit {
   gotoWritingFeedback() {
     const coffeeString = JSON.stringify(this.coffeeShop);
     this.router.navigate(['write-feedback', coffeeString]);
+  }
+
+  gotoUpdateCoffee() {
+    const coffeeString = JSON.stringify(this.coffeeShop);
+    this.router.navigate(['updatecoffee', coffeeString]);
   }
 
   convertCategoryArrToString(): string {

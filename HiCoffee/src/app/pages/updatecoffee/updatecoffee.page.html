@@ -1,67 +1,76 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/tabs/user']">
+    <ion-buttons slot="start">
       <ion-button color="coffee-primary">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Signup Coffee</ion-title>
+    <ion-title>Update Coffee</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <div id="form">
     <ion-item>
-      <ion-input type="text" placeholder="Tên quán" [(ngModel)]="coffeename"></ion-input>
+      <ion-label>Tên quán : </ion-label>
+      <ion-input type="text" [(ngModel)]="coffeename"></ion-input>
     </ion-item>
     <div class="image_represent">
-      <ion-label >Ảnh đại diện quán cà phê :</ion-label>
+      <ion-label>Ảnh đại diện quán cà phê :</ion-label>
       <div (click)="chooseFromGallery()">
         <ion-icon name="camera-outline"></ion-icon><ion-label>Thêm ảnh</ion-label>  
       </div>    
-      <div class="image" *ngIf="showImage">
+      <div class="image">
         <ion-img src="{{image_represent}}" alt="Ảnh đại diện của quán"></ion-img>
       </div>
     </div>
+    <ion-label>Mô tả : </ion-label>
     <div class="description">
       <ion-textarea type="text" placeholder="Mô tả" [(ngModel)]="description"></ion-textarea>
     </div>
     <ion-item>
+      <ion-label>Giá thấp nhất : </ion-label>
       <ion-input type="number" placeholder="Giá thấp nhất" [(ngModel)]="min_price"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label>Giá cao nhất : </ion-label>
       <ion-input type="number" placeholder="Giá cao nhất" [(ngModel)]="max_price"></ion-input>
     </ion-item>
     <ion-item class="time" lines="none">
-      <ion-label>Time Open</ion-label>
-      <ion-select placeholder="Giờ" [(ngModel)]="hourOpen">
+      <ion-label>Time Open :</ion-label>
+      <ion-select [(ngModel)]="hourOpen">
         <ion-select-option *ngFor="let hourOpen of listHour" [value]="hourOpen">{{hourOpen}}</ion-select-option>
       </ion-select>
-      <ion-select placeholder="Phút" [(ngModel)]="minuteOpen">
+      <ion-select [(ngModel)]="minuteOpen">
         <ion-select-option *ngFor="let minuteOpen of listMinute" [value]="minuteOpen">{{minuteOpen}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item class="time" lines="none">
-      <ion-label>Time Close</ion-label>
-      <ion-select placeholder="Giờ" [(ngModel)]="hourClose">
+      <ion-label>Time Close :</ion-label>
+      <ion-select [(ngModel)]="hourClose">
         <ion-select-option *ngFor="let hourClose of listHour" [value]="hourClose">{{hourClose}}</ion-select-option>
       </ion-select>
-      <ion-select placeholder="Phút" [(ngModel)]="minuteClose">
-        <ion-select-option *ngFor="let minuteClose of listMinute" [value]="minuteClose">{{minuteClose}}</ion-select-option>
+      <ion-select [(ngModel)]="minuteClose">
+        <ion-select-option *ngFor="let minuteClose of listMinute" [value]="minuteClose">{{minuteClose}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
+    <ion-label>SĐT : </ion-label>
       <ion-input type="text" placeholder="Số điện thoại" [(ngModel)]="phonenumber"></ion-input>
     </ion-item>
     <ion-item>
+    <ion-label>Địa chỉ : </ion-label>
       <ion-input type="text" placeholder="Địa chỉ" [(ngModel)]="location"></ion-input>
     </ion-item>
     <ion-item>
+    <ion-label>Vĩ độ : </ion-label>
       <ion-input type="text" placeholder="Vĩ độ" [(ngModel)]="latitude"></ion-input>
     </ion-item>
     <ion-item>
+    <ion-label>Kinh độ : </ion-label>
       <ion-input type="text" placeholder="Kinh độ" [(ngModel)]="longitude"></ion-input>
     </ion-item>
-    <ion-button (click)="clickSignupCoffee()" expand="block" shape="round">Đăng kí</ion-button>
+    <ion-button (click)="clickUpdateCoffee()" expand="block" shape="round">Cập nhật</ion-button>
   </div>
 </ion-content>

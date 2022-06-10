@@ -90,6 +90,14 @@ const routes: Routes = [
   {
     path: 'info-update',
     loadChildren: () => import('./pages/info-update/info-update.module').then(m => m.InfoUpdatePageModule)
+  },
+  {
+    path: 'updatecoffee/:cafeObj',
+    loadChildren: () => import('./pages/updatecoffee/updatecoffee.module').then( m => m.UpdatecoffeePageModule)
+  },
+  {
+    path: 'coffeeimageadd/:idCoffee',
+    loadChildren: () => import('./pages/coffeeimageadd/coffeeimageadd.module').then( m => m.CoffeeimageaddPageModule)
   }
 ];
 

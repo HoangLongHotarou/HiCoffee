@@ -101,4 +101,13 @@ export class CoffeeShopService {
     });
     return this.result;
   }
+
+  async postImagesByIDCoffee(idCoffee: number,image: any): Promise<any>{
+    await this.fetchAPI.postFormData(`customer/cfsowner/${idCoffee}/imagecfs/`,image,true).then((res)=>{
+      this.result = res.data;
+    }).catch((error)=>{
+      this.errorUtils.catchError(error.response.status);
+    });
+    return this.result;
+  }
 }

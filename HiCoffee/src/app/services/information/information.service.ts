@@ -47,6 +47,7 @@ export class InformationService {
         id = coffee.id;
       }).catch((error) => {
         this.errorUtil.catchError(error.response.status);
+        //console.log(error);
       });
     return id;
   }
@@ -77,5 +78,20 @@ export class InformationService {
 
   async getHobbies(): Promise<string>{
     return await this.localStore.getHobbies();
+  }
+
+  async updateCoffee(coffee: any, id: number): Promise<number> {
+    let idCafe = 0;
+    await this.fetchAPI.putFormData('customer/cfsowner/', coffee, id, true).then(
+      async (res) => {
+        coffee = res.data;
+        idCafe = id;
+        console.log(coffee);
+      }).catch((error) => {
+        //this.errorUtil.catchError(error.response.status);
+        console.log(error);
+
+      });
+    return idCafe;
   }
 }

@@ -68,7 +68,7 @@ export class UserPage implements OnInit,OnChanges {
   }
   // eslint-disable-next-line @typescript-eslint/naming-convention
   SignUpCoffee() {
-    this.router.navigateByUrl('/signupcoffee');
+    this.router.navigateByUrl('signupcoffee');
   }
 
   goToInfoUpdatePage() {

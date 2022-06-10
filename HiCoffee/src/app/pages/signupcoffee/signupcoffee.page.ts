@@ -1,16 +1,13 @@
 import { InformationService } from './../../services/information/information.service';
 /* eslint-disable guard-for-in */
-import AlertUtils from 'src/app/utils/alert.utils';
 import LoadingUtils from 'src/app/utils/loading.utils';
 /* eslint-disable radix */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { FetchAPIService } from 'src/app/services/fetch-api.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource, GalleryPhoto, Photo } from '@capacitor/camera';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signupcoffee',
@@ -19,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class SignupcoffeePage implements OnInit {
   loading: any;
+
   coffeename: string;
 
   image_represent: any;
@@ -41,10 +39,14 @@ export class SignupcoffeePage implements OnInit {
   latitude: string;
   longitude: string;
 
+  showImage = false;
+
+
   constructor(public toastController: ToastController,
     public loadingController: LoadingController,
     private router: Router,
     private loadingUtils: LoadingUtils,
+    private route: ActivatedRoute,
     private infoService: InformationService
     // private axios: AxiosInstance
   ) { }
@@ -96,6 +98,7 @@ export class SignupcoffeePage implements OnInit {
       }
       this.listMinute.push(this.value);
     }
+
   }
 
   // this.image_represent === undefined||
@@ -130,27 +133,25 @@ export class SignupcoffeePage implements OnInit {
     }
   }
 
-  onFileSelected(event) {
-    if (event.target.files.length > 0) {
-      console.log(event.target.files[0]);
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      this.image_file = event.target.files[0];
-    }
+  async chooseFromGallery() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
+    });
+    this.image_file = await this.getFileFromUrl(image.webPath);
+    this.image_represent = image.webPath;
+    console.log(this.image_file);
+    this.showImage = true;
   }
 
-  // async signUpCoffee(coffee: any): Promise<number> {
-  //   let id;
-  //   await this.fetchAPI.postFormData('customer/cfsowner/', coffee, true).then(async (res) => {
-  //     if (res.status === 200) {
-  //       coffee = res.data;
-  //       console.log(coffee);
-  //       id = coffee.id;
-  //       console.log(id);
-  //     } else {
-  //       console.log('error!');
-  //     }
-  //   });
-  //   return id;
-  // }
+  async getFileFromUrl(url: string, defaultType = 'image/jpeg') {
+    const fileName = new Date().getTime() + '.jpeg';
+    const response = await fetch(url);
+    const data = await response.blob();
+    return new File([data], fileName, {
+      type: data.type || defaultType,
+    });
+  }
 }
 

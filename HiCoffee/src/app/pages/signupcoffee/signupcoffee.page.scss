@@ -1,7 +1,15 @@
-.image_represent{
-    ion-label{
-        padding-left: 20px;
+.image_represent {
+    .image {
+        text-align: center;
+        ion-img {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            border: 1px solid black;
+            object-fit: cover;
+        }
     }
+
 }
 
 ion-item{
@@ -9,7 +17,8 @@ ion-item{
     height: 55px;
     box-shadow: 1px 8px 8px 0px var(--shadow);
     --highlight-height: 0px;
-
+    align-items: center;
+    display: flex;
     margin: 10px 0px;
 
     ion-input{

@@ -1,0 +1,36 @@
+ion-title {
+    text-align: center;
+    font-size: 15px;
+}
+
+.chooseImage {
+    text-align: center;
+    margin-top: 10px;
+
+    .coffee-insert-picture {
+        border: 1px solid var(--ion-color-coffee-primary1);
+        border-radius: 10px;
+        padding: 10px;
+        display: inline-block;
+    }
+}
+
+.coffee-list-img-choose {
+
+    padding: 10px;
+
+    ion-img {
+        margin-top: 10px;
+        overflow: hidden;
+        border-radius: 10px;
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+    }
+}
+
+.coffee-delete-images {
+    font-style: italic;
+    margin-top: 20px;
+    margin-right: 10px;
+}
