@@ -15,6 +15,7 @@ import ToastUtils from 'src/app/utils/toast.utils';
 export class AddcoffeecategoryPage implements OnInit {
 
   categories: Category[];
+  theloai: Category[];
   idCoffee: number;
   checkedItems: Category[] = [];
   listidcategory: number[];
@@ -33,10 +34,21 @@ export class AddcoffeecategoryPage implements OnInit {
 
   async ngOnInit() {
     this.loadingUtils.presentLoading('Đang lấy dữ liệu từ API\nVui lòng chờ');
-    await this.fetchAPI.getAll().then((res)=>{
+    await this.fetchAPI.getAll().then((res) => {
       this.categories = res;
     });
+    await this.fetchAPI.getCategoryByIdCoffee(this.idCoffee).then((res) => {
+      this.theloai = res;
+    });
     this.loadingUtils.dismiss();
+    //console.log(this.theloai);
+    for (let i = 0; i < this.categories.length; i++) {
+      for (let j = 0; j < this.theloai.length; j++) {
+        if (this.categories[i].type === this.theloai[j].type) {
+          this.categories[i].isChecked = true;
+        }
+      }
+    }
   }
   async AddCoffeeCategory() {
     this.loadingUtils.presentLoading('Đang thêm thể loại');
@@ -49,7 +61,7 @@ export class AddcoffeecategoryPage implements OnInit {
     };
     const check = await this.fetchAPI.addCategory(this.idCoffee, category);
     if (check) {
-      console.log('Them category thanh cong');
+      console.log('Thêm thể loại thành công');
       this.toastUltils.presentToastSuccess('Thêm quán thành công');
       this.router.navigateByUrl('/tabs/user').then(() => {
         window.location.reload();

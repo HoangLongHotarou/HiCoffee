@@ -85,7 +85,12 @@ const routes: Routes = [
   {
     path: 'information',
     loadChildren: () => import('./pages/information/information.module').then( m => m.InformationPageModule)
+  },
+  {
+    path: 'updatecoffee/:cafeObj',
+    loadChildren: () => import('./pages/updatecoffee/updatecoffee.module').then( m => m.UpdatecoffeePageModule)
   }
+
 
 
 ];

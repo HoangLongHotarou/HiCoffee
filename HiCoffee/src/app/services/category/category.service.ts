@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/interfaces/category';
+import { CategoryUser } from 'src/app/interfaces/categoryUser';
+import { Pagination } from 'src/app/interfaces/pagination';
 import InformErrorUtils from 'src/app/utils/inform-error.utils';
 import { FetchAPIService } from '../fetch-api.service';
 
@@ -9,6 +11,8 @@ import { FetchAPIService } from '../fetch-api.service';
 export class CategoryService {
 
   category$: Category[];
+  pagination: Pagination;
+  categoryuser : CategoryUser[];
 
   constructor(
     private fetchAPI: FetchAPIService,
@@ -18,6 +22,17 @@ export class CategoryService {
   async getAll(): Promise<any> {
     await this.fetchAPI.get(`location/categories/`).then((res) => {
       this.category$ = res.data;
+    }).catch((err) => {
+      this.informError.catchError(err.response.status);
+    });
+    return this.category$;
+  }
+
+  async getCategoryByIdCoffee(idCoffee : number) : Promise<any>{
+    await this.fetchAPI.get(`customer/cfsowner/${idCoffee}/cfstypes/`).then((res)=>{
+      this.pagination = res.data;
+      this.categoryuser = this.pagination.results;
+      this.category$ = this.categoryuser.map(value=> value.category);
     }).catch((err) => {
       this.informError.catchError(err.response.status);
     });

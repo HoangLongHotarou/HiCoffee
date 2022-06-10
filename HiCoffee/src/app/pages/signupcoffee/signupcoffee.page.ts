@@ -10,7 +10,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { FetchAPIService } from 'src/app/services/fetch-api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
 
 @Component({
   selector: 'app-signupcoffee',
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
 })
 export class SignupcoffeePage implements OnInit {
   loading: any;
+
   coffeename: string;
 
   image_represent: any;
@@ -41,10 +43,12 @@ export class SignupcoffeePage implements OnInit {
   latitude: string;
   longitude: string;
 
+
   constructor(public toastController: ToastController,
     public loadingController: LoadingController,
     private router: Router,
     private loadingUtils: LoadingUtils,
+    private route: ActivatedRoute,
     private infoService: InformationService
     // private axios: AxiosInstance
   ) { }
