@@ -85,7 +85,11 @@ const routes: Routes = [
   {
     path: 'information',
     loadChildren: () => import('./pages/information/information.module').then( m => m.InformationPageModule)
+  },  {
+    path: 'info-update',
+    loadChildren: () => import('./pages/info-update/info-update.module').then( m => m.InfoUpdatePageModule)
   }
+
 
 
 ];

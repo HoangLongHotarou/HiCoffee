@@ -1,0 +1,68 @@
+@mixin flexLayout($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+ion-content {    
+    #info-user {
+        h4 {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--ion-color-coffee-primary);
+        }
+
+        .avatar {
+            margin-top: 20px;
+            @include flexLayout(center, center);
+            flex-direction: column;
+
+            ion-img {
+                width: 100px;
+                height: 100px;
+                overflow: hidden;
+                border-radius: 50%;   
+                border: 2px solid var(--ion-color-coffee-primary);   
+                object-fit: cover;    
+            }            
+
+            ion-label {
+                margin-bottom: 10px;
+                ion-icon {
+                    font-size: 1.2em;
+                }
+            }
+
+            .pick-image {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin-top: 8px;  
+                font-size: 1.2em;          
+
+                ion-icon {
+                    color: var(--ion-color-coffee-primary);
+                }
+            }
+        }
+
+        .info-detail {
+            ion-label {
+                display: block;
+                color: var(--ion-color-coffee-primary);
+                font-weight: 500;
+            }
+            ion-input {
+                font-size: 1.1em;
+                margin: 5px 0;
+                --background: var(--ion-color-coffee-light-1);
+                border-radius: 5px;
+                border: 1px solid transparent;
+                transition: linear 0.2s;
+                &.has-focus {
+                    border: 1px solid var(--ion-color-coffee-primary);
+                }
+            }
+        }            
+    }
+}

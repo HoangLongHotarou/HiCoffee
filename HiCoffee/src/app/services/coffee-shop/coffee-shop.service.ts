@@ -15,6 +15,8 @@ export class CoffeeShopService {
   feedBack$: FeedBack[];
   pagination: Pagination;
   pages: number;
+  result: any;
+
   constructor(
     private fetchAPI: FetchAPIService,
     private errorUtils: InformErrorUtils
@@ -72,5 +74,23 @@ export class CoffeeShopService {
       this.errorUtils.catchError(error.response.status);
     });
     return { 'feedBacks': this.feedBack$, 'pages': this.pages };
+  }
+
+  async postFeedBackByIDCoffee(idCoffee: number, feedBackData: any): Promise<any> {
+    await this.fetchAPI.post(`location/coffeeshops/${idCoffee}/feedbacks/`, feedBackData, true).then((res) => {
+      this.result = res.data;
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
+    });
+    return this.result;
+  }
+
+  async postImagesFeedBackByIDCoffee(idCoffee: number, idFeedBack: number, imgsFeedBackData: any): Promise<any> {
+    await this.fetchAPI.postFormData(`location/coffeeshops/${idCoffee}/feedbacks/${idFeedBack}/images/`, imgsFeedBackData, true).then((res) => {
+      this.result = res.data;
+    }).catch((error) => {
+      this.errorUtils.catchError(error.response.status);
+    });
+    return this.result;
   }
 }

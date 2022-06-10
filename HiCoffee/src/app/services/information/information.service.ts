@@ -50,4 +50,17 @@ export class InformationService {
       });
     return id;
   }
+
+  async updateInformation(data: any): Promise<any> {
+    let result;
+    await this.fetchAPI.putFormData(`customer/information/`, data, 'me', true).then(
+      async (res) => {
+        console.log(res.data);        
+        result = res.data;
+      }).catch((error) => {
+        // this.errorUtil.catchError(error.response.status);
+        console.log(error);        
+      });
+    return result;
+  }
 }
