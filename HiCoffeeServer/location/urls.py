@@ -11,4 +11,9 @@ coffeeshop_router.register(
     'cfscategories', CoffeeShopCategoryViewSet, basename='cfscategories')
 coffeeshop_router.register(
     'imagecoffeeshops', ImageCoffeeShopViewSet, basename='imagecoffeeshops')
-urlpatterns = router.urls + coffeeshop_router.urls
+
+feedback_router = routers.NestedDefaultRouter(
+    coffeeshop_router, 'feedbacks', lookup='feedback')
+feedback_router.register('images', ImagesFeedBackViewSet, basename='images')
+
+urlpatterns = router.urls + coffeeshop_router.urls + feedback_router.urls

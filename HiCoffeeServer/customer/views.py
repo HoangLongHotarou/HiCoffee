@@ -13,19 +13,20 @@ from .filters import CheckInOrFavoriteFilter
 
 
 class InformationViewSet(ModelViewSet):
-<<<<<<< HEAD
-    queryset = Information.objects.prefetch_related('info_checkins','info_hobbies').all()
-=======
-    queryset = Information.objects.prefetch_related(
-        "info_marks", "info_hobbies").all()
->>>>>>> api
-    serializer_class = InformationSerializer
     permission_classes = [permissions.IsAdminUser]
+    pagination_class = DefaultPagination
+
+    def get_queryset(self):
+        print(self.kwargs)
+        return Information.objects.prefetch_related(
+            "info_marks", "info_hobbies").all()
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return InformationSerializer
-        return PostOrPutInformationSerializer
+        if (self.request.method == 'POST' or self.request.method == 'PUT') and self.request.user.is_staff:
+            return PostOrPutForAdminInformationSerializer
+        return PutForUserInformationSerializer
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
     def me(self, request):
@@ -35,9 +36,11 @@ class InformationViewSet(ModelViewSet):
             serializer = InformationSerializer(info)
             return Response(serializer.data)
         elif request.method == 'PUT':
-            serializer = InformationSerializer(info, data=request.data)
+            serializer = PutForUserInformationSerializer(
+                info, data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.save()
+            info = serializer.save(me=True, id_user=request.user.pk)
+            serializer = InformationSerializer(info)
             return Response(serializer.data)
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[permissions.IsAuthenticated])
@@ -54,8 +57,28 @@ class InformationViewSet(ModelViewSet):
 
 
 class HobbyViewSet(ModelViewSet):
-    queryset = Hobby.objects.all()
-    serializer_class = HobbySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        INFO_ID = Information.objects.only(
+            'id').filter(user_id=user.id).first()
+        return Hobby.objects.select_related('category').filter(information_id=INFO_ID)
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AddHobbyUserSerializer
+        return HobbySerializer
+
+    def create(self, request, *args, **kwargs):
+        serializers = AddHobbyUserSerializer(
+            data=request.data)
+        serializers.is_valid(raise_exception=True)
+        INFO = Information.objects.only(
+            'id').filter(user_id=request.user.pk).first()
+        data = serializers.save(info_id=INFO.id)
+        serializers = HobbySerializer(data, many=True)
+        return Response(serializers.data)
 
 
 class CheckInViewSet(ModelViewSet):

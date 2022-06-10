@@ -9,7 +9,7 @@ from django.views.decorators.vary import vary_on_cookie
 from .permission import IsAdminOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import CoffeeShopFilter
-from .permission import IsAdminOwnerOrReadOnly
+from .permission import IsAdminOwnerOrReadOnly, IsGuestOrUser
 # Create your views here.
 
 
@@ -100,10 +100,10 @@ class ImageCoffeeShopViewSet(ModelViewSet):
 
 class FeedBackViewSet(ModelViewSet):
     pagination_class = DefaultPagination
-    permission_classes = [IsAdminOwnerOrReadOnly]
+    permission_classes = [IsGuestOrUser]
 
     def get_queryset(self):
-        return FeedBack.objects.filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
+        return FeedBack.objects.select_related('user').prefetch_related('fb_images').filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
 
     def get_serializer_context(self):
         return {"request": self.request}
@@ -133,14 +133,14 @@ class FeedBackViewSet(ModelViewSet):
 
 
 class ImagesFeedBackViewSet(ModelViewSet):
-    pagination_class = DefaultPagination
-    permission_classes = [IsAdminOwnerOrReadOnly]
-    
+    # pagination_class = DefaultPagination
+    permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
-        return FeedBackImage.objects.filter(coffee_shop_id=self.kwargs['feedback_pk'])
+        return FeedBackImage.objects.filter(feed_back_id=self.kwargs['feedback_pk'])
 
     def get_serializer_context(self):
-        return {"request": self.request}
+        return {"id_feedback": self.kwargs['feedback_pk']}
 
     def get_serializer_class(self):
         return FeedBackImagesSerializer

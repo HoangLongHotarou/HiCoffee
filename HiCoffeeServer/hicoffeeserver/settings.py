@@ -156,15 +156,21 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("JWT",),
-    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
 }
 
 AUTH_USER_MODEL = "core.User"
 
 DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     "SERIALIZERS": {
         "user_create": "core.serializers.UserCreateSerializer",
+        "user": "core.serializers.UserSerializer",
         "current_user": "core.serializers.UserSerializer",
+        "password_reset": "core.serializers.SendEmailResetSerializer",
     }
 }
 
@@ -182,8 +188,8 @@ REDIS_URL = os.environ.get('REDISCLOUD_URL')
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        # "LOCATION": REDIS_URL,
+        # "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": REDIS_URL,
         "TIME_OUT": 2*60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
@@ -217,3 +223,9 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # CELERY_BROKER_URL = 'redis://localhost:6379/1'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'hicoffeemobile@gmail.com'
+EMAIL_HOST_PASSWORD = 'TestHiCoffee123'

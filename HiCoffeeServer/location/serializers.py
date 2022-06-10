@@ -3,6 +3,7 @@ from .models import *
 from customer.models import *
 from django.db import transaction
 from django.shortcuts import get_object_or_404
+from core.serializers import UserNameSerializer
 
 
 class CoffeeShopNameSerializer(serializers.ModelSerializer):
@@ -68,10 +69,10 @@ class GetImageCoffeeShopSerializer(serializers.ModelSerializer):
         fields = ('id', 'image')
 
 
-class GetFeedBackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FeedBack
-        fields = ('id', 'vote_rate', 'feedback', 'user', 'customer_fake')
+# class GetFeedBackSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = FeedBack
+#         fields = ('id', 'vote_rate', 'feedback', 'user', 'customer_fake')
 
 
 class FeedBackSerializer(serializers.ModelSerializer):
@@ -178,7 +179,7 @@ class GetCoffeeShopSerializer(serializers.ModelSerializer):
         model = CoffeeShop
         fields = ('id', 'name', 'description', 'total_rate', 'max_price', 'minimum_price',
                   'image_represent', 'open_time', 'closed_time', 'updated_at',
-                  'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs')
+                  'phone_number', 'location', 'latitude', 'longitude', 'types_cfs', 'imgs_cfs', 'owner')
 
 
 class GetFilterCoffeeShopSerializer(serializers.ModelSerializer):
@@ -192,7 +193,7 @@ class GetFilterCoffeeShopSerializer(serializers.ModelSerializer):
 class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
-        fields = ('vote_rate', 'feedback')
+        fields = ('id', 'vote_rate', 'feedback')
 
     def calculate_rate(self, coffee_shop_id):
         cf = CoffeeShop.objects.get(pk=coffee_shop_id)
@@ -220,7 +221,7 @@ class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
             self.instance.vote_rate = self.validated_data['vote_rate']
             self.instance.feedback = self.validated_data['feedback']
             # self.instance.customer_fake = self.validated_data['customer_fake']
-            self.instance.user = self.validated_data['user']
+            # self.instance.user = self.validated_data['user']
             self.instance.save()
             self.calculate_rate(kwargs['coffee_shop_id'])
             return self.instance
@@ -229,4 +230,22 @@ class PostAndPutFeedBackSerializer(serializers.ModelSerializer):
 class FeedBackImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBackImage
-        fields = ('image')
+        fields = ('id', 'image',)
+
+    def save(self):
+        with transaction.atomic():
+            feedback_id = self.context['id_feedback']
+            self.instance = FeedBackImage.objects.create(
+                feed_back_id=feedback_id,
+                image=self.validated_data['image'])
+            return self.instance
+
+
+class GetFeedBackSerializer(serializers.ModelSerializer):
+    fb_images = FeedBackImagesSerializer(many=True)
+    user = UserNameSerializer(many=False)
+
+    class Meta:
+        model = FeedBack
+        fields = ('id', 'vote_rate', 'feedback',
+                  'user', 'customer_fake', 'fb_images')
