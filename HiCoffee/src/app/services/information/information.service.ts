@@ -58,9 +58,24 @@ export class InformationService {
         console.log(res.data);
         result = res.data;
       }).catch((error) => {
-        // this.errorUtil.catchError(error.response.status);
-        console.log(error);
+        this.errorUtil.catchError(error.response.status);
       });
     return result;
+  }
+
+  async addHobbies(data: any): Promise<any> {
+    let check = false;
+    await this.fetchAPI.post(`customer/hobbies/`, data, true).then((res) => {
+      console.log(res.data);
+      check = true;
+      this.localStore.setHobbies(res.data);
+    }).catch((error) => {
+      this.errorUtil.catchError(error.response.status);
+    });
+    return check;
+  }
+
+  async getHobbies(): Promise<string>{
+    return await this.localStore.getHobbies();
   }
 }

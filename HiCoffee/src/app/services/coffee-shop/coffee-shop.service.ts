@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import InformErrorUtils from 'src/app/utils/inform-error.utils';
 /* eslint-disable quote-props */
 import { Pagination } from 'src/app/interfaces/pagination';
@@ -22,8 +23,14 @@ export class CoffeeShopService {
     private errorUtils: InformErrorUtils
   ) { }
 
-  async getAll(page?: number): Promise<any> {
-    await this.fetchAPI.get(`location/coffeeshops/?page=${page}`).then((res) => {
+  async getAll(
+    page?: number,
+    isOrdering?: boolean,
+    id_hobbies_user?: string
+  ): Promise<any> {
+    const id_hobbies = id_hobbies_user === undefined ? '' : `id_hobbies_user=${id_hobbies_user}&`;
+    const Ordering = isOrdering === true ? 'ordering=-total_rate&' : '';
+    await this.fetchAPI.get(`location/coffeeshops/?${id_hobbies}${Ordering}page=${page}`).then((res) => {
       this.pagination = res.data;
       this.coffeeShop$ = this.pagination.results;
       this.pages = Math.ceil(this.pagination.count / 10);
@@ -86,6 +93,7 @@ export class CoffeeShopService {
   }
 
   async postImagesFeedBackByIDCoffee(idCoffee: number, idFeedBack: number, imgsFeedBackData: any): Promise<any> {
+    // eslint-disable-next-line max-len
     await this.fetchAPI.postFormData(`location/coffeeshops/${idCoffee}/feedbacks/${idFeedBack}/images/`, imgsFeedBackData, true).then((res) => {
       this.result = res.data;
     }).catch((error) => {

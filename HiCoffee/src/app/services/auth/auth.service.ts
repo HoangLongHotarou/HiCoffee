@@ -14,11 +14,14 @@ export class AuthService {
   constructor(
     private fetchAPI: FetchAPIService,
     private localStore: LocalStoreService,
-    private errorUtils: InformErrorUtils
   ) { }
 
   async checkLogin(): Promise<boolean> {
     return this.localStore.checkToken();
+  }
+
+  async checkHadHobbies(): Promise<boolean> {
+    return this.localStore.checkHadHobbies();
   }
 
   async signUp(user: User): Promise<Array<any>> {
@@ -66,7 +69,4 @@ export class AuthService {
     await this.localStore.deleteInfo();
   }
 
-  // async getUserByID(idUser: number) {
-  //   this.fetchAPI.get(`auth/users/${idUser}/`)
-  // }
 }

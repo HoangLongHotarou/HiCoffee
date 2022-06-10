@@ -1,6 +1,6 @@
 from rest_framework_nested import routers
 from .views import *
-from location.views import FeedBackViewSet, CoffeeShopCategoryViewSet, ImageCoffeeShopViewSet
+from location.views import ImageCoffeeShopViewSet
 
 router = routers.DefaultRouter()
 router.register('information', InformationViewSet, basename="information")
@@ -16,6 +16,6 @@ coffeeshop_router = routers.NestedDefaultRouter(
     router, 'cfsowner', lookup='coffeeshop')
 coffeeshop_router.register(
     'cfstypes', CoffeeShopCategoryOwnerViewSet, basename='cfstypes')
-# coffeeshop_router.register(
-#     'imagecoffeeshops', ImageCoffeeShopViewSet, basename='imagecoffeeshops')
+coffeeshop_router.register(
+    'imagecfs', ImageCoffeeShopViewSet, basename='imagecfs')
 urlpatterns = router.urls + coffeeshop_router.urls

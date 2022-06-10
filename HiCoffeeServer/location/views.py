@@ -8,6 +8,7 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from .permission import IsAdminOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from .filters import CoffeeShopFilter
 from .permission import IsAdminOwnerOrReadOnly, IsGuestOrUser
 # Create your views here.
@@ -19,8 +20,9 @@ class CoffeeShopViewSet(ModelViewSet):
         'types_cfs__category', 'imgs_cfs').all()
 
     pagination_class = DefaultPagination
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filter_class = CoffeeShopFilter
+    ordering_fields = ['total_rate']
 
     # permission_classes = [IsAdminOwnerOrReadOnly]
 
@@ -103,7 +105,7 @@ class FeedBackViewSet(ModelViewSet):
     permission_classes = [IsGuestOrUser]
 
     def get_queryset(self):
-        return FeedBack.objects.select_related('user').prefetch_related('fb_images').filter(coffee_shop_id=self.kwargs['coffeeshop_pk'])
+        return FeedBack.objects.select_related('user').prefetch_related('fb_images').filter(coffee_shop_id=self.kwargs['coffeeshop_pk']).order_by('-created_at')
 
     def get_serializer_context(self):
         return {"request": self.request}

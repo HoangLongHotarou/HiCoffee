@@ -12,7 +12,7 @@ export default class InformErrorUtils {
 
     async unauthenticated() {
         await this.alert.presentAlert(
-            'Phiên đăng nhập hết hạn',
+            'Phiên đăng nhập hết hạn / chưa đăng nhập',
             'Vui lòng đăng nhập lại'
         ).then(() => { this.auth.logout(); this.router.navigate(['login']); });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { CoffeeShop } from 'src/app/interfaces/coffeeshop';
@@ -13,7 +13,7 @@ import LoadingUtils from 'src/app/utils/loading.utils';
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
 })
-export class UserPage implements OnInit {
+export class UserPage implements OnInit,OnChanges {
 
   loading: any;
 
@@ -32,12 +32,16 @@ export class UserPage implements OnInit {
   isLogin = true;
 
   coffeeShop$: CoffeeShop[]=[];
-  hobbies : Hobby[] = [];
+  hobbies: Hobby[] = [];
   constructor(public loadingController: LoadingController,
     private router: Router,
     private loadingUtils: LoadingUtils,
     private fetchCoffeeShop: CoffeeShopService,
     private localstore: LocalStoreService) {
+  }
+  async ngOnChanges() {
+    this.info = await this.localstore.loadInfo('info');
+    console.log('test',this.info);
   }
 
   async ngOnInit() {

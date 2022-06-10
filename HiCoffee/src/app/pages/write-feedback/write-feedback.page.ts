@@ -27,7 +27,7 @@ export class WriteFeedbackPage implements OnInit {
   userName: string;
 
   imgPhotos: any[] = [];
-  rating: number = 1;
+  rating = 1;
   desText: string;
 
   constructor(
@@ -73,7 +73,7 @@ export class WriteFeedbackPage implements OnInit {
     });
     if (this.checkValidPhotosCount()) {
       this.imgPhotos.push(image);
-      let file = await this.getFileFromUrl(image.webPath);
+      const file = await this.getFileFromUrl(image.webPath);
       console.log(file);
     }
   }
@@ -117,18 +117,19 @@ export class WriteFeedbackPage implements OnInit {
 
   postFeedBack() {
     if (this.desText) {
-      this.loadingUtils.presentLoading("Vui lòng chờ");
-      let feedBackData = {
+      this.loadingUtils.presentLoading('Vui lòng chờ');
+      const feedBackData = {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         vote_rate: this.rating,
         feedback: this.desText
-      }
+      };
       this.coffeeShopService.postFeedBackByIDCoffee(this.coffeeShop.id, feedBackData).then(res => {
         this.feedBack = res;
         if (this.imgPhotos.length > 0) {
           this.imgPhotos.forEach(async img => {
-            let file = await this.getFileFromUrl(img.webPath);
+            const file = await this.getFileFromUrl(img.webPath);
             await this.postImageFeedBack(this.feedBack.id, file);
-          })          
+          });
         }
         this.loadingUtils.dismiss();
         this.alertUtils.presentAlert('Thông báo', 'Cảm ơn bạn đã gửi phản hồi!');
@@ -141,7 +142,7 @@ export class WriteFeedbackPage implements OnInit {
   }
 
   async postImageFeedBack(idFeedBack: number, imgFile: File) {
-    let imgFeedbackData = new FormData();    
+    const imgFeedbackData = new FormData();
     imgFeedbackData.append('image', imgFile);
     await this.coffeeShopService.postImagesFeedBackByIDCoffee(this.coffeeShop.id, idFeedBack, imgFeedbackData).catch(err => {
       this.alertUtils.presentAlert('Lỗi', 'Không thể tải ảnh lên!');
@@ -156,14 +157,14 @@ export class WriteFeedbackPage implements OnInit {
   checkValidPhotosCount(): boolean {
     let check = true;
     if (this.imgPhotos.length >= 3) {
-      this.alertUtils.presentAlert("Cảnh báo", "Số lượng ảnh không được vượt quá 3 ảnh");
+      this.alertUtils.presentAlert('Cảnh báo', 'Số lượng ảnh không được vượt quá 3 ảnh');
       check = false;
     }
     return check;
   }
 
   resetAll() {
-    this.desText = "";
+    this.desText = '';
     this.imgPhotos = [];
   }
 }
